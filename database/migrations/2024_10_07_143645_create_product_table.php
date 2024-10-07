@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('table_product', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained('table_product_categories')->onDelete('cascade');
+            // $table->integer('category_id');
             $table->string('name');
             $table->mediumText('desc')->nullable();
             $table->mediumText('content')->nullable(); 
@@ -21,9 +23,11 @@ return new class extends Migration
             $table->double('sale_price')->nullable();           
             $table->integer('discount')->nullable(); 
             $table->string('code')->nullable(); 
-            $table->boolean('status')->default(false);
-
+            $table->unsignedInteger('view')->default(0); 
+            $table->boolean('status')->default(true);
+            $table->boolean('featured')->default(false);
             $table->timestamps();
+           
         });
     }
 
