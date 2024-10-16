@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Publisher extends Model
+class PublisherModel extends Model
 {
     use SoftDeletes;
     protected $fillable =['name','desc','photo_path','photo_name'];

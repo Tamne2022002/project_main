@@ -12,11 +12,11 @@
                 <div class="row d-block">
                     <div class="col-md-12 text-center d-flex justify-content-center align-items-center">
                         <h2 class=" mt-5">
-                            <b>Chào mừng bạn đến với trang quản trị TL Bookstore</b>
+                            <b>Chào mừng bạn đến với trang quản trị TP Bookstore</b>
                         </h2>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
 @endsection

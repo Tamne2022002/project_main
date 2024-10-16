@@ -10,12 +10,9 @@ class HomeController extends Controller
 {
     public function index(): View
     {   
-        return view('login');
-    }
-    public function adminHome(Request $request): View
-    { 
         return view('admin.admin');
     }
+ 
 
 
 }

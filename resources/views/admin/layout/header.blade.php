@@ -6,14 +6,14 @@
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            {{-- <a class="nav-link" target="_blank" href="{{ route('index') }}" role="button" title="Xem website">
+            <a class="nav-link" target="_blank" href="#" role="button" title="Xem website">
                 <i class="fas fa-reply"></i>
-            </a> --}}
+            </a>
         </li>
         <li class="nav-item">
-            {{-- <a href="{{ route('logout.admin') }}" class="nav-link" title="Đăng xuất">
+            <a href="#" class="nav-link" title="Đăng xuất">
                 <i class="fa-solid fa-right-from-bracket"></i>
-            </a> --}}
+            </a>
         </li>
         
         <li class="nav-item">
