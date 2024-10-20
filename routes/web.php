@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\HomeController; 
 use App\Http\Controllers\Admin\ProductController; 
 use App\Http\Controllers\Admin\ProductListController; 
+use App\Http\Controllers\Admin\PublisherController; 
 
 Route::get('/', function () {
     return view('index');
@@ -18,6 +19,17 @@ Route::get('/adminlogout', [HomeController::class, 'logoutAdmin'])->name('admin.
 Route::middleware(['auth', 'user-access:admin'])->group(function () {  
     Route::prefix('admin')->group(function () { 
         Route::get('', [HomeController::class, 'index'])->name('admin.index');
+
+ 
+        /* Publisher */
+        Route::prefix('publisher')->group(function () {
+            Route::get('', [PublisherController::class, 'index'])->name('publisher.index');
+            Route::get('/create', [PublisherController::class, 'create'])->name('publisher.create');
+            Route::post('/store', [PublisherController::class, 'store'])->name('publisher.store');
+            Route::get('/edit/{id}', [PublisherController::class, 'edit'])->name('publisher.edit');
+            Route::post('/update/{id}', [PublisherController::class, 'update'])->name('publisher.update');
+            Route::get('/delete/{id}', [PublisherController::class, 'delete'])->name('publisher.delete');
+        });
 
         /* Category */
         Route::prefix('categories')->group(function () {
@@ -39,6 +51,12 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/get-category-id', [ProductController::class, 'getCategoryId'])->name('get-category-id');
             Route::get('/get-category-id-warehouse', [ProductController::class, 'getCategoryIdWarehouse'])->name('get-category-id-warehouse');
         });
+
+            /* Warehouse */
+        Route::prefix('warehouse')->group(function () {
+            Route::get('', [ProductController::class, 'warehouse'])->name('warehouse.index');
+        });
+    
     });
 });
  

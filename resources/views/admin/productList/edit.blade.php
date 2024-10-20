@@ -12,7 +12,7 @@
     <div class="content">
         <div class="container-fluid pt-3">
 
-            <form action="{{ route('categories.update', ['id' => $category->id]) }}" method="POST">
+            <form action="{{ route('productList.update', ['id' => $category->id]) }}" method="POST">
                 @csrf
                 <div class="row col-12">
                     <div class="col-md-4">
@@ -28,7 +28,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Chọn Danh Mục Cha</label>
-                            <select class="form-control select-category-parent" name="parent_id">
+                            <select class="form-control select-category-parent" name="id_parent">
                                 <option value="0">Chọn Danh Mục Cha</option>
                                 {!! $categoryoption !!}
                             </select>
@@ -47,10 +47,10 @@
                         <div class="form-group col-md-6">
                             <label>Nổi bật:</label>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="outstanding"
-                                    name="outstanding" value="1"
-                                    @if (old('outstanding', $category->outstanding) == 1) checked @endif>
-                                <label class="form-check-label" for="outstanding">Nổi bật</label>
+                                <input type="checkbox" class="form-check-input" id="featured"
+                                    name="featured" value="1"
+                                    @if (old('featured', $category->featured) == 1) checked @endif>
+                                <label class="form-check-label" for="featured">Nổi bật</label>
                             </div>
                         </div>
                     </div>

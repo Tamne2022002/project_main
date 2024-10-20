@@ -19,10 +19,10 @@ class ProductListModel extends Model
     {
         return $this->belongsTo(ProductListModel::class, 'id_parent');
     }
-    // public function childrenRecursive()
-    // {
-    //     return $this->hasMany(ProductListModel::class, 'id_parent')->with('childrenRecursive');
-    // }
+    public function childrenRecursive()
+    {
+        return $this->hasMany(ProductListModel::class, 'id_parent')->with('childrenRecursive');
+    }
     public function category()
     {
         return $this->belongsTo(ProductListModel::class);

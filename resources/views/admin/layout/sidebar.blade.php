@@ -10,15 +10,12 @@ use App\Http\Controllers\HomeController;
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href="#"
-                        class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p class="text-capitalize">
-                            Bảng điều khiển
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
+                    <a href=""
+                    class="nav-link">
+                    <i class="nav-icon fas fa-chart-pie"></i>
+                    <p class="text-capitalize">Thống kê</p>
+                </a>
+                    {{-- <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href=""
                                 class="nav-link">
@@ -26,7 +23,7 @@ use App\Http\Controllers\HomeController;
                                 <p class="text-capitalize">Thống kê</p>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </li>
 
                 <li
@@ -50,7 +47,7 @@ use App\Http\Controllers\HomeController;
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#"
+                            <a href="{{ route('publisher.index') }}"
                                 class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p class="text-capitalize">
@@ -68,7 +65,7 @@ use App\Http\Controllers\HomeController;
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#"
+                            <a href="{{ route('warehouse.index') }}"
                                 class="nav-link ">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p class="text-capitalize">

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoryAddRequest;
-use App\Http\Requests\CategoryEditRequest;
+use App\Http\Requests\ProductListAddRequest;
+use App\Http\Requests\ProductListEditRequest;
 use App\Models\ProductListModel;
 use App\Traits\DeleteModelTrait;
+use App\Components\Recusive;
+
 
 class ProductListController extends Controller
 {
@@ -30,30 +32,30 @@ class ProductListController extends Controller
         $categories = null;
         if ($search) {
             $searchUnicode = '%' . $search . '%';
-            $categories = $this->category::select('id', 'name')
+            $categories = ProductListModel::select('id', 'name')
                 ->where('name', 'LIKE', $searchUnicode)
                 ->paginate(10);
             $categories->setPath('categories?search_keyword=' . $search);
         } else {
-            $categories = $this->category::latest()->paginate(10);
+            $categories = ProductListModel::latest()->paginate(10);
         }
 
 
         return view('admin.productList.index', compact('categories'));
     }
-    public function store(CategoryAddRequest $request)
+    public function store(ProductListAddRequest $request)
     {
-        $this->category->create([
+        ProductListModel::create([
             'name' => $request->name,
-            'parent_id' => $request->parent_id,
+            'id_parent' => $request->id_parent,
             'status' => $request->filled('status') ? $request->status : false,
-            'outstanding' => $request->filled('outstanding') ? $request->outstanding : false,
+            'featured' => $request->filled('featured') ? $request->featured : false,
         ]);
-        return redirect()->route('categories.index');
+        return redirect()->route('productList.index');
     }
     public function getCategory($parentId)
     {
-        $data = $this->category->all();
+        $data = ProductListModel::all();
         $recusive = new Recusive($data);
         $categoryoption = $recusive->categoryRecusive($parentId);
         return $categoryoption;
@@ -61,20 +63,20 @@ class ProductListController extends Controller
 
     public function edit($id)
     {
-        $category = $this->category->find($id);
-        $categoryoption = $this->getCategory($category->parent_id);
+        $category =  ProductListModel::find($id);
+        $categoryoption = $this->getCategory($category->id_parent);
         return view('admin.productList.edit', compact('category', 'categoryoption'));
     }
-    public function update($id, CategoryEditRequest $request)
+    public function update($id, ProductListEditRequest $request)
     {
 
-        $this->category->find($id)->update([
+        ProductListModel::find($id)->update([
             'name' => $request->name,
-            'parent_id' => $request->parent_id,
+            'id_parent' => $request->id_parent,
             'status' => $request->filled('status') ? $request->status : false,
-            'outstanding' => $request->filled('outstanding') ? $request->outstanding : false,
+            'featured' => $request->filled('featured') ? $request->featured : false,
         ]);
-        return redirect()->route('categories.index');
+        return redirect()->route('productList.index');
 
     }
     public function delete($id)
