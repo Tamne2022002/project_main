@@ -23,7 +23,7 @@ class SliderAddRequest extends FormRequest
     {
         return [
             'name' => 'required|regex:/^[\pL0-9\s]*$/u|unique:sliders|max:255',
-            'description' => 'required',
+            'desc' => 'required',
             'photo_path' => 'required|mimes:jpg,jpeg,png|max:20480',
         ];
     }
@@ -35,7 +35,7 @@ class SliderAddRequest extends FormRequest
             'name.unique' => 'Tên không được phép trùng',
             'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
             'name.max' => 'Tên không vượt quá 255 ký tự',
-            'description.required' => 'Mô tả không được để trống',
+            'desc.required' => 'Mô tả không được để trống',
             'photo_path.required' => 'Hình ảnh không được để trống',
             'photo_path.mimes' => 'Ảnh phải có định dạng JPG, JPEG hoặc PNG',
             'photo_path.max' => 'Ảnh không được quá 20MB',

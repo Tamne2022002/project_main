@@ -1,4 +1,4 @@
-@extends('admin.layout.admin')
+@extends('admin.layout.head')
 @section('title')
     <title>Sửa Sản Phẩm</title>
 @endsection
@@ -19,7 +19,6 @@
 
 @section('content')
     <div class="content-wrapper">
-
          <form action="{{ route('product.update', ['id' => $product->id])}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-footer text-sm sticky-top">
@@ -53,10 +52,10 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Mô tả</label>
-                                                <textarea class="form-control summernote  @error('description') is-invalid @enderror" name="description" rows="3">
-                                                    {!! $product->description !!}
+                                                <textarea class="form-control summernote  @error('desc') is-invalid @enderror" name="desc" rows="3">
+                                                    {!! $product->desc !!}
                                         </textarea>
-                                                @error('description')
+                                                @error('desc')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -203,11 +202,11 @@
                                             <div class="photoUpload-zone">
                                                 <div class="photoUpload-detail" id="photoUpload-preview">
                                                     <img class="rounded image-core adm-product-img"
-                                                        src="{{ $product->product_photo_path }}" alt="">
+                                                        src="{{ $product->photo_path }}" alt="">
                                                 </div>
                                                 <label class="photoUpload-file" id="photo-zone" for="file-zone">
                                                     <input type="file" class=" form-control-file"
-                                                        name="product_photo_path" id="file-zone">
+                                                        name="photo_path" id="file-zone">
                                                     <i class="fas fa-cloud-upload-alt"></i>
                                                     <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
                                                     <p class="photoUpload-or">hoặc</p>
@@ -217,7 +216,7 @@
                                                 <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
                                                     (.jpg|.png|.jpeg)</div>
                                             </div>
-                                            @error('product_photo_path')
+                                            @error('photo_path')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>

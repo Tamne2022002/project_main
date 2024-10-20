@@ -23,7 +23,7 @@ class PublisherController extends Controller
     }
     public function getPublishers()
     {
-        return Publisher::all();  
+        return PublisherModel::all();  
     }
     public function index(Request $request)
     { 

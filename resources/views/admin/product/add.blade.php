@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin')
+@extends('admin.layout.head')
 @section('title')
     <title>Thêm Sản Phẩm</title>
 @endsection
@@ -55,11 +55,11 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Mô tả</label>
-                                                <textarea class="height-summernote form-control summernote @error('description') is-invalid @enderror"
-                                                    name="description" rows="3">
-                                                {{ old('description') }}
+                                                <textarea class="height-summernote form-control summernote @error('desc') is-invalid @enderror"
+                                                    name="desc" rows="3">
+                                                {{ old('desc') }}
                                             </textarea>
-                                                @error('description')
+                                                @error('desc')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -94,25 +94,25 @@
                                         <div class="form-group ">
                                             <label>Chọn Danh Mục</label>
                                             <select
-                                                class="form-control select2_init @error('category_id') is-invalid @enderror"
-                                                name="category_id">
+                                                class="form-control select2_init @error('id_list') is-invalid @enderror"
+                                                name="id_list">
                                                 <option value="">Chọn danh mục</option>
                                                 {!! $htmlOption !!}
                                             </select>
-                                            @error('category_id')
+                                            @error('id_list')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group ">
                                             <label>Nhà xuất bản:</label>
-                                            <select class="form-control @error('publisher_id') is-invalid @enderror"
-                                                name="publisher_id">
+                                            <select class="form-control @error('id_publisher') is-invalid @enderror"
+                                                name="id_publisher">
                                                 <option value="">Chọn nhà xuất bản</option>
                                                 @foreach ($publishers as $publisher)
                                                     <option value="{{ $publisher->id }}">{{ $publisher->name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('publisher_id')
+                                            @error('id_publisher')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -187,10 +187,10 @@
                                             <div class="form-group col-md-6">
                                                 <label>Nổi bật:</label>
                                                 <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="outstanding"
-                                                        name="outstanding" value="1"
-                                                        @if (old('outstanding') == 1) checked @endif>
-                                                    <label class="form-check-label" for="outstanding">Nổi bật</label>
+                                                    <input type="checkbox" class="form-check-input" id="featured"
+                                                        name="featured" value="1"
+                                                        @if (old('featured') == 1) checked @endif>
+                                                    <label class="form-check-label" for="featured">Nổi bật</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,7 +215,7 @@
                                                 </div>
                                                 <label class="photoUpload-file" id="photo-zone" for="file-zone">
                                                     <input type="file" class=" form-control-file"
-                                                        name="product_photo_path" id="file-zone">
+                                                        name="photo_path" id="file-zone">
                                                     <i class="fas fa-cloud-upload-alt"></i>
                                                     <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
                                                     <p class="photoUpload-or">hoặc</p>
@@ -225,14 +225,11 @@
                                                 <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
                                                     (.jpg|.png|.jpeg)</div>
                                             </div>
-                                            @error('product_photo_path')
+                                            @error('photo_path')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
-                                            <label>Hình Ảnh Chi Tiết</label>
-                                            <input type="file" multiple class="form-control-file" name="photo_path[]">
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

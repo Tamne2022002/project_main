@@ -15,7 +15,7 @@ class Recusive
     {
 
         foreach ($this->data as $value) {
-            if ($value['parent_id'] == $id) {
+            if ($value['id_parent'] == $id) {
                 if (!empty($parentId) && $parentId == $value['id']) {
                     $this->categoryselect .= "<option selected value='" . $value['id'] . "'>" . $text . $value['name'] . "</option>";
                 } else {

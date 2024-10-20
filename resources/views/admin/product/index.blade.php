@@ -1,4 +1,4 @@
-@extends('admin.layout.admin')
+@extends('admin.layout.head')
 @section('title')
     <title>Sản phẩm</title>
 @endsection
