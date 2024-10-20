@@ -59,22 +59,22 @@ class ProductController extends Controller
                 ->paginate(15);
 
             foreach ($warehouse as $warehouseItem) {
-                $product = Product::find($warehouseItem->id);
+                $product = ProductModel::find($warehouseItem->id);
                 $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
                 $warehouseItem->photo_path = $product ? $product->photo_path : 'Ảnh không có sẵn';
-                $warehousedata = Warehouse::find($warehouseItem->id);
+                $warehousedata = WarehouseModel::find($warehouseItem->id);
 
                 if ($warehousedata) {
                     $warehouseItem->quantity = $warehousedata->quantity;
 
-                    // Lấy category_id từ bảng Product
-                    $category_id = $product ? $product->category_id : null;
-                    $warehouseItem->category_id = $category_id;
+                    // Lấy id_list từ bảng Product
+                    $id_list = $product ? $product->id_list : null;
+                    $warehouseItem->id_parent = $id_list;
 
-                    if ($category_id) {
-                        // Tìm tên danh mục dựa trên category_id từ bảng Category
-                        $category = Category::find($category_id);
-                        $warehouseItem->category_name = $category ? $category->name : 'Không tìm thấy danh mục';
+                    if ($id_list) {
+                        // Tìm tên danh mục dựa trên id_list từ bảng Category
+                        $productList = ProductListModel::find($id_list);
+                        $warehouseItem->category_name = $productList ? $productList->name : 'Không tìm thấy danh mục';
                     } else {
                         $warehouseItem->category_name = 'Không tìm thấy danh mục';
                     }
@@ -87,19 +87,19 @@ class ProductController extends Controller
 
         $warehouse->setPath('warehouse?search_keyword=' . $search);
         } else {
-        $warehouse = $this->warehouse->latest()->paginate(15);
+        $warehouse = WareHouseModel::latest()->paginate(15);
             foreach ($warehouse as $warehouseItem) {
-                $product = Product::find($warehouseItem->product_id);
+                $product = ProductModel::find($warehouseItem->id_parent);
                 $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
                 $warehouseItem->photo_path = $product ? $product->photo_path : 'Ảnh không có sẵn';
 
-                // Lấy category_id từ bảng Product
-                $category_id = $product ? $product->category_id : null;
-                $warehouseItem->category_id = $category_id;
+                // Lấy id_list từ bảng Product
+                $id_list = $product ? $product->id_list : null;
+                $warehouseItem->id_parent = $id_list;
 
-                if ($category_id) {
+                if ($id_list) {
                     // Tìm tên danh mục dựa trên category_id từ bảng Category
-                    $category = ProductListModel::find($category_id);
+                    $category = ProductListModel::find($id_list);
                     $warehouseItem->category_name = $category ? $category->name : 'Không tìm thấy danh mục';
                 } else {
                     $warehouseItem->category_name = 'Không tìm thấy danh mục';
@@ -241,9 +241,9 @@ class ProductController extends Controller
     {
         $categoryIds = $request->query('categoryId');
         if (is_array($categoryIds)) {
-            $products = Product::whereIn('category_id', $categoryIds)->with('category')->get();
+            $products = ProductModel::whereIn('category_id', $categoryIds)->with('category')->get();
         } else {
-            $products = Product::with('category')->get();
+            $products = ProductModel::with('category')->get();
         }
         return response()->json(['products' => $products]);
     }
@@ -253,9 +253,9 @@ class ProductController extends Controller
         $categoryIds = $request->query('categoryId');
         
         if (is_array($categoryIds)) {
-            $products = Product::whereIn('category_id', $categoryIds)->with('category')->get();
+            $products = ProductModel::whereIn('category_id', $categoryIds)->with('category')->get();
         } else {
-            $products = Product::with('category')->get();
+            $products = ProductModel::with('category')->get();
         }
         foreach ($products as $key => $product) {
             $products[$key]['quantity'] = Warehouse::where('product_id', $product->id)->pluck('quantity');
