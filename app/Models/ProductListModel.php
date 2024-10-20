@@ -13,18 +13,18 @@ class ProductListModel extends Model
     protected $fillable =['name','id_parent','status','featured'];
     public function children()
     {
-        return $this->hasMany(ProductList::class, 'id_parent');
+        return $this->hasMany(ProductListModel::class, 'id_parent');
     } 
     public function parent()
     {
-        return $this->belongsTo(ProductList::class, 'id_parent');
+        return $this->belongsTo(ProductListModel::class, 'id_parent');
     }
     // public function childrenRecursive()
     // {
-    //     return $this->hasMany(ProductList::class, 'id_parent')->with('childrenRecursive');
+    //     return $this->hasMany(ProductListModel::class, 'id_parent')->with('childrenRecursive');
     // }
     public function category()
     {
-        return $this->belongsTo(ProductList::class);
+        return $this->belongsTo(ProductListModel::class);
     }
 }

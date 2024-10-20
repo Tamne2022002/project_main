@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use function Laravel\Prompts\error;
 use App\Http\Requests\PublisherAddRequest;
 use App\Http\Requests\PublisherEditRequest;
 use App\Models\PublisherModel;
 use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
 use App\Traits\DeleteModelTrait;
  
 

@@ -20,7 +20,7 @@ class ProductModel extends Model
         'regular_price',
         'sale_price',
         'discount',
-        'publisher_id',
+        'id_publisher',
         'author',
         'code',
         'publishing_year',

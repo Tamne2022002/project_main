@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->string('publishing_year')->nullable();
             $table->boolean('status')->default(false);
-            $table->boolean('featured')->default(false);        
+                $table->boolean('featured')->default(false);        
             $table->timestamps();
             $table->softDeletes(); 
 
