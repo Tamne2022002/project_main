@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin')
+@extends('admin.layout.admin')
 @section('title')
     <title>Sửa Sản Phẩm</title>
 @endsection
@@ -20,7 +20,7 @@
 @section('content')
     <div class="content-wrapper">
 
-         <form action="{{ route('product.update', ['id' => $product->id]) }} " method="POST" enctype="multipart/form-data">
+         <form action="{{ route('product.update', ['id' => $product->id])}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-footer text-sm sticky-top">
                 <button type="submit" class="btn btn-primary">Lưu</button>
@@ -91,27 +91,27 @@
                                             <label>Chọn Danh Mục</label>
 
                                             <select
-                                                class="form-control select2_init @error('category_id') is-invalid @enderror"
-                                                name="category_id">
+                                                class="form-control select2_init @error('id_list') is-invalid @enderror"
+                                                name="id_list">
                                                 <option value="">Chọn danh mục</option>
                                                 {!! $htmlOption !!}
                                             </select>
-                                            @error('category_id')
+                                            @error('id_list')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group ">
                                             <label>Nhà xuất bản:</label>
-                                            <select class="form-control @error('publisher_id') is-invalid @enderror"
-                                                name="publisher_id">
+                                            <select class="form-control @error('id_publisher') is-invalid @enderror"
+                                                name="id_publisher">
                                                 <option value="">Chọn Nhà xuất bản</option>
                                                 @foreach ($publishers as $publisher)
                                                     <option value="{{ $publisher->id }}"
-                                                        @if ($product->publisher_id == $publisher->id) selected @endif>
+                                                        @if ($product->id_publisher == $publisher->id) selected @endif>
                                                         {{ $publisher->name }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('publisher_id')
+                                            @error('id_publisher')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -221,7 +221,7 @@
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label>Hình Ảnh Chi Tiết</label>
                                             <input type="file" multiple class="form-control-file" name="photo_path[]">
                                             <div class="col-md-12 box-gallery">
@@ -232,7 +232,7 @@
                                                     </div>
                                                 @endforeach
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

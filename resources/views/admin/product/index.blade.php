@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
- 
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/jquery.sumoselect.min.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>
@@ -17,7 +16,7 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
-         <div class="content">
+        <div class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="row mb-2">
@@ -61,22 +60,21 @@
                             </thead>
                             <tbody class="filter-product-call-by-ajax">
                                 @if (!$products->isEmpty())
-                                    @foreach ($products as $productItem)
+                                    @foreach ($products as $v)
                                         <tr>
-                                            <td class="text-capitalize">{{ $productItem->name }}</td>
+                                            <td class="text-capitalize">{{ $v['name'] }}-{{ $v['id'] }}</td>
                                             <td>
                                                 <img class="adm-product-img"
-                                                    src="{{ $productItem->product_photo_path ? $productItem->product_photo_path : asset('assets/noimage.jpg') }} "
+                                                    src="{{ $v['product_photo_path'] ? $v['product_photo_path'] : asset('assets/noimage.jpg') }} "
                                                     alt="">
                                             </td>
-                                            <td class="text-capitalize">{{ optional($productItem->category)->name }}</td>
+                                            <td class="text-capitalize">{{ optional($v['id_list'])->name }}</td>
                                             <td>
-                                                <a href="{{ route('product.edit', ['id' => $productItem->id]) }}"
+                                                <a href="{{ route('product.edit', ['id' => $v->id]) }}"
                                                     class="btn btn-default">Sửa</a>
-                                                <a href=""
-                                                    data-url="{{ route('product.delete', ['id' => $productItem->id]) }}"
+                                                    <a href="{{ route('product.delete', ['id' => $v->id]) }}"
                                                     class="btn btn-danger action_delete">Xóa</a>
-                                            </td>
+                                                </td>
                                         </tr>
                                     @endforeach
                                 @else

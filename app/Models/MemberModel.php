@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Member extends Authenticatable
+class MemberModel extends Authenticatable
 {
     use HasFactory, Notifiable,SoftDeletes;
 

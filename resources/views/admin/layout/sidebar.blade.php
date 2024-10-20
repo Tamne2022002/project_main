@@ -59,7 +59,7 @@ use App\Http\Controllers\HomeController;
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#"
+                            <a href="{{ route('product.index') }}"
                                 class="nav-link ">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p class="text-capitalize">
