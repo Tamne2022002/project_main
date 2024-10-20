@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link" title="Đăng xuất">
+            <a href="{{ route('admin.logout') }}" class="nav-link" title="Đăng xuất">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </a>
         </li>

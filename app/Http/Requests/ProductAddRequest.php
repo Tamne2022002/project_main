@@ -11,7 +11,7 @@ class ProductAddRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+    return true;
     }
 
     /**
@@ -22,17 +22,17 @@ class ProductAddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'bail|required|unique:products|regex:/^[\pL0-9\s]*$/u|max:255|min:10',
+            'name' => 'bail|required|unique:table_product|regex:/^[\pL0-9\s]*$/u|max:255|min:10',
             'id_list' => 'required',
             'id_publisher' => 'required',
             'desc' => 'required',
             'content' => 'required',
             'photo_path' => 'required|mimes:jpg,jpeg,png|max:20480',
             'regular_price' => 'required|numeric|min:0',
-            'sale_price' => 'min:0',
+            'sale_price' => 'numeric|min:0',
             'discount' => 'nullable|numeric|between:1,99',
             'publishing_year' => 'required|integer|min:1900',
-            'code' => 'required|unique:products|string|max:255',
+            'code' => 'required|unique:table_product|string|max:255',
             'author' => 'required|regex:/^[\pL\s]*$/u|max:255',
         ];
     }

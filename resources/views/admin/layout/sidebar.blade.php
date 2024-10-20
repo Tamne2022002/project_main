@@ -41,7 +41,7 @@ use App\Http\Controllers\HomeController;
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#"
+                            <a href="{{ route('productList.index') }}"
                                 class="nav-link">
                                 <i class="nav-icon text-sm fas fa-boxes"></i>
                                 <p class="text-capitalize">

@@ -22,7 +22,7 @@ class ProductListController extends Controller
     public function create()
     {
         $categoryoption = $this->getCategory($parentId = '');
-        return view('admin.category.add', compact('categoryoption'));
+        return view('admin.productList.add', compact('categoryoption'));
     }
     public function index(Request $request)
     {
@@ -39,7 +39,7 @@ class ProductListController extends Controller
         }
 
 
-        return view('admin.category.index', compact('categories'));
+        return view('admin.productList.index', compact('categories'));
     }
     public function store(CategoryAddRequest $request)
     {
@@ -63,7 +63,7 @@ class ProductListController extends Controller
     {
         $category = $this->category->find($id);
         $categoryoption = $this->getCategory($category->parent_id);
-        return view('admin.category.edit', compact('category', 'categoryoption'));
+        return view('admin.productList.edit', compact('category', 'categoryoption'));
     }
     public function update($id, CategoryEditRequest $request)
     {

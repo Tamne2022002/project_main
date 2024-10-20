@@ -21,18 +21,12 @@ class MemberEditRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'first_name' => [
+        return [ 
+            'full_name' => [
                 'required',
                 'string',
                 'regex:/^[\pL0-9\s]*$/u',
-                'max:20',
-            ],
-            'last_name' => [
-                'required',
-                'string',
-                'regex:/^[\pL0-9\s]*$/u',
-                'max:100',
+                'max:255',
             ],
             'phone' => [
                 'required',
@@ -55,12 +49,9 @@ class MemberEditRequest extends FormRequest
     public function messages()
     {
         return [
-            'first_name.required' => 'Tên không được để trống',
-            'first_name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
-            'first_name.max' => 'Tên không được vượt quá 20 ký tự',
-            'last_name.required' => 'Họ và tên đệm không được để trống',
-            'last_name.regex' => 'Họ và tên đệm chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
-            'last_name.max' => 'Họ và tên đệm không được vượt quá 100 ký tự',
+            'full_name.required' => 'Tên không được để trống',
+            'full_name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
+            'full_name.max' => 'Tên không được vượt quá 255 ký tự',
             'phone.required' => 'Số điện thoại không được để trống',
             'phone.max' => 'Số điện thoại không được vượt quá 10 ký tự',
             'address.required' => 'Địa chỉ không được để trống',

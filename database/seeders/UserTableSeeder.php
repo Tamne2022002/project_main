@@ -17,7 +17,6 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             ['id' => '1', 'full_name' => 'Nguyễn Minh Tâm', 'phone' => '0335644500', 'address' => 'TP. Hồ Chí Minh', 'email' => '0306201074@caothang.edu.vn', 'password' =>bcrypt('123456'), 'type' => 1],
             ['id' => '2', 'full_name' => 'Phạm Hữu Phúc','phone' => '0386292585', 'address' => 'TP. Hồ Chí Minh', 'email' => '0306201168@caothang.edu.vn', 'password' =>bcrypt('123456'),  'type' => 1],
-             
         ]);
     }
 }
