@@ -6,10 +6,11 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ProductController; 
 use App\Http\Controllers\Admin\ProductListController; 
 use App\Http\Controllers\Admin\PublisherController; 
+use App\Http\Controllers\Admin\DashboardController; 
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 Auth::routes();
 
@@ -18,7 +19,8 @@ Route::get('/adminlogout', [HomeController::class, 'logoutAdmin'])->name('admin.
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {  
     Route::prefix('admin')->group(function () { 
-        Route::get('', [HomeController::class, 'index'])->name('admin.index');
+        Route::get('', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
+        Route::get('/dashboard/{month?}&{year}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
 
  
         /* Publisher */
