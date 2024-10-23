@@ -10,6 +10,7 @@ class GalleryModel extends Model
 {
     use SoftDeletes;
 
-    protected $fillable =['name','description','photo_path','photo_name'];
+    protected $table = 'table_gallery';
+    protected $fillable =['name','desc','photo_path','photo_name'];
 
 }

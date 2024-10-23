@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use App\Models\GalleryModel;
 class ProductModel extends Model
 {
     use SoftDeletes;
@@ -32,21 +32,21 @@ class ProductModel extends Model
         'featured' => false,
     ];
     public function images(){
-        return $this->hasMany(Gallery::class, 'id_parent');
+        return $this->hasMany(GalleryModel::class, 'id_parent');
     }
     
     public function category()
     {
-        return $this->belongsTo(ProductList::class,'category_id');
+        return $this->belongsTo(ProductListModel::class,'id');
     }
     public function publisher()
     {
-        return $this->belongsTo(Publisher::class, 'id_publisher');        
+        return $this->belongsTo(PublisherModel::class, 'id_publisher');        
     }
    
     public function productGallery()
     {
-        return $this->hasMany(Gallery::class,'id_parent');
+        return $this->hasMany(GalleryModel::class,'id_parent');
         
     }
     public function products()

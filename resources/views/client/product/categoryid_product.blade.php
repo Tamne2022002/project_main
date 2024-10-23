@@ -19,7 +19,7 @@
                                             <a class="pic-product " href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                 title="Sản phẩm">
                                                 <div class="pic-product-img scale-img hover_light">
-                                                    <img class="w-100" src="{{ $v->product_photo_path }}"
+                                                    <img class="w-100" src="{{ $v->photo_path }}"
                                                         alt="{{ $v->name }}">
                                                 </div>
                                             </a>

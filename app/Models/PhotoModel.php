@@ -10,6 +10,7 @@ class PhotoModel extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'table_photo';
     protected $fillable =['name','desc','photo_path','photo_name'];
 
 }

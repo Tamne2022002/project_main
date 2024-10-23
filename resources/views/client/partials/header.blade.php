@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\Clients\IndexController;
+use App\Http\Controllers\Client\CHomeController;
 ?>
 <div class="header">
     <div class="header-top">
@@ -7,7 +7,7 @@ use App\Http\Controllers\Clients\IndexController;
             <div class="flex-header-top">
                 <div class="header-top-address w-25 text-light">
                     <marquee behavior="" direction="">
-                        {{ IndexController::settings()->description }}
+                        {{ CHomeController::settings()->description }}
                     </marquee>
                 </div>
                 <div class="header-top-social">
@@ -41,7 +41,7 @@ use App\Http\Controllers\Clients\IndexController;
         <div class="wrap-content">
             <div class="flex-header-bottom">
                 <div class="header-bottom-logo peShiner" width="">
-                    <img src="{{ IndexController::settings()->logo_path }}" alt>
+                    <img src="{{ CHomeController::settings()->logo_path }}" alt>
                 </div>
                 <div class="header-bottom-banner ">
                     
@@ -57,7 +57,7 @@ use App\Http\Controllers\Clients\IndexController;
                             </div>
                             <div class="header-bottom-contact-num">
                                 <a
-                                    href="tel:{{ IndexController::settings()->phone }}">{{ IndexController::settings()->phone }}</a>
+                                    href="tel:{{ CHomeController::settings()->phone }}">{{ CHomeController::settings()->phone }}</a>
                             </div>
 
                         </div>

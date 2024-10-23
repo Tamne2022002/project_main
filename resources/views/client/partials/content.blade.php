@@ -1,13 +1,11 @@
 <?php
-use App\Http\Controllers\Clients\IndexController;
+use App\Http\Controllers\Client\CHomeController;
 
 ?>
 
- 
-
-@isset($productOutstanding)
-    @if (!$productOutstanding->isEmpty())
-        {{-- Product Oustanding --}}
+@isset($productFeatured)
+    @if (!$productFeatured->isEmpty())
+        {{-- productFeatured --}}
         <div class="wrap-product-outstanding py50">
             <div class="wrap-content">
                 <div class="title-main title-left">
@@ -15,7 +13,7 @@ use App\Http\Controllers\Clients\IndexController;
                 </div>
                 <div class="slick-product-outstanding-cover">
                     <div class="slick-product-outstanding">
-                        @foreach ($productOutstanding as $v)
+                        @foreach ($productFeatured as $v)
                             <div class="product-outstanding-item" data-aos="fade-up" data-aos-duration="1000">
                                 <div class="product" data-aos="zoom-in-up">
                                     <div class="box-product text-decoration-none">
@@ -81,7 +79,7 @@ use App\Http\Controllers\Clients\IndexController;
                         <span>{{ $v->name }}</span>
                     </div>
                     <div class="flex-categorysecond">
-                        @foreach ($v->children()->where('outstanding', 1)->where('status', 1)->whereNull('deleted_at')->get() as $category_second)
+                        @foreach ($v->children()->where('featured', 1)->where('status', 1)->whereNull('deleted_at')->get() as $category_second)
                             <div class="categorysecond" data-idf="{{ $v->id }}"
                                 data-ids="{{ $category_second->id }}"
                                 data-url="{{ route('get-category-data', ['categoryId' => $category_second->id]) }}">
