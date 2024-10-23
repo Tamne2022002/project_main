@@ -8,9 +8,105 @@ use App\Http\Controllers\Admin\ProductListController;
 use App\Http\Controllers\Admin\PublisherController; 
 use App\Http\Controllers\Admin\DashboardController; 
 
-// Route::get('/', function () {
-//     return view('index');
-// });
+use App\Http\Controllers\Client\CCartController;
+// use App\Http\Controllers\Client\CChangePasswordController;
+use App\Http\Controllers\Client\CInfoController;
+use App\Http\Controllers\Client\CNewsController;
+use App\Http\Controllers\Client\COrderController;
+use App\Http\Controllers\Client\CProductController;
+// use App\Http\Controllers\Client\CRateController;
+// use App\Http\Controllers\Client\CSearchController;
+use App\Http\Controllers\Client\CUserController;
+use App\Http\Controllers\Client\CHomeController;
+
+Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
+Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
+Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
+Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
+Route::get('logout', [CUserController::class, 'logout'])->name('user.logout');
+
+Route::prefix('/')->group(function () {
+    /* Index */
+    Route::controller(CHomeController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/get-category-data/{categoryId}', [CHomeController::class, 'getCategoryData'])->name('get-category-data');
+        Route::get('/publisher/{id}', [CHomeController::class, 'publisherproduct'])->name('publisher.publisherproduct');
+        Route::get('/categoryid/{id}', [CHomeController::class, 'categoryidproduct'])->name('categoryid.categoryidproduct');
+    });
+    /* Search */
+    Route::controller(CSearchController::class)->group(function () {
+        Route::get('/search', 'index')->name('search');
+    });
+  
+    
+    /* News */
+    Route::controller(CNewsController::class)->group(function () {
+        Route::get('/news', 'index')->name('news');
+        Route::get('/news/{id}', [CNewsController::class, 'detail'])->name('news.detail');
+    });
+    /* Product */
+    Route::controller(CProductController::class)->group(function () {
+        Route::get('/product', 'index')->name('product');
+        Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
+        Route::get('/product/{id}/buy-now', 'add')->name('product.add');
+    });
+
+    /* Cart */
+    Route::controller(CCartController::class)->group(function () {
+        Route::get('/cart', 'index')->name('user.cart');
+        Route::get('/cart/add/{id?}&{quantity?}', 'add_index')->name('add_index.cart');
+        Route::get('/cart/update_quantity/{id?}&{method?}', 'changeQuantity')->name('update_quantity.cart');
+        Route::get('/cart/delete/{id}', 'delete')->name('delete.cart');
+        //Route::patch('/cart/update/{id}', 'update_qty')->name('update.cart');
+
+    });
+
+    /* Info */
+    // Route::controller(CInfoController::class)->group(function () {
+    //     Route::get('user-info', 'index')->name('user.info');
+    //     Route::post('user-info/update', 'update')->name('user.info.update');
+    //     Route::delete('user-info/delete', 'delete')->name('user.info.delete');
+    // });
+
+    /*Order*/
+    // Route::controller(COrderController::class)->group(function () {
+    //     Route::get('order', 'index')->name('user.order');
+    //     Route::get('order/{id}', 'detail')->name('user.order.detail');
+    // });
+
+    /*Address Change*/
+    /*Route::controller(CChangeAddressController::class)->group(function() {
+    Route::get('change-address', 'index')->name('user.changeaddress.index');
+    Route::post('change-address/update', 'update')->name('user.changeaddress.update');
+    });*/
+
+    /*Password Change*/
+    // Route::controller(CChangePasswordController::class)->group(function () {
+    //     Route::get('change-password', 'index')->name('user.changepassword');
+    //     Route::post('change-password/update', 'update')->name('user.changepassword.update');
+    // });
+
+    // /*Rate*/
+    // Route::controller(CRateController::class)->group(function () {
+    //     Route::get('rate', 'index')->name('user.rate');
+    //     Route::get('/rate/{id}', 'rate')->name('user.rate.rate');
+    //     Route::get('/rate/{id}/{rate_id}', 'detail')->name('user.rate.detail');
+    //     Route::post('rate/store', 'store')->name('user.rate.store');
+    // });
+
+    /* PAYMENT */
+
+    // Route::controller(PaymentController::class)->group(function () {
+    //     Route::get('/payment', 'index')->name('user.payment');
+    //     Route::post('/cod_payment', 'cod_payment')->name('cod');
+    //     Route::post('/vnpay_payment', 'vnpay_payment')->name('vnpay');
+    //     Route::post('/payment_return', 'combination')->name('combination');
+    //     Route::get('/vnpay_return', 'return')->name('vnpay.return');
+    // });
+
+    /*VNPAY*/
+    // Route::post('/vnpay_return', [PaymentController::class, 'return'])->name('vnpay.return');
+});
 
 Auth::routes();
 

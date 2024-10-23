@@ -1,7 +1,7 @@
 <?php
-use App\Http\Controllers\Clients\IndexController;
+use App\Http\Controllers\Client\CHomeController;
 ?>
-<link href="{{ IndexController::settings()->favicon_path }}" rel="icon" type="image/x-icon">
+<link href="{{ CHomeController::settings()->favicon_path }}" rel="icon" type="image/x-icon">
 
 <link href="{{ asset('index/css/effect.css') }}" rel="stylesheet">
 <link href="{{ asset('index/css/animate.min.css') }}" rel="stylesheet">

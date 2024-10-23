@@ -10,5 +10,6 @@ class NewsModel extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'table_news';
     protected $fillable =['name','desc','content','photo_path','photo_name','status', 'featured',];
 }

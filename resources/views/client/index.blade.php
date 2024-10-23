@@ -1,10 +1,10 @@
 <?php
-use App\Http\Controllers\Clients\IndexController;
+use App\Http\Controllers\Client\CHomeController;
 ?>
 
 @extends('client.layouts.index')
 @section('title')
-    <title>{{ IndexController::settings()->name }}</title>
+    <title>{{ CHomeController::settings()->name }}</title>
 @endsection
 @section('content')
 @endsection

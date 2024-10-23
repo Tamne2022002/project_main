@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\Clients\IndexController;
+use App\Http\Controllers\Client\CHomeController;
 ?>
 <div class="footer">
     <div class="footer-article py50 ">
@@ -7,21 +7,21 @@ use App\Http\Controllers\Clients\IndexController;
             <div class="footer-row d-flex justify-content-between align-items-center">
                 <div class="footer-news">
                     <div class="footer-company-name">
-                        {{ IndexController::settings()->name }}
+                        {{ CHomeController::settings()->name }}
                     </div>
                     <div class="footer-info-item">
-                        <span>Điện thoại: <a href="tel: {{ IndexController::settings()->phone }}">
-                                {{ IndexController::settings()->phone }}</a></span>
+                        <span>Điện thoại: <a href="tel: {{ CHomeController::settings()->phone }}">
+                                {{ CHomeController::settings()->phone }}</a></span>
                     </div>
                     <div class="footer-info-item">
-                        <span>Email: <a href="mailto: {{ IndexController::settings()->email }}">
-                                {{ IndexController::settings()->email }}</a></span>
+                        <span>Email: <a href="mailto: {{ CHomeController::settings()->email }}">
+                                {{ CHomeController::settings()->email }}</a></span>
                     </div>
                     <div class="footer-info-item">
-                        <span>Địa chỉ: {{ IndexController::settings()->address }}</span>
+                        <span>Địa chỉ: {{ CHomeController::settings()->address }}</span>
                     </div>
                     <div class="footer-info-item">
-                        <span><a href="{{ IndexController::settings()->link_map }}" target="_blank">Xem bản
+                        <span><a href="{{ CHomeController::settings()->link_map }}" target="_blank">Xem bản
                                 đồ</a></span>
                     </div>
                 </div>
@@ -30,11 +30,11 @@ use App\Http\Controllers\Clients\IndexController;
                 <div class="footer-news">
                     <div class="footer-fanpage">
                         <div id="fb-root"></div>
-                        <div class="fb-page" data-href="{{ IndexController::settings()->fanpage }}" data-tabs="timeline"
+                        <div class="fb-page" data-href="{{ CHomeController::settings()->fanpage }}" data-tabs="timeline"
                             data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
                             data-hide-cover="false" data-show-facepile="true">
-                            <blockquote cite="{{ IndexController::settings()->fanpage }}" class="fb-xfbml-parse-ignore"><a
-                                    href="{{ IndexController::settings()->fanpage }}">Facebook</a></blockquote>
+                            <blockquote cite="{{ CHomeController::settings()->fanpage }}" class="fb-xfbml-parse-ignore"><a
+                                    href="{{ CHomeController::settings()->fanpage }}">Facebook</a></blockquote>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@ use App\Http\Controllers\Clients\IndexController;
     </div>
     <div class="footer-map">
         <div class="footer-map-iframe">
-            {!! IndexController::settings()->iframe_map !!}
+            {!! CHomeController::settings()->iframe_map !!}
         </div>
     </div>
 </div>

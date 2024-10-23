@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\Clients\IndexController;
+use App\Http\Controllers\Client\CHomeController;
 ?>
 <div class="menu">
     <div class="wrap-content">
@@ -16,8 +16,8 @@ use App\Http\Controllers\Clients\IndexController;
                     <div class="flex-menu-mega">
                         <div class="menu-mega-left ht-tab">
                             <ul class="nav nav-tabs" role="tablist">
-                                @if (!IndexController::MenuCategory()->isEmpty())
-                                    @foreach (IndexController::MenuCategory() as $v)
+                                @if (!CHomeController::MenuCategory()->isEmpty())
+                                    @foreach (CHomeController::MenuCategory() as $v)
                                         <li class="">
                                             <a href="#tab-id-{{ $v->id }}" role="tab" data-toggle="tab"
                                                 class="menucategory-first-title">{{ $v->name }}</a>
@@ -28,7 +28,7 @@ use App\Http\Controllers\Clients\IndexController;
                         </div>
                         <div class="menu-mega-right ht-tab">
                             <div class="tab-content">
-                                @foreach (IndexController::MenuCategory() as $v)
+                                @foreach (CHomeController::MenuCategory() as $v)
                                     <div class="tab-pane" id="tab-id-{{ $v->id }}">
                                         @foreach ($v->children as $menucategorysecond)
                                             <div class="menucategory-second-tab ht-ul">
@@ -88,7 +88,7 @@ use App\Http\Controllers\Clients\IndexController;
                                     </a>
 
                                 </div>
-                                @if (Auth::guard('member')->check())
+                                {{-- @if (Auth::guard('member')->check())
                                 <div class="menu-bottom-account-positon">
                                     <a href="{{route('user.info')}}">
                                         <div class="menu-bottom-account">
@@ -96,12 +96,12 @@ use App\Http\Controllers\Clients\IndexController;
                                                 <i class="fa-solid fa-user"></i>
                                             </div>
                                             <div class="menu-bottom-account-text">
-                                                Xin chào, {{ IndexController::getUserInfo()->first_name }}
+                                                Xin chào, {{ CHomeController::getUserInfo()->first_name }}
                                             </div>
                                         </div>
                                     </a>
                                 </div>
-                                @else
+                                @else --}}
                                 <div class="menu-bottom-account-positon">
                                     <a href="{{route('user.login')}}">
                                         <div class="menu-bottom-account">
@@ -114,7 +114,7 @@ use App\Http\Controllers\Clients\IndexController;
                                         </div>
                                     </a>
                                 </div>
-                                @endif
+                                {{-- @endif --}}
                             </div>
                         </div>
                     </div>

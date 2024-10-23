@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\Clients\IndexController;
+use App\Http\Controllers\Client\CHomeController;
 ?>
 @if (isset($sliders))
     <div class="slideshow">
