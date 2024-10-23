@@ -61,7 +61,7 @@ class LoginController extends Controller
             if(!empty($account)){
                 session(['user' => $account]);
                 if (auth()->user()->type == 'admin') {
-                    return redirect()->route('admin.index'); 
+                    return redirect()->route('admin.dashboard.dashboard'); 
                 } else { 
                     return redirect()->route('admin.login');
                 }

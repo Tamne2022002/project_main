@@ -10,7 +10,7 @@ use App\Http\Controllers\HomeController;
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item">
-                    <a href=""
+                    <a href="{{ route('admin.dashboard.dashboard') }}"
                     class="nav-link">
                     <i class="nav-icon fas fa-chart-pie"></i>
                     <p class="text-capitalize">Thống kê</p>
