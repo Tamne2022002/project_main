@@ -12,19 +12,18 @@ use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
-
     private $order;
     private $orderdetail;
 
-    public function __construct(Order $order, OrderDetail $orderDetail)
-    {
+    public function __construct(OrderModel $order, OrderDetailModel $orderDetail)
+    {  
         $this->order = $order;
         $this->orderdetail = $orderDetail;
     }
     public function index(Request $request)
     {
         $search = $request->input('search_keyword');
-        $status = OrderStatuse::get();
+        $status = OrderStatusModel::get();
 
         $order = null;
         if ($search) {

@@ -76,10 +76,10 @@
                         <div class="price-product-detail">
                             Giá: 
                             @if ($productDetail->sale_price)
-                                <span class="price-new-product-detail">@formatmoney($productDetail->sale_price)</span> <span
-                                class="price-old-product-detail">@formatmoney($productDetail->regular_price)</span>
+                                <span class="price-new-product-detail"> {{ \App\Helpers\Func::formatMoney($productDetail->sale_price) }}</span> <span
+                                class="price-old-product-detail"> {{ \App\Helpers\Func::formatMoney($productDetail->regular_price) }}</span>
                             @else
-                                <span  class="price-new-product-detail">@formatmoney($productDetail->regular_price)</span>
+                                <span  class="price-new-product-detail"> {{ \App\Helpers\Func::formatMoney($productDetail->regular_price) }}</span>
                             @endif
                         </div>
                         <div class="desc-product-detail">

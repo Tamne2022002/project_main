@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductListController; 
 use App\Http\Controllers\Admin\PublisherController; 
 use App\Http\Controllers\Admin\DashboardController; 
+use App\Http\Controllers\Admin\OrderController; 
+use App\Http\Controllers\Admin\ImportOrderController; 
+use App\Http\Controllers\Admin\SettingController; 
 
 use App\Http\Controllers\Client\CCartController;
 // use App\Http\Controllers\Client\CChangePasswordController;
@@ -117,7 +120,22 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::prefix('admin')->group(function () { 
         Route::get('', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
         Route::get('/dashboard/{month?}&{year}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
+        
+        /* Order */
+        Route::prefix('order')->group(function () {
+            Route::get('', [OrderController::class, 'index'])->name('order.index');
+            Route::get('/view/{id}', [OrderController::class, 'view'])->name('order.view');
+        }); 
 
+        /* Import_order */
+        Route::prefix('import_order')->group(function () {
+            Route::get('', [ImportOrderController::class, 'index'])->name('import_order.index');
+            Route::get('/create', [ImportOrderController::class, 'create'])->name('import_order.create');
+            Route::post('/store', [ImportOrderController::class, 'store'])->name('import_order.store');
+            Route::get('/delete/{id}', [ImportOrderController::class, 'delete'])->name('import_order.delete');
+            Route::get('/view/{id}', [ImportOrderController::class, 'view'])->name('import_order.view');
+            Route::get('/get-product-id', [ImportOrderController::class, 'getProductId'])->name('get-product-id]');
+        });
  
         /* Publisher */
         Route::prefix('publisher')->group(function () {
@@ -139,6 +157,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/delete/{id}', [ProductListController::class, 'delete'])->name('productList.delete');
         });
 
+        /* Product */
         Route::prefix('product')->group(function () {
             Route::get('', [ProductController::class, 'index'])->name('product.index');
             Route::get('/create',  [ProductController::class, 'create'])->name('product.create');
@@ -150,10 +169,14 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/get-category-id-warehouse', [ProductController::class, 'getCategoryIdWarehouse'])->name('get-category-id-warehouse');
         });
 
-            /* Warehouse */
+        /* Warehouse */
         Route::prefix('warehouse')->group(function () {
             Route::get('', [ProductController::class, 'warehouse'])->name('warehouse.index');
         });
+
+        /* Setting */
+        Route::get('setting', [SettingController::class, 'index'])->name('setting.index');
+        Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
     
     });
 });

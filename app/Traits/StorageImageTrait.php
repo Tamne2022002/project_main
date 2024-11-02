@@ -3,9 +3,7 @@ namespace App\Traits;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
- 
-
-
+  
 trait StorageImageTrait
 {
     /* Upload */
