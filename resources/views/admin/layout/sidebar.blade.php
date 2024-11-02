@@ -88,7 +88,7 @@ use App\Http\Controllers\HomeController;
                     <ul class="nav nav-treeview">
 
                         <li class="nav-item">
-                            <a href=""
+                            <a href="{{ route('order.index')}}"
                                 class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p class="text-capitalize">
@@ -97,7 +97,7 @@ use App\Http\Controllers\HomeController;
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href=""
+                            <a href="{{ route('import_order.index') }}"
                                 class="nav-link">
                                 <i class="nav-icon text-sm fas fa-boxes"></i>
                                 <p class="text-capitalize">
@@ -169,7 +169,7 @@ use App\Http\Controllers\HomeController;
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#"
+                    <a href="{{ route('setting.index') }}"
                         class="nav-link">
                         <i class="nav-icon text-sm fas fa-cogs"></i>
                         <p class="text-capitalize">

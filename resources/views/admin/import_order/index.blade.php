@@ -1,13 +1,12 @@
 @extends('admin.layout.head') @section('title')
-    <title>Nhà Xuất Bản</title>
+    <title>Danh Sách Hóa Đơn Nhập</title>
     @endsection @section('content')
 @section('css')
-    <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
     {{-- <script type="text/javascript">
-    var PERMISSION = @php echo CheckPermissionAdmin(session()->get('user')[0]['id'], 'delete_publisher')?'"true"':'"false"' @endphp;
+    var PERMISSION = @php echo CheckPermissionAdmin(session()->get('user')[0]['id'], 'delete_import_order')?'"true"':'"false"' @endphp;
 </script> --}}
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
@@ -17,47 +16,44 @@
         <div class="container-fluid pt-3">
             <div class="w-100 card card-primary card-outline text-sm">
                 <div class="col-md-6">
-                    <a href="{{ route('publisher.create') }}" class="btn btn-success m-2">Thêm</a>
+                    <a href="{{ route('import_order.create') }}" class="btn btn-success m-2">Thêm</a>
                 </div>
             </div>
             <div class="w-100 card card-primary card-outline text-sm px-3 py-3">
-                <div class="card-title mb-2">Tìm kiếm Nhà xuất bản:</div>
+
                 <form action="" class="form-inline" method="GET">
                     @csrf
                     <input class="search-keyword form-control border-end-0 border"
                         value="{{ request()->get('search_keyword') }}" type="search" name="search_keyword"
                         placeholder="Nhập từ khóa để tìm kiếm">
-                    <input type="hidden" id="search_route" value="{{ route('publisher.index') }}">
+                    <input type="hidden" id="search_route" value="{{ route('import_order.index') }}">
                     <div class="input-group-append bg-primary rounded-right">
                         <button class="btn btn-navbar text-white" onclick="onSearch()" type="button">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
                 </form>
-            </div>
+            </div>  
             <div class="col-md-12">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Tên Nhà Xuất Bản</th>
-                            <th scope="col">Hình Ảnh</th>
+                            <th scope="col">Mã Hóa Đơn</th>
+                            <th scope="col">Ngày Nhập</th>
                             <th scope="col">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (!$publishers->isEmpty())
-                            @foreach ($publishers as $publisher)
+                        @if (!$ImportOrder->isEmpty())
+                            @foreach ($ImportOrder as $v)
                                 <tr>
-                                    <td>{{ $publisher->name }}</td>
+                                    <td class="">{{ $v->order_code }}</td>
+                                    <td class="">{{ $v->import_date }}</td>
                                     <td>
-                                        <img class="publisher-image-thumb" src="{{ $publisher->photo_path }}"
-                                            alt="">
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('publisher.edit', ['id' => $publisher->id]) }}"
-                                            class="btn btn-default">Sửa</a>
-                                        <a href=" "data-url="{{ route('publisher.delete', ['id' => $publisher->id]) }}"
-                                            class="btn btn-danger action_delete">Xóa</a>
+                                        <a href="{{ route('import_order.view', ['id' => $v->id]) }}"
+                                            class="btn btn-default">Xem</a>
+                                        <a data-url="{{ route('import_order.delete', ['id' => $v->id]) }}"
+                                            class="action_delete btn btn-danger">Xóa</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -68,9 +64,11 @@
                 </table>
             </div>
             <div class="col-md-12">
-                {{ $publishers->links('pagination::bootstrap-5') }}
+                {{ $ImportOrder->links('pagination::bootstrap-5') }}
             </div>
         </div>
     </div>
 </div>
+
+
 @endsection

@@ -11,18 +11,19 @@
 
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
-<div class="content-wrapper">
-
- 
+<div class="content-wrapper bg-white">  
     <div class="content">
-        <div class="container-fluid pt-3">
-
+        <div class="container-fluid pt-3"> 
             <form action="{{ route('publisher.store') }}" method="POST" enctype="multipart/form-data">
-                <div class="col-md-12 mb-3">
-                    <button type="submit" class="btn btn-primary">Lưu</button>
+                <div class="card card-primary card-outline text-sm">
+                    <div class="d-flex px-3 py-1 my-2 ">
+                        <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
+                        <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
+                        <a href="{{ route('publisher.index') }}" class="btn btn-danger">Thoát</a>
+                    </div>
                 </div>
                 @csrf
-                <div class="row col-12">
+                <div class="row">
                     <div class="form-publisher-left col-xl-8">
                         <div class="card card-primary card-outline text-sm">
                             <div class="card-header">
@@ -45,8 +46,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Mô Tả Nhà Xuất Bản</label>
-                                    <textarea name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="4">{{ old('description') }}</textarea>
-                                    @error('description')
+                                    <textarea name="desc" class="form-control summernote @error('desc') is-invalid @enderror" rows="4">{{ old('desc') }}</textarea>
+                                    @error('desc')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -93,9 +94,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Lưu</button>
+                </div> 
+                {{-- <button type="submit" class="btn btn-primary">Lưu</button> --}}
             </form>
         </div>
     </div>

@@ -39,10 +39,10 @@ use App\Http\Controllers\Client\CHomeController;
                                                                                         <div class="price-product">
                                                 @if ($v->discount)
                                                     <div class="price-new">
-                                                        @formatmoney($v->sale_price)
+                                                        {{ \App\Helpers\Func::formatMoney($v->sale_price)}}
                                                     </div>
                                                     <div class="price-old">
-                                                        @formatmoney($v->regular_price)
+                                                        {{ \App\Helpers\Func::formatMoney($v->regular_price)}}
                                                     </div>
                                                     <div class="discount">
                                                         {{ $v->discount }}%
@@ -50,7 +50,7 @@ use App\Http\Controllers\Client\CHomeController;
                                                 @else
                                                     @if ($v->regular_price)
                                                         <div class="price-new">
-                                                            @formatmoney($v->regular_price)
+                                                            {{ \App\Helpers\Func::formatMoney($v->regular_price)}}
                                                         </div>
                                                     @else
                                                         <div class="price-new">

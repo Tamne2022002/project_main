@@ -18,14 +18,19 @@
 @endsection
 
 @section('content')
-    <div class="content-wrapper">
-         <form action="{{ route('product.update', ['id' => $product->id])}}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="card-footer text-sm sticky-top">
-                <button type="submit" class="btn btn-primary">Lưu</button>
-            </div>
-            <div class="content">
-                <div class="container-fluid">
+    <div class="content-wrapper bg-white">
+        <div class="container-fluid pt-3"> 
+            <form action="{{ route('product.update', ['id' => $product->id]) }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                <div class="card card-primary card-outline text-sm sticky-top">
+                    <div class="d-flex px-3 py-1 my-2 ">
+                        <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
+                        <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
+                        <a href="{{ route('product.index') }}" class="btn btn-danger">Thoát</a>
+                    </div>
+                </div>
+                <div class="content">
                     <div class="row">
                         <div class="row col-12">
                             <div class="form-prod-left col-xl-8">
@@ -89,8 +94,7 @@
                                         <div class="form-group ">
                                             <label>Chọn Danh Mục</label>
 
-                                            <select
-                                                class="form-control select2_init @error('id_list') is-invalid @enderror"
+                                            <select class="form-control select2_init @error('id_list') is-invalid @enderror"
                                                 name="id_list">
                                                 <option value="">Chọn danh mục</option>
                                                 {!! $htmlOption !!}
@@ -205,8 +209,8 @@
                                                         src="{{ $product->photo_path }}" alt="">
                                                 </div>
                                                 <label class="photoUpload-file" id="photo-zone" for="file-zone">
-                                                    <input type="file" class=" form-control-file"
-                                                        name="photo_path" id="file-zone">
+                                                    <input type="file" class=" form-control-file" name="photo_path"
+                                                        id="file-zone">
                                                     <i class="fas fa-cloud-upload-alt"></i>
                                                     <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
                                                     <p class="photoUpload-or">hoặc</p>
@@ -237,11 +241,11 @@
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <button type="submit" class="btn btn-primary">Lưu</button>
+                            {{-- <button type="submit" class="btn btn-primary">Lưu</button> --}}
                         </div>
                     </div>
                 </div>
-            </div>
+        </div>
 
         </form>
     </div>
