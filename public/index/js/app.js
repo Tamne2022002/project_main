@@ -148,7 +148,7 @@ function setupBackToTop() {
 function SlickPage() {
     if (isExist("slick-slideshow")) {
         $(".slick-slideshow").slick({
-            dots: true,
+            dots: false,
             infinite: true,
             autoplaySpeed: 3000,
             slidesToShow: 1,

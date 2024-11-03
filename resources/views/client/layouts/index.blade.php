@@ -8,7 +8,7 @@
 
 <body>
     <div class="wrap-container">
-        <div class="{{ Request::route()->getName() == 'index' ? 'external-page' : 'internal-page' }}"">
+        <div class="{{ Request::route()->getName() == 'index' ? 'external-page' : 'internal-page' }}">
             @include('client.partials.header')
             @include('client.partials.menu')
             @include('client.partials.slider')
