@@ -8,7 +8,7 @@
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
-<div class="content-wrapper">
+<div class="content-wrapper bg-white">
      <div class="content">
         <div class="container-fluid pt-3">
             <div class="row">

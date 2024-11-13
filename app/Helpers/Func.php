@@ -2,6 +2,9 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\DB; 
+use Illuminate\Support\Str;
+
 class Func
 {
     public static function convert_utf8_to_iconv($str = '')
@@ -48,5 +51,20 @@ class Func
         }
 
         return $str;
+    }
+
+    function CheckPermissionAdmin($id_user, $permissionCheck)
+    {
+        $id_role = DB::table('table_user_roles')->where('id_member', $id_user)->pluck('id_role');
+        $arrPermission = DB::table('table_permission_role')->whereIn('id_role', $id_role)->pluck('id_permission');
+        $arrKeyPermission = DB::table('table_permissions')->whereIn('id', $arrPermission)->pluck('key_permissions');
+
+        if (Str::contains($permissionCheck, $arrKeyPermission)){
+            return true;
+        } else {
+            return false; 
+        }
+
+    
     }
 }

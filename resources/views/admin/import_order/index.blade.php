@@ -1,3 +1,6 @@
+<?php
+$func = new App\Helpers\Func();
+?>
 @extends('admin.layout.head') @section('title')
     <title>Danh Sách Hóa Đơn Nhập</title>
     @endsection @section('content')
@@ -5,20 +8,22 @@
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
-    {{-- <script type="text/javascript">
-    var PERMISSION = @php echo CheckPermissionAdmin(session()->get('user')[0]['id'], 'delete_import_order')?'"true"':'"false"' @endphp;
-</script> --}}
+    <script type="text/javascript">
+        var PERMISSION = @php echo $func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_import_order')?'"true"':'"false"' @endphp;
+    </script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
 <div class="content-wrapper bg-white">
     <div class="content">
         <div class="container-fluid pt-3">
-            <div class="w-100 card card-primary card-outline text-sm">
-                <div class="col-md-6">
-                    <a href="{{ route('import_order.create') }}" class="btn btn-success m-2">Thêm</a>
+            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'add_import_order'))
+                <div class="w-100 card card-primary card-outline text-sm">
+                    <div class="col-md-6">
+                        <a href="{{ route('import_order.create') }}" class="btn btn-success m-2">Thêm</a>
+                    </div>
                 </div>
-            </div>
+            @endif
             <div class="w-100 card card-primary card-outline text-sm px-3 py-3">
 
                 <form action="" class="form-inline" method="GET">
@@ -33,7 +38,7 @@
                         </button>
                     </div>
                 </form>
-            </div>  
+            </div>
             <div class="col-md-12">
                 <table class="table">
                     <thead>
@@ -50,10 +55,14 @@
                                     <td class="">{{ $v->order_code }}</td>
                                     <td class="">{{ $v->import_date }}</td>
                                     <td>
-                                        <a href="{{ route('import_order.view', ['id' => $v->id]) }}"
-                                            class="btn btn-default">Xem</a>
-                                        <a data-url="{{ route('import_order.delete', ['id' => $v->id]) }}"
-                                            class="action_delete btn btn-danger">Xóa</a>
+                                        @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'view_import_order'))
+                                            <a href="{{ route('import_order.view', ['id' => $v->id]) }}"
+                                                class="btn btn-default">Xem</a>
+                                        @endif 
+                                        @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_import_order'))
+                                            <a data-url="{{ route('import_order.delete', ['id' => $v->id]) }}"
+                                                class="action_delete btn btn-danger">Xóa</a>
+                                        @endif 
                                     </td>
                                 </tr>
                             @endforeach

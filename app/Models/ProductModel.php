@@ -37,7 +37,7 @@ class ProductModel extends Model
     
     public function category()
     {
-        return $this->belongsTo(ProductListModel::class,'id');
+        return $this->belongsTo(ProductListModel::class,'id_list');
     }
     public function publisher()
     {

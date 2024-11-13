@@ -46,10 +46,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Mô Tả Nhà Xuất Bản</label>
-                                    <textarea name="desc" class="form-control summernote @error('desc') is-invalid @enderror" rows="4">{{ old('desc') }}</textarea>
-                                    @error('desc')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    <textarea name="desc" class="form-control summernote" rows="4">{{ old('desc') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +68,7 @@
                                     <label>Hình ảnh</label>
                                     <div class="photoUpload-zone">
                                         <div class="photoUpload-detail" id="photoUpload-preview">
-                                            <img class="rounded" src="{{ asset('admins/imgs/noimage.png') }}"
+                                            <img class="rounded" src="{{ asset('assets/noimage.jpg') }}"
                                                 alt="Alt Photo">
                                         </div>
                                         <label class="photoUpload-file" id="photo-zone" for="file-zone">
@@ -86,10 +83,7 @@
                                         </label>
                                         <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
                                             (.jpg|.png|.jpeg)</div>
-                                    </div>
-                                    @error('photo_path')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
+                                    </div> 
                                 </div>
                             </div>
                         </div>

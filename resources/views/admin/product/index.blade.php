@@ -1,3 +1,6 @@
+<?php 
+$func = new App\Helpers\Func();  
+?>
 @extends('admin.layout.head')
 @section('title')
     <title>Sản phẩm</title>
@@ -9,6 +12,9 @@
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
+    <script type="text/javascript">
+        var PERMISSION =  @php echo $func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_product')?'"false"':'"false"' @endphp;
+    </script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/jquery.sumoselect.min.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>
@@ -18,11 +24,13 @@
     <div class="content-wrapper bg-white">
         <div class="content">
             <div class="container-fluid pt-3">
+                @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'add_product')) 
                 <div class="w-100 card card-primary card-outline text-sm">
                     <div class="col-md-6">
                         <a href="{{ route('product.create') }}" class="btn btn-success m-2">Thêm</a>
                     </div>
                 </div>
+                @endif
                 <div class="w-100 card card-primary card-outline text-sm px-3 py-3">
                     <div class="row">
                         <div class="col-md-4 filter-product-admin">
@@ -68,19 +76,24 @@
                                     $productList = $v->category()->first(); 
                                 @endphp
                                     <tr>
-                                        <td class="text-capitalize">{{ $v['name'] }}-{{ $v['id'] }}</td>
+                                        <td class="text-capitalize">{{ $v['name'] }}</td>
                                         <td>
                                             <img class="adm-product-img"
-                                                src="{{ $v['photo_path'] ? $v['photo_path'] : asset('assets/noimage.jpg') }} "
+                                                src="{{ (!empty($v->photo_name) && !empty($v->photo_path)) ? $v->photo_path : asset('assets/noimage.jpg') }}"
                                                 alt="">
                                         </td>
-                                        {{-- <td class="text-capitalize">{{ optional($v['id_list'])->name }}</td> --}}
-                                        <td class="text-capitalize">{{ !empty($productList) ? $productList['name'] : null }}</td>
+                                        <td class="text-capitalize">{{ $productList->name }}</td>
                                         <td>
+                                            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'edit_product'))
+                                                
                                             <a href="{{ route('product.edit', ['id' => $v->id]) }}"
                                                 class="btn btn-default">Sửa</a>
-                                            <a data-url="{{ route('product.delete', ['id' => $v->id]) }}"
-                                                class="btn btn-danger action_delete">Xóa</a>
+                                            @endif
+                                            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_product')) 
+                                                <a data-url="{{ route('product.delete', ['id' => $v->id]) }}"
+                                                    class="btn btn-danger action_delete">Xóa</a>
+                                            @endif
+
                                         </td>
                                     </tr>
                                 @endforeach

@@ -1,3 +1,6 @@
+<?php 
+$func = new App\Helpers\Func();  
+?>
 @extends('admin.layout.head')
 @section('title')
     <title>Kho</title>
@@ -9,9 +12,9 @@
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
 @endsection
 @section('js')
-    {{-- <script type="text/javascript">
-    var PERMISSION = @php echo CheckPermissionAdmin(session()->get('user')[0]['id'], 'delete_warehouse')?'"true"':'"false"' @endphp;
-</script> --}}
+    <script type="text/javascript">
+        var PERMISSION =  @php echo $func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_warehouse')?'"true"':'"false"' @endphp;
+    </script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('vendors/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('/admins/js/jquery.sumoselect.min.js') }}"></script>
@@ -67,7 +70,7 @@
                                             {{ $warehouseItem->product_name }}
                                         </td>
                                         <td class="col-md-2">
-                                            <img class="adm-product-img" src="{{ $warehouseItem->photo_path }}"
+                                            <img class="adm-product-img" src="{{ !empty($warehouseItem->photo_name) ? $warehouseItem->photo_path : asset('assets/noimage.jpg') }}"
                                                 alt="">
                                         </td>
                                         <td class="text-capitalize col-md-4">{{ $warehouseItem->category_name }}</td>

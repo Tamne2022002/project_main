@@ -24,6 +24,10 @@ class ProductController extends Controller
 {
 
     use StorageImageTrait, DeleteModelTrait; 
+    public function __construct(ProductModel $product)
+    { 
+        $this->product = $product; 
+    }
     public function index(Request $request)
     {
         $categories = ProductListModel::select('*')->get();
@@ -38,7 +42,8 @@ class ProductController extends Controller
             ->paginate(15);
             $products->setPath('product?search_keyword=' . $search);
         } else {
-            $products = ProductModel::latest()->orderBy('id','asc')->paginate(10);
+            $products = ProductModel::latest()->orderBy('id','asc')->paginate(10); 
+ 
         }
         return view('admin.product.index', compact('products', 'categories'));
 
@@ -126,20 +131,21 @@ class ProductController extends Controller
     }
     public function store(ProductAddRequest $request)
     {
-        try {
+        
+        try { 
             DB::beginTransaction();
             $dataProductCreate = [
                 'name' => $request->name,
-                'id_list' => $request->id_list,
-                'desc' => $request->desc,
-                'content' => $request->content,
-                'regular_price' => $request->regular_price,
-                'sale_price' => $request->sale_price,
-                'discount' => $request->discount,
-                'id_publisher' => $request->id_publisher,
-                'author' => $request->author,
-                'code' => $request->code,
-                'publishing_year' => $request->publishing_year,
+                'id_list' => $request->id_list ?? null,
+                'desc' => $request->desc ?? null,
+                'content' => $request->content ?? null,
+                'regular_price' => $request->regular_price ?? null,
+                'sale_price' => $request->sale_price ?? null,
+                'discount' => $request->discount ?? null,
+                'id_publisher' => $request->id_publisher ?? null,
+                'author' => $request->author ?? null,
+                'code' => $request->code ?? null,
+                'publishing_year' => $request->publishing_year ?? '',
                 'status' => $request->filled('status') ? $request->status : false,
                 'featured' => $request->filled('featured') ? $request->featured : false,
             ];
@@ -148,7 +154,9 @@ class ProductController extends Controller
                 $dataProductCreate['photo_name'] = $dataUploadProductImage['file_name'];
                 $dataProductCreate['photo_path'] = $dataUploadProductImage['file_path'];
             }
-            $product = ProductModel::create($dataProductCreate);
+            $product = $this->product->create($dataProductCreate);
+ 
+
             $product_id = $product->id;
             $dataWarehouseCreate = [
                 'id_parent' => $product_id,
@@ -157,19 +165,19 @@ class ProductController extends Controller
             ]; 
             WarehouseModel::create($dataWarehouseCreate);
             // /* Sub img */
-            // if ($request->hasFile('photo_path')) {
-            //     foreach ($request->photo_path as $fileItem) {
-            //         $datagallery = $this->storagetraitmultiple($fileItem, 'product');
-            //         $product->images()->create([
-            //             'product_id' => $product->id,
-            //             'photo_path' => $datagallery['file_path'],
-            //             'photo_name' => $datagallery['file_name'],
-            //         ]);
-            //     }
-            // }
+            if ($request->hasFile('photo_path')) {
+                foreach ($request->photo_path as $fileItem) {
+                    $datagallery = $this->storagetraitmultiple($fileItem, 'product');
+                    $product->images()->create([
+                        'id_parent' => $product->id,
+                        'photo_path' => $datagallery['file_path'],
+                        'photo_name' => $datagallery['file_name'],
+                    ]);
+                }
+            }
             DB::commit();
             return redirect()->route('product.index');
-        } catch (\Exception $exception) {
+        } catch (\Exception $exception) { 
             DB::rollBack();
             Log::error('Message:' . $exception->getMessage() . 'Line:' . $exception->getLine());
         }
@@ -234,7 +242,7 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        Warehouse::where('product_id', $id)->delete();
+        WarehouseModel::where('id_parent', $id)->delete();
         return $this->deleteModelTrait($id, $this->product);
     }
     public function getCategoryId(Request $request)

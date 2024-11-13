@@ -1,5 +1,5 @@
 @extends('admin.layout.head') @section('title')
-    <title>Chi Tiết Hóa Đon Nhập</title>
+    <title>Chi Tiết Hóa Đơn Nhập</title>
     @endsection @section('content')
 @section('css')
     <link rel="stylesheet" href="{{ asset('/admins/css/style.css') }}">
