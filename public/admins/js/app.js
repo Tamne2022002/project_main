@@ -56,15 +56,15 @@ function actionDelete(event) {
     }
 
     let noti = {};
-    // if (PERMISSION == "false") {
-    //     noti = {
-    //         title: "Bạn không thể thực hiện thao tác này!",
-    //         text: "Vui lòng liên hệ người có thẩm quyền cao hơn!",
-    //         icon: "info",
-    //         showCancelButton: true,
-    //         showConfirmButton: false,
-    //     };
-    // } else {
+    if (PERMISSION == "false") {
+        noti = {
+            title: "Bạn không thể thực hiện thao tác này!",
+            text: "Vui lòng liên hệ người có thẩm quyền cao hơn!",
+            icon: "info",
+            showCancelButton: true,
+            showConfirmButton: false,
+        };
+    } else {
         noti = {
             title: "Bạn có chắc không?",
             text: "Bạn sẽ không thể hoàn tác hành động này!",
@@ -74,7 +74,7 @@ function actionDelete(event) {
             cancelButtonColor: "#d33",
             confirmButtonText: "Có, hãy xóa nó!",
         };
-    // }
+    }
 
     let urlRequest = $(this).data("url");
     let that = $(this);
@@ -134,7 +134,7 @@ function SumoSelectImportInvoive() {
                         var productBlock = `
                             <div class="col-12 product-call-by-ajax" id="${product.id}">
                                 <div class="card card-primary card-outline text-sm">
-                                <input type="hidden" name="product_id[]" value="${product.id}" class="form-control">
+                                <input type="hidden" name="id_product[]" value="${product.id}" class="form-control">
                                     <div class="card-header">
                                         <h3 class="card-title">
                                             <strong>${product.name}</strong>

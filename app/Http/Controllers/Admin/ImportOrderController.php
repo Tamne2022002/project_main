@@ -56,17 +56,18 @@ class ImportOrderController extends Controller
             ];
             $ImportOrder = $this->ImportOrder->create($dataCreate);
             $id_import_order = $ImportOrder->id;
-            $details = count($request->id_product);
+            $details = count($request->product_id);
 
             for ($i = 0; $i < $details; $i++) {
                 $dataCreateImportOrderDetail = [
                     'id_import_order' => $id_import_order,
-                    'id_product' => $request->id_product[$i],
+                    'id_product' => $request->product_id[$i],
                     'quantity' => $request->quantity[$i],
                 ];
+
                 $this->ImportOrderdetail->create($dataCreateImportOrderDetail);
 
-                $product = WarehouseModel::find($request->id_product[$i]);
+                $product = WarehouseModel::find($request->product_id[$i]);
                 $product->quantity = $product->quantity + $request->quantity[$i];
                 $product->save();
             }

@@ -56,7 +56,7 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) {
+        if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) { 
             $account = User::where('email', $request->email)->first();
             if(!empty($account)){
                 session(['user' => $account]);

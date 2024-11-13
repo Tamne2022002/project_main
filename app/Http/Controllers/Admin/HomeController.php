@@ -29,6 +29,13 @@ class HomeController extends Controller
     {
         return view('admin.index');
     } 
+
+    
+    public static function getUser()
+    {
+        $user = Session::get('user'); 
+        return $user;
+    }
    
     public function logoutAdmin(Request $request)
     {

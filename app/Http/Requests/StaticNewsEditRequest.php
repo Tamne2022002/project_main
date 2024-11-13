@@ -23,8 +23,8 @@ class StaticNewsEditRequest extends FormRequest
     {
         return [
             'name' => 'required|regex:/^[\pL0-9\s]*$/u|max:255|min:10',
-            'description' => 'required',
-            'content' => 'required',
+            // 'description' => 'required',
+            // 'content' => 'required',
 
         ];
     }
@@ -35,8 +35,8 @@ class StaticNewsEditRequest extends FormRequest
             'name.max' => 'Tên không vượt quá 255 ký tự',
             'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
             'name.min' => 'Tên không dưới 10 ký tự',
-            'description.required' => 'Mô tả không được để trống',
-            'content.required' => 'Nội dung không được để trống',
+            // 'description.required' => 'Mô tả không được để trống',
+            // 'content.required' => 'Nội dung không được để trống',
 
         ];
     }
