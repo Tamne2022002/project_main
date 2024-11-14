@@ -36,7 +36,7 @@ class ProductController extends Controller
         $products = null;
         if ($search) {
             $searchUnicode = '%' . $search . '%';
-            $products = ProductModel::select('id', 'name', 'id_list','photo_path')
+            $products = ProductModel::select('id', 'name', 'id_list', 'photo_name', 'photo_path')
             ->where('name', 'LIKE', $searchUnicode)
             ->latest()
             ->paginate(15);
@@ -248,10 +248,11 @@ class ProductController extends Controller
     public function getCategoryId(Request $request)
     {
         $categoryIds = $request->query('categoryId');
+        dd($categoryIds);
         if (is_array($categoryIds)) {
-            $products = ProductModel::whereIn('category_id', $categoryIds)->with('category')->get();
+            $products = ProductModel::whereIn('id_list', $categoryIds)->with('table_product_list')->get();
         } else {
-            $products = ProductModel::with('category')->get();
+            $products = ProductModel::with('table_product_list')->get();
         }
         return response()->json(['products' => $products]);
     }
