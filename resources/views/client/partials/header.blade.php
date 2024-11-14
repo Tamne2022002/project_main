@@ -10,13 +10,17 @@ use App\Http\Controllers\Client\CHomeController;
                         {{ CHomeController::settings()->description }}
                     </marquee>
                 </div>
-                <div class="header-top-social">
-                    <div class="flex-social">
-                        <div class="social-item hvr-float-shadow">
+                <div class="header-top-auth">
+                    <div class="flex-auth">
+                            <a href="#" style="border-right:2px solid #ddd">Đăng ký</a>
+                            <a href="#">Đăng nhập</a>
+                            <i class="fa-regular fa-circle-user" ></i>
+                        
+                        <!-- <div class="social-item hvr-float-shadow">
                             <a href="https://www.facebook.com/profile.php?id=61561027564170" target="_blank">
                                 <i class="fa-brands fa-facebook"></i>
                             </a>
-                        </div>
+                        </div> -->
                         <!--<div class="social-item hvr-float-shadow">
                             <a href="" target="_blank">
                                 <i class="fa-brands fa-instagram"></i>
@@ -40,28 +44,34 @@ use App\Http\Controllers\Client\CHomeController;
     <div class="header-bottom">
         <div class="wrap-content">
             <div class="flex-header-bottom">
-                <div class="header-bottom-logo peShiner" width="">
-                    <img src="{{ CHomeController::settings()->logo_path }}" alt>
+                <div class="header-bottom-logo peShiner" width="20px">
+                    <!-- <img src="{{ CHomeController::settings()->logo_path }}" alt> -->
+                     <img src="../index/imgs/logo.png" alt="tpstore-logo">
                 </div>
-                <div class="header-bottom-banner ">
-                    
-                </div>
-                <div class="header-bottom-contact">
-                    <div class="flex-header-bottom-contact">
-                        <div class="header-bottom-contact-img">
-                            <i class="fa-solid fa-phone-volume"></i>
-                        </div>
-                        <div class="header-bottom-contact-info">
-                            <div class="header-bottom-contact-text">
-                                Hotline liên hệ:
-                            </div>
-                            <div class="header-bottom-contact-num">
-                                <a
-                                    href="tel:{{ CHomeController::settings()->phone }}">{{ CHomeController::settings()->phone }}</a>
-                            </div>
-
+                <div class="header-bottom-searchbox ">
+                    <div class="search-box d-flex">
+                        <!-- <div class="searchbox-icon">
+                            <span>
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                        </div> -->
+                        <div class="container" style="width: 814px">
+                            <form class="d-flex">
+                                <input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                                <button class="btn btn-primary" type="send">Tìm kiếm</button>
+                            </form>
                         </div>
                     </div>
+                </div>
+                <div class="header-bottom-end">
+                   <div class="header-bottom-item">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <h6>Giỏ hàng</h6>
+                   </div>
+                   <div class="header-bottom-item">
+                        <i class="fa-solid fa-truck"></i>
+                        <h6>Đơn hàng</h6>
+                   </div>
                 </div>
             </div>
         </div>

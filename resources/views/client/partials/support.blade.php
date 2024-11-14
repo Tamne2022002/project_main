@@ -33,13 +33,13 @@ use App\Http\Controllers\Client\CHomeController;
             </a>
             <div
                 style="
-    position: fixed;
-    right: 100px;
-    bottom: -60px;
-    color: white;
-    width: 450px;
-    max-width: 80vw;
-    text-align: right;
+                    position: fixed;
+                    right: 100px;
+                    bottom: -60px;
+                    color: white;
+                    width: 450px;
+                    max-width: 80vw;
+                    text-align: right;
 ">
                 <div class="ak-info">
                     <p>
