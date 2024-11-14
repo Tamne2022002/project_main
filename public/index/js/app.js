@@ -379,7 +379,7 @@ function AllRun() {
                                 <div class="product-item product-slick-item" data-id="${
                                     product.id
                                 }" data-aos="fade-up" data-aos-duration="1000">
-                                <div class="product" data-aos="zoom-in-up">
+                                <div class="product">
                                     <div class="box-product text-decoration-none">
                                         <div class="position-relative overflow-hidden  ">
                                             <a class="pic-product" href="/product/${
@@ -387,8 +387,8 @@ function AllRun() {
                                             }" title="${product.name}">
                                                 <div class="pic-product-img scale-img hover_light">
                                                     <img class="w-100" src="${
-                                                        product.product_photo_path
-                                                            ? product.product_photo_path
+                                                        product.photo_path
+                                                            ? product.photo_path
                                                             : "/assets/noimage.jpg"
                                                     }"
                                                         alt="${product.name}">
@@ -429,7 +429,7 @@ function AllRun() {
                         } else {
                             productHtml =
                                 '<div class="alert alert-warning w-100 gr-100">' +
-                                "<strong>Thông tin đang được cập nhật. Vui lòng kiểm tra lại sau để không bỏ lỡ bất kỳ nội dung mới nào!</strong>" +
+                                "<strong>Đang cập nhật dữ liệu !!</strong>" +
                                 "</div>";
                             $(
                                 ".paging-product-category-" + categoryParentId

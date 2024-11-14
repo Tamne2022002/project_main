@@ -12,8 +12,9 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\DashboardController; 
 use App\Http\Controllers\Admin\OrderController; 
 use App\Http\Controllers\Admin\ImportOrderController; 
-use App\Http\Controllers\Admin\SettingController; 
 use App\Http\Controllers\Admin\PhotoController; 
+use App\Http\Controllers\Admin\NewsController; 
+use App\Http\Controllers\Admin\SettingController; 
 
 use App\Http\Controllers\Client\CCartController;
 // use App\Http\Controllers\Client\CChangePasswordController;
@@ -219,6 +220,16 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('', [PhotoController::class, 'static'])->name('photo_static.index');
             Route::post('/store', [PhotoController::class, 'store'])->name('photo_static.store');
         });   
+
+        /* News */
+        Route::prefix('news')->group(function () {
+            Route::get('', [NewsController::class, 'index'])->name('news.index')->middleware('can:news-list');
+            Route::get('/create', [NewsController::class, 'create'])->name('news.create')->middleware('can:news-add');
+            Route::post('/store', [NewsController::class, 'store'])->name('news.store');
+            Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('news.edit')->middleware('can:news-edit');
+            Route::post('/update/{id}', [NewsController::class, 'update'])->name('news.update');
+            Route::get('/delete/{id}', [NewsController::class, 'delete'])->name('news.delete')->middleware('can:news-delete');
+        });
 
         /* Warehouse */
         Route::prefix('warehouse')->group(function () {

@@ -11,12 +11,19 @@
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
-<div class="content-wrapper">
+<div class="content-wrapper bg-white">
      <div class="content">
         <div class="container-fluid pt-3">
             <div class="row">
                 <div class="col-md-12">
                     <form action="{{ route('setting.update') }}" method="POST" enctype="multipart/form-data">
+                        <div class="col-12">
+                            <div class="card card-primary card-outline text-sm">
+                                <div class="d-flex px-3 py-1 my-2 ">
+                                    <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button> 
+                                </div>
+                            </div>
+                        </div>
                         @csrf
                         <div class="row">
                             <div class="form-group col-6">
@@ -147,7 +154,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>
             </div>

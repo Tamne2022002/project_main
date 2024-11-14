@@ -34,7 +34,7 @@
                     </div>
                 @else
                     <div class="alert alert-warning w-100">
-                        <strong>Thông tin đang được cập nhật. Vui lòng kiểm tra lại sau để không bỏ lỡ bất kỳ nội dung mới nào!</strong>
+                        <strong>Đang cập nhật dữ liệu !!</strong>
                     </div>
                 @endif
             @endisset

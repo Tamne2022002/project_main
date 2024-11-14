@@ -186,8 +186,8 @@ $func = new App\Helpers\Func();
                         </p>
                     </a>
                 </li> --}}
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item">
+                    <a href="{{ route('news.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p class="text-capitalize">
                             Bài Viết tin tức
@@ -201,7 +201,7 @@ $func = new App\Helpers\Func();
                             Cấu Hình Chung
                         </p>
                     </a>
-                </li> --}}
+                </li>
             </ul>
         </nav>
     </div>
