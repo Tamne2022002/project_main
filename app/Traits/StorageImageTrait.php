@@ -3,9 +3,7 @@ namespace App\Traits;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
- 
-
-
+  
 trait StorageImageTrait
 {
     /* Upload */
@@ -15,7 +13,7 @@ trait StorageImageTrait
             $file = $request->$fieldName;
             $fileNameOrigin = $file->getClientOriginalName();
             $fileNameHash = Str::random(20) . '.' . $file->getClientOriginalExtension();
-            $filepath = $request->file($fieldName)->storeAs('public/' . $folderPlace . '/' . auth()->id(), $fileNameHash);
+            $filepath = $request->file($fieldName)->storeAs('public/' . $folderPlace . '/' . auth()->id(), $fileNameHash, 'local');
             $dataUpload = [
                 'file_name' => $fileNameOrigin,
                 'file_path' => Storage::url($filepath),

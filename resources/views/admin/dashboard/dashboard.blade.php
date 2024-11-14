@@ -24,7 +24,7 @@
         const profitBaseOnDate = @php echo json_encode($profitBaseOnDate) @endphp;
     </script>
 @endsection
-<div class="content-wrapper">
+<div class="content-wrapper bg-white">
     <div class="content">
         <div class="container-fluid">
             <div class="row pt-3">

@@ -11,16 +11,8 @@ class MemberModel extends Authenticatable
 {
     use HasFactory, Notifiable,SoftDeletes;
 
-    protected $fillable = [
-        'name', 
-        'phone',
-        'address',
-        'email',
-        'password',
-    ];
+    protected $table = 'table_member';
+    protected $fillable = ['name', 'phone','address','email','password',];
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ['password','remember_token',];
 }

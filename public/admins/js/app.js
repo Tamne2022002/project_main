@@ -132,9 +132,9 @@ function SumoSelectImportInvoive() {
                     $(".list-product-call-by-ajax").empty();
                     $.each(response.products, function (index, product) {
                         var productBlock = `
-                            <div class="col-4 product-call-by-ajax" id="${product.id}">
+                            <div class="col-12 product-call-by-ajax" id="${product.id}">
                                 <div class="card card-primary card-outline text-sm">
-                                <input type="hidden" name="product_id[]" value="${product.id}" class="form-control">
+                                <input type="hidden" name="id_product[]" value="${product.id}" class="form-control">
                                     <div class="card-header">
                                         <h3 class="card-title">
                                             <strong>${product.name}</strong>
