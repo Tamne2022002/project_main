@@ -19,6 +19,7 @@ class CUserController extends Controller
     }
     public function clientRegister()
     { 
+        dd('123');
         return view('client.user.register');
     }
 
@@ -40,36 +41,9 @@ class CUserController extends Controller
             //dd('đúng');
             //dd($user);
         }
-        //$email = $request->input('email');
-        //$password = $request->input('password');
 
-        /*$check = [
-        ['email', '=', $email],
-        //['password', '=', $password]
-        ];
-
-        $user = Member::where($check)->get();
-
-        if(Hash::check($password, $user[0]->password)){
-        return redirect()->route('index');
-        }*/
-
-        /*if($user)
-        {
-        $is_logged = 1;
-        $id = $user->id;
-        setcookie('is_logged', $is_logged, time() + 360000, '/');
-        setcookie('id', $id, time() + 360000, '/');
-        return redirect()->route('index');
-        }*/
         return redirect()->route('user.login')->with('fail', 'Tài khoản hoặc mật khẩu không chính xác.');
 
-        //dd(Auth::guard('member')->attempt($credentials));
-
-        //dd(Hash::make('123456'));
-
-        //dd($user);
-        //dd(Hash::make('123456'));
     }
 
     public function postregister(RegisterRequest $request)

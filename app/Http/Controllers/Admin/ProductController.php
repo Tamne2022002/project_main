@@ -90,13 +90,14 @@ class ProductController extends Controller
                 }
             }
 
-        $warehouse->setPath('warehouse?search_keyword=' . $search);
+            $warehouse->setPath('warehouse?search_keyword=' . $search);
         } else {
-        $warehouse = WareHouseModel::latest()->paginate(15);
+        $warehouse = WareHouseModel::latest()->paginate(15); 
             foreach ($warehouse as $warehouseItem) {
                 $product = ProductModel::find($warehouseItem->id_parent);
                 $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
                 $warehouseItem->photo_path = $product ? $product->photo_path : 'Ảnh không có sẵn';
+                $warehouseItem->photo_name = $product ? $product->photo_name : 'Ảnh không có sẵn';
 
                 // Lấy id_list từ bảng Product
                 $id_list = $product ? $product->id_list : null;
@@ -110,7 +111,7 @@ class ProductController extends Controller
                     $warehouseItem->category_name = 'Không tìm thấy danh mục';
                 }
             }
-        }
+        } 
 
         return view('admin.warehouse.index', compact('warehouse','categories'));
     }

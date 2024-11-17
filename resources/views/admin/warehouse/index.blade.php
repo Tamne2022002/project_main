@@ -63,7 +63,7 @@ $func = new App\Helpers\Func();
                             </tr>
                         </thead>
                         <tbody class="filter-product-warehouse-call-by-ajax">
-                            @if (!$warehouse->isEmpty())
+                            @if (!$warehouse->isEmpty()) 
                                 @foreach ($warehouse as $warehouseItem)
                                     <tr class="row">
                                         <td class="text-capitalize col-md-5">

@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div class="login-copyright text-sm">Powered by TL Bookstore</div>
+    <div class="login-copyright text-sm">Powered by TP Store</div>
 
 </body>
 <script></script>
