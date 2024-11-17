@@ -29,7 +29,8 @@ use App\Http\Controllers\Client\CHomeController;
 
 Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
 Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
-Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
+Route::get('/sign-up', [CUserController::class, 'clientRegister'])->name('user.sign-up');
+// Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
 Route::get('logout', [CUserController::class, 'logout'])->name('user.logout');
 
@@ -215,10 +216,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
             Route::get('/edit/{id}', [PhotoController::class, 'edit'])->name('photo.edit');
             Route::post('/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
             Route::get('/delete/{id}', [PhotoController::class, 'delete'])->name('photo.delete');
-        });   
-        Route::prefix('photo_static')->group(function () {
-            Route::get('', [PhotoController::class, 'static'])->name('photo_static.index');
-            Route::post('/store', [PhotoController::class, 'store'])->name('photo_static.store');
         });   
 
         /* News */

@@ -10,9 +10,9 @@ use App\Http\Controllers\Client\CHomeController;
                 </a>
             </li>
             <li class=" menu-main-li dropdown mega-dropdown active">
-                <a href="{{ route('product') }}" class="dropdown-toggle" title="Danh mục sản phẩm"
-                    data-toggle="dropdown">Danh mục sản phẩm </a>
-                <div class="dropdown-menu mega-dropdown-menu" style="display: block !important;">
+                <a href="{{ route('product') }}" title="Sản phẩm"
+                    data-toggle="dropdown">Sản phẩm </a>
+                {{-- <div class="dropdown-menu mega-dropdown-menu" style="display: block !important;">
                     <div class="flex-menu-mega">
                         <div class="menu-mega-left ht-tab">
                             <ul class="nav nav-tabs" role="tablist">
@@ -50,7 +50,7 @@ use App\Http\Controllers\Client\CHomeController;
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </li>
            
             <li class="menu-main-li">

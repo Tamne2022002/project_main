@@ -15,7 +15,7 @@ class SettingTableSeeder extends Seeder
     {
         DB::table('table_setting')->insert([
             ['name' => 'TPStore', 
-            'desc' => 'Sách là nguồn tri thức vô tận, TL Bookstore là người bạn đồng hành trên hành trình khám phá',
+            'desc' => 'Sách là nguồn tri thức vô tận, TP Store là người bạn đồng hành trên hành trình khám phá',
             'phone'=>'0768848015',
             'email'=>'tpstore@gmail.com',
             'zalo'=>'0768848015',

@@ -62,7 +62,7 @@
                         class="btn-lg btn btn-sm bg-danger btn-block w-100" value="Đăng Nhập">
                 </div>
                 <div class="text-center mt-3 btn-login-member btn btn-primary w-100 text-center">
-                    <a href="{{ route('redirect') }}" class="d-block"><svg style=" width:20px;height:20px;" role="img"
+                    {{-- <a href="{{ route('redirect') }}" class="d-block"><svg style=" width:20px;height:20px;" role="img"
                             viewBox="10 10 28 28" xmlns="http://www.w3.org/2000/svg" aria-label="google"
                             class="sc-hLseeU idnFbI sc-iAEyYk bWqgHG">
                             <title id="social">google</title>
@@ -78,11 +78,11 @@
                             <path
                                 d="M24.2417 16.7492C25.987 16.7227 27.6738 17.3664 28.9378 18.548L32.4329 15.1223C30.2198 13.0854 27.2825 11.9655 24.2417 12.0008C19.6131 12.0008 15.3804 14.558 13.3022 18.6142L17.3686 21.7048C18.3357 18.8611 21.0481 16.7492 24.2417 16.7492Z"
                                 fill="#EA4335"></path>
-                        </svg></a>
+                        </svg></a> --}}
                 </div>
                 <div class="no-account-text text-center">
                     <div>
-                        Chưa có tài khoản? <a href="{{ route('user.register') }}">Đăng ký</a>
+                        Chưa có tài khoản? <a href="{{ route('user.sign-up') }}">Đăng ký</a>
                     </div>
 
                 </div>

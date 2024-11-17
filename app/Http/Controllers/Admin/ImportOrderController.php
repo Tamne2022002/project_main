@@ -48,7 +48,7 @@ class ImportOrderController extends Controller
         return view('admin.import_order.add', compact('ImportOrderCode', 'TimeCreateImportOrder', 'products'));
     }
     public function store(Request $request)
-    {
+    { 
         try {
             $dataCreate = [
                 'order_code' => $request->order_code,
@@ -56,18 +56,18 @@ class ImportOrderController extends Controller
             ];
             $ImportOrder = $this->ImportOrder->create($dataCreate);
             $id_import_order = $ImportOrder->id;
-            $details = count($request->product_id);
+            $details = count($request->id_product);
 
             for ($i = 0; $i < $details; $i++) {
                 $dataCreateImportOrderDetail = [
                     'id_import_order' => $id_import_order,
-                    'id_product' => $request->product_id[$i],
+                    'id_product' => $request->id_product[$i],
                     'quantity' => $request->quantity[$i],
                 ];
 
                 $this->ImportOrderdetail->create($dataCreateImportOrderDetail);
 
-                $product = WarehouseModel::find($request->product_id[$i]);
+                $product = WarehouseModel::find($request->id_product[$i]);
                 $product->quantity = $product->quantity + $request->quantity[$i];
                 $product->save();
             }

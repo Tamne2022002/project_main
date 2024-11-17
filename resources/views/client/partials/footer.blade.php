@@ -39,7 +39,7 @@ use App\Http\Controllers\Client\CHomeController;
                     </div>
                 </div>
                 <div class="footer-news">
-                    <h6 class="footer-policy-title">Chính sách mua hàng tại TP Bookstore</h6>
+                    <h6 class="footer-policy-title">Chính sách mua hàng tại TP Store</h6>
                     <ul class="footer-policy">
                         <li class="footer-policy-item"><a href="#">Hướng dẫn mua hàng</a></li>
                         <li class="footer-policy-item"><a href="#">Chính sách đổi trả & hoàn tiền</a></li>
@@ -74,7 +74,7 @@ use App\Http\Controllers\Client\CHomeController;
     </div>
     <div class="footer-powered ">
         <div class="wrap-content ">
-            <div class="footer-copyright">Copyright © 2024 TL Bookstore. All rights reserved.
+            <div class="footer-copyright">Copyright © 2024 TL Store. All rights reserved.
             </div>
         </div>
     </div>
