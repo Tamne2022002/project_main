@@ -12,4 +12,5 @@ use App\Http\Controllers\Client\CHomeController;
 <link href="{{ asset('vendors/bootstrap/bootstrap.css') }}" rel="stylesheet">
 <link href="{{ asset('vendors/simplenotify/simple-notify.css') }}" rel="stylesheet">
 <link href="{{ asset('index/css/style.css') }}" rel="stylesheet">
+<link href="{{ asset('index/css/main.css') }}" rel="stylesheet">
 @yield('css')

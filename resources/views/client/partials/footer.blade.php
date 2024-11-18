@@ -59,30 +59,23 @@ use App\Http\Controllers\Client\CHomeController;
                     </div>
                 </div>
                 <div class="footer-news">
-                    <div class="footer-fanpage">
-                        <div id="fb-root"></div>
-                        <div class="fb-page" data-href="{{ CHomeController::settings()->fanpage }}" data-tabs="timeline"
-                            data-width="" data-height="" data-small-header="false" data-adapt-container-width="true"
-                            data-hide-cover="false" data-show-facepile="true">
-                            <blockquote cite="{{ CHomeController::settings()->fanpage }}" class="fb-xfbml-parse-ignore"><a
-                                    href="{{ CHomeController::settings()->fanpage }}">Facebook</a></blockquote>
+                    <div class="footer-map">
+                        <div class="footer-map-iframe">
+                            {!! CHomeController::settings()->iframe_map !!}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
     <div class="footer-powered ">
         <div class="wrap-content ">
-            <div class="footer-copyright">Copyright © 2024 TL Bookstore. All rights reserved.
+            <div class="footer-copyright">Copyright © 2024 TP Bookstore. All rights reserved.
             </div>
         </div>
     </div>
-    <div class="footer-map">
-        <div class="footer-map-iframe">
-            {!! CHomeController::settings()->iframe_map !!}
-        </div>
-    </div>
+    
 </div>
 
 <div class="scrollToTop cursor-pointer active-progress">

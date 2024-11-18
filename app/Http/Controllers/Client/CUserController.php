@@ -21,6 +21,9 @@ class CUserController extends Controller
     { 
         return view('client.user.register');
     }
+    public function clientInfo(){
+        return view('client.user.user-detail');
+    }
 
     public function postlogin(LoginRequest $request)
     {
@@ -74,15 +77,15 @@ class CUserController extends Controller
 
     public function postregister(RegisterRequest $request)
     {
-        /*$cre = $request->validate([
-        'firstname' => ['required', 'string', 'max:20'],
-        'lastname' => ['required', 'string', 'max:100'],
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-        'confirm-password' => ['required'],
-        'address' => ['required'],
-        'phone' => ['required']
-        ]);*/
+        // $cre = $request->validate([
+        // 'firstname' => ['required', 'string', 'max:20'],
+        // 'lastname' => ['required', 'string', 'max:100'],
+        // 'email' => ['required', 'email'],
+        // 'password' => ['required'],
+        // 'confirm-password' => ['required'],
+        // 'address' => ['required'],
+        // 'phone' => ['required']
+        // ]);
         $popularDomains = [
             'gmail.com',
             'yahoo.com',
@@ -109,8 +112,8 @@ class CUserController extends Controller
         if ($cre) {
             MemberModel::create([
                 'name' => $request->name,
-                'phone' => $request->phone,
                 'address' => $request->address,
+                'phone' => $request->phone,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
@@ -122,7 +125,7 @@ class CUserController extends Controller
                 'cart_total' => 0,
             ]);*/
 
-            return redirect()->route('user.login')->with('success', 'Đăng ký thành công');
+            return redirect()->route('index')->with('success', 'Đăng ký thành công');
             //dd($cre, 'true');
         }
         return redirect()->route('user.register')->with('fail', 'Đã có lỗi xảy ra');

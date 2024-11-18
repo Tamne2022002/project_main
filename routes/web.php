@@ -21,9 +21,9 @@ use App\Http\Controllers\Client\CHomeController;
 
 Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
 Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
-Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
+Route::get('/sign-up', [CUserController::class, 'clientRegister'])->name('user.signup');
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
-Route::get('logout', [CUserController::class, 'logout'])->name('user.logout');
+Route::get('logout', [CUserController::class, 'logout'])->name('client.user.logout');
 
 Route::prefix('/')->group(function () {
     /* Index */
@@ -62,11 +62,11 @@ Route::prefix('/')->group(function () {
     });
 
     /* Info */
-    // Route::controller(CInfoController::class)->group(function () {
-    //     Route::get('user-info', 'index')->name('user.info');
-    //     Route::post('user-info/update', 'update')->name('user.info.update');
-    //     Route::delete('user-info/delete', 'delete')->name('user.info.delete');
-    // });
+    Route::controller(CInfoController::class)->group(function () {
+        Route::get('user-info', 'index')->name('user.info');
+        Route::post('user-info/update', 'update')->name('user.info.update');
+        Route::delete('user-info/delete', 'delete')->name('user.info.delete');
+    });
 
     /*Order*/
     // Route::controller(COrderController::class)->group(function () {
