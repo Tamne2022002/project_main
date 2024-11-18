@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\NewsController; 
 use App\Http\Controllers\Admin\SettingController; 
 
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Client\CCartController;
 // use App\Http\Controllers\Client\CChangePasswordController;
 use App\Http\Controllers\Client\CInfoController;
@@ -29,8 +30,8 @@ use App\Http\Controllers\Client\CHomeController;
 
 Route::get('/sign-in', [CUserController::class, 'clientLogin'])->name('user.login');
 Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.postlogin');
-Route::get('/sign-up', [CUserController::class, 'clientRegister'])->name('user.sign-up');
-// Route::get('/register', [CUserController::class, 'clientRegister'])->name('user.register');
+Route::get('/check-login', function () {  return response()->json(['logged_in' => Auth::guard('member')->check()]);});
+Route::get('/signup', [CUserController::class, 'clientRegister'])->name('user.signup'); 
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
 Route::get('logout', [CUserController::class, 'logout'])->name('user.logout');
 
@@ -63,25 +64,26 @@ Route::prefix('/')->group(function () {
     /* Cart */
     Route::controller(CCartController::class)->group(function () {
         Route::get('/cart', 'index')->name('user.cart');
-        Route::get('/cart/add/{id?}&{quantity?}', 'add_index')->name('add_index.cart');
+        Route::get('/add-to-cart/{id}/{quantity}', [CCartController::class, 'add_index'])->name('add_index.cart');
         Route::get('/cart/update_quantity/{id?}&{method?}', 'changeQuantity')->name('update_quantity.cart');
         Route::get('/cart/delete/{id}', 'delete')->name('delete.cart');
         //Route::patch('/cart/update/{id}', 'update_qty')->name('update.cart');
 
     });
 
+    
     /* Info */
-    // Route::controller(CInfoController::class)->group(function () {
-    //     Route::get('user-info', 'index')->name('user.info');
-    //     Route::post('user-info/update', 'update')->name('user.info.update');
-    //     Route::delete('user-info/delete', 'delete')->name('user.info.delete');
-    // });
+    Route::controller(CInfoController::class)->group(function () {
+        Route::get('user-info', 'index')->name('user.info');
+        Route::post('user-info/update', 'update')->name('user.info.update');
+        Route::delete('user-info/delete', 'delete')->name('user.info.delete');
+    });
 
     /*Order*/
-    // Route::controller(COrderController::class)->group(function () {
-    //     Route::get('order', 'index')->name('user.order');
-    //     Route::get('order/{id}', 'detail')->name('user.order.detail');
-    // });
+    Route::controller(COrderController::class)->group(function () {
+        Route::get('order', 'index')->name('user.order');
+        Route::get('order/{id}', 'detail')->name('user.order.detail');
+    });
 
     /*Address Change*/
     /*Route::controller(CChangeAddressController::class)->group(function() {
@@ -90,31 +92,32 @@ Route::prefix('/')->group(function () {
     });*/
 
     /*Password Change*/
-    // Route::controller(CChangePasswordController::class)->group(function () {
-    //     Route::get('change-password', 'index')->name('user.changepassword');
-    //     Route::post('change-password/update', 'update')->name('user.changepassword.update');
-    // });
+    Route::controller(CChangePasswordController::class)->group(function () {
+        Route::get('change-password', 'index')->name('user.changepassword');
+        Route::post('change-password/update', 'update')->name('user.changepassword.update');
+    });
 
-    // /*Rate*/
-    // Route::controller(CRateController::class)->group(function () {
-    //     Route::get('rate', 'index')->name('user.rate');
-    //     Route::get('/rate/{id}', 'rate')->name('user.rate.rate');
-    //     Route::get('/rate/{id}/{rate_id}', 'detail')->name('user.rate.detail');
-    //     Route::post('rate/store', 'store')->name('user.rate.store');
-    // });
+    /*Rate*/
+    Route::controller(CRateController::class)->group(function () {
+        Route::get('rate', 'index')->name('user.rate');
+        Route::get('/rate/{id}', 'rate')->name('user.rate.rate');
+        Route::get('/rate/{id}/{rate_id}', 'detail')->name('user.rate.detail');
+        Route::post('rate/store', 'store')->name('user.rate.store');
+    });
 
     /* PAYMENT */
 
-    // Route::controller(PaymentController::class)->group(function () {
-    //     Route::get('/payment', 'index')->name('user.payment');
-    //     Route::post('/cod_payment', 'cod_payment')->name('cod');
-    //     Route::post('/vnpay_payment', 'vnpay_payment')->name('vnpay');
-    //     Route::post('/payment_return', 'combination')->name('combination');
-    //     Route::get('/vnpay_return', 'return')->name('vnpay.return');
-    // });
+    Route::controller(PaymentController::class)->group(function () {
+        Route::post('/payment', 'index')->name('user.payment');
+        Route::post('/cod_payment', 'cod_payment')->name('cod');
+        Route::post('/vnpay_payment', 'vnpay_payment')->name('vnpay');
+        Route::post('/payment_return', 'combination')->name('combination');
+        Route::get('/vnpay_return', 'return')->name('vnpay.return');
+    });
 
     /*VNPAY*/
-    // Route::post('/vnpay_return', [PaymentController::class, 'return'])->name('vnpay.return');
+    Route::post('/vnpay_return', [PaymentController::class, 'return'])->name('vnpay.return');
+
 });
 
 Auth::routes();
@@ -210,12 +213,12 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         /* Photo */
         Route::prefix('photo/{type}')->group(function () {
-            Route::get('', [PhotoController::class, 'index'])->name('photo.index');
-            Route::get('/create', [PhotoController::class, 'create'])->name('photo.create');
+            Route::get('', [PhotoController::class, 'index'])->name('photo.index')->middleware('can:photo-delete');
+            Route::get('/create', [PhotoController::class, 'create'])->name('photo.create')->middleware('can:photo-delete');
             Route::post('/store', [PhotoController::class, 'store'])->name('photo.store');
-            Route::get('/edit/{id}', [PhotoController::class, 'edit'])->name('photo.edit');
+            Route::get('/edit/{id}', [PhotoController::class, 'edit'])->name('photo.edit')->middleware('can:photo-delete');
             Route::post('/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
-            Route::get('/delete/{id}', [PhotoController::class, 'delete'])->name('photo.delete');
+            Route::get('/delete/{id}', [PhotoController::class, 'delete'])->name('photo.delete')->middleware('can:photo-delete');
         });   
 
         /* News */
