@@ -158,3 +158,11 @@ text-transform: none; font-size: 14px; }
 .SumoSelect[is-selected=true] .reset-all { opacity: 1; cursor: pointer; color: #7799d0 }
 .SumoSelect[is-selected=true] .reset-all * { cursor: pointer }
 .SumoSelect[is-selected=true] .reset-all:hover { color: #000 }
+.btn-header {
+    position: sticky;
+    z-index: 999;
+    padding: 10px;
+    box-shadow: 0 0.125rem 0.25rem rgb(165 163 174 / 88%);
+    border-radius: 5px;
+    top: 15px;
+}

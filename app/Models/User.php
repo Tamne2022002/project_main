@@ -19,6 +19,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
         'full_name', 
         'phone',
@@ -56,26 +57,21 @@ class User extends Authenticatable
             get: fn ($value) =>  ["user", "admin"][$value],
         );
     }
-    // public function roles()
-    // {
-    //     return $this->belongsToMany(Role::class, table: 'role_users', foreignPivotKey: 'user_id', relatedPivotKey: 'role_id');
-    // }
-    // protected function type(): Attribute
-    // {
-    //     return new Attribute(
-    //         get: fn($value) => ["user", "admin", "manager"][$value],
-    //     );
-    // }
-    // public function CheckPermissionAccess($permissionCheck)
-    // {
-    //     $roles = auth()->user()->roles;
-    //     foreach ($roles as $role) {
-    //         $permissions = $role->permissions;
-    //         if ($permissions->contains('key_permissions', $permissionCheck)) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    //     // return true;
-    // }
+    public function roles()
+    {
+        return $this->belongsToMany(RoleModel::class, table: 'table_user_roles', foreignPivotKey: 'id_member', relatedPivotKey: 'id_role');
+    }
+    
+    public function CheckPermissionAccess($permissionCheck)
+    {
+        $roles = auth()->user()->roles;
+        foreach ($roles as $role) {
+            $permissions = $role->permissions;
+            if ($permissions->contains('key_permissions', $permissionCheck)) {
+                return true;
+            }
+        }
+        return false;
+        // return true;
+    }
 }

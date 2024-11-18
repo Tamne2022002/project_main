@@ -13,6 +13,6 @@ class ImportOrderModel extends Model
     protected $fillable = ['order_code', 'import_date', 'total_price'];
     public function importinvoicedetail()
     {
-        return $this->hasMany(ImportOrderDetail::class, 'id_import_order');
+        return $this->hasMany(ImportOrderDetailModel::class, 'id_import_order');
     }
 }

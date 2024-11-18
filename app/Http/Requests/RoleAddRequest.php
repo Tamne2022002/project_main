@@ -23,7 +23,7 @@ class RoleAddRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:roles|regex:/^[\pL0-9\s]*$/u|max:255',
-            'display_name' => 'required',
+            // 'display_name' => 'required',
 
         ];
     }
@@ -34,7 +34,7 @@ class RoleAddRequest extends FormRequest
             'name.unique' => 'Vai trò không được trùng',
             'name.regex' => 'Vai trò chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
             'name.max' => 'Vai trò không vượt quá 255 ký tự',
-            'display_name.required' => 'Mô tả vai trò không được để trống', 
+            // 'display_name.required' => 'Mô tả vai trò không được để trống', 
         ];
     }
 }

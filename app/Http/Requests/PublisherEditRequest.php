@@ -23,8 +23,8 @@ class PublisherEditRequest extends FormRequest
     {
         return [
             'name' => 'required|regex:/^[\pL0-9\s]*$/u|max:255',
-            'desc' => 'required', 
-            'photo_path' => 'mimes:jpg,jpeg,png|max:20480',
+            // 'desc' => 'required', 
+            // 'photo_path' => 'mimes:jpg,jpeg,png|max:20480',
         ];
     }
     public function messages(){
@@ -32,9 +32,9 @@ class PublisherEditRequest extends FormRequest
             'name.required' => 'Tên không được để trống', 
             'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
             'name.max' => 'Tên không vượt quá 255 ký tự', 
-            'desc.required' => 'Mô tả không được để trống',
-            'photo_path.mimes' => 'Ảnh phải có định dạng JPG, JPEG hoặc PNG',
-            'photo_path.max' => 'Ảnh không được quá 20MB',
+            // 'desc.required' => 'Mô tả không được để trống',
+            // 'photo_path.mimes' => 'Ảnh phải có định dạng JPG, JPEG hoặc PNG',
+            // 'photo_path.max' => 'Ảnh không được quá 20MB',
         ];
     }
 }

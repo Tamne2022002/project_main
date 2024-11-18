@@ -48,19 +48,21 @@ class PublisherController extends Controller
         return view('admin.publisher.add');
     }
     public function store(PublisherAddRequest $request)
-    {
+    { 
         try {
-            $dataCreate = [
-                'name' => $request->name,
-                'description' => $request->description,
-            ];
-            $dataPhotoPublisher = $this->storagetrait($request, 'photo_path', 'publisher');
+            $dataCreate['name'] = $request->name;
+            $dataCreate['desc'] = $request->desc;
 
+            $dataPhotoPublisher = $this->storagetrait($request, 'photo_path', 'publisher');
+            
             if (!empty($dataPhotoPublisher)) {
                 $dataCreate['photo_name'] = $dataPhotoPublisher['file_name'];
                 $dataCreate['photo_path'] = $dataPhotoPublisher['file_path'];
+            } else { 
+                $dataCreate['photo_name'] = '';
+                $dataCreate['photo_path'] = '';
             }
-            $this->publisher->create($dataCreate);
+            $this->publisher->create($dataCreate); 
             return redirect()->route('publisher.index');
         } catch (\Exception $exception) {
             Log::error('Lỗi:' . $exception->getMessage() . 'Line:' . $exception->getLine());
