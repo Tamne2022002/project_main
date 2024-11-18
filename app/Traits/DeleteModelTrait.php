@@ -7,6 +7,8 @@ trait DeleteModelTrait
     public function deleteModelTrait($id,$model)
     {
         try {
+
+            dd($model);
             $model->find($id)->delete();
             return response()->json([
                 'code' => 200,

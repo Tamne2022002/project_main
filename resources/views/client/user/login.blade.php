@@ -82,7 +82,7 @@
                 </div>
                 <div class="no-account-text text-center">
                     <div>
-                        Chưa có tài khoản? <a href="{{ route('user.sign-up') }}">Đăng ký</a>
+                        Chưa có tài khoản? <a href="{{ route('user.signup') }}">Đăng ký</a>
                     </div>
 
                 </div>

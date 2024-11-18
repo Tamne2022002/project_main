@@ -1,7 +1,6 @@
 @extends('client.layouts.index')
-
 @section('title')
-    <title> {{$pageName }}</title>
+    <title> {{ $pageName }}</title>
 @endsection
 
 @section('content')
@@ -11,8 +10,7 @@
                 <div class="group-product-image">
                     <div class="slick-product-image-core">
                         <div class="product-image-core">
-                            <img class="w-100" src="{{ $productDetail->photo_path }}"
-                                alt="{{ $productDetail->name }}">
+                            <img class="w-100" src="{{ $productDetail->photo_path }}" alt="{{ $productDetail->name }}">
                         </div>
                         {{-- @foreach ($productDetail->productGallery as $galleryItem)
                             <div class="product-image-core">
@@ -24,8 +22,7 @@
                     <div class="slick-product-image-detail">
                         <div class="product-image-detail-item">
                             <div class="product-image-detail">
-                                <img class="w-100" src="{{ $productDetail->photo_path }}"
-                                    alt="{{ $productDetail->name }}">
+                                <img class="w-100" src="{{ $productDetail->photo_path }}" alt="{{ $productDetail->name }}">
                             </div>
                         </div>
                         {{-- @foreach ($productDetail->productGallery as $galleryItem)
@@ -64,22 +61,24 @@
                                 class="attribute-product-detail-text">{{ $productDetail->publishing_year }}</span>
                         </div>
                         <div class="attribute-product-detail">
-                            Số lượng tồn kho: <span
-                                class="attribute-product-detail-text" id="qty_shown">{{ $qty }}</span>
+                            Số lượng tồn kho: <span class="attribute-product-detail-text"
+                                id="qty_shown">{{ $qty }}</span>
                         </div>
-                        <input type="hidden" id="qty" value="{{$qty}}">
+                        <input type="hidden" id="qty" value="{{ $qty }}">
                         <div class="attribute-product-detail" style="display: none">
-                            Số lượng có trong giỏ hàng: <span
-                                 id="cqty_shown">{{ $cqtyincart }}</span>
+                            Số lượng có trong giỏ hàng: <span id="cqty_shown">{{ $cqtyincart }}</span>
                         </div>
-                        <input type="hidden" id="cqty" value="{{$cqtyincart}}">
+                        <input type="hidden" id="cqty" value="{{ $cqtyincart }}">
                         <div class="price-product-detail">
-                            Giá: 
+                            Giá:
                             @if ($productDetail->sale_price)
-                                <span class="price-new-product-detail"> {{ \App\Helpers\Func::formatMoney($productDetail->sale_price) }}</span> <span
-                                class="price-old-product-detail"> {{ \App\Helpers\Func::formatMoney($productDetail->regular_price) }}</span>
+                                <span class="price-new-product-detail">
+                                    {{ \App\Helpers\Func::formatMoney($productDetail->sale_price) }}</span> <span
+                                    class="price-old-product-detail">
+                                    {{ \App\Helpers\Func::formatMoney($productDetail->regular_price) }}</span>
                             @else
-                                <span  class="price-new-product-detail"> {{ \App\Helpers\Func::formatMoney($productDetail->regular_price) }}</span>
+                                <span class="price-new-product-detail">
+                                    {{ \App\Helpers\Func::formatMoney($productDetail->regular_price) }}</span>
                             @endif
                         </div>
                         <div class="desc-product-detail">
@@ -87,18 +86,26 @@
                         </div>
                         <div class="d-flex flex-wrap align-items-center mt-3 mb-3">
                             <label class="attr-label-pro-detail d-block me-2 mb-0">Số lượng:</label>
-                            <div class="attr-content-pro-detail d-flex flex-wrap align-items-center justify-content-between">
+                            <div
+                                class="attr-content-pro-detail d-flex flex-wrap align-items-center justify-content-between">
                                 <div class="quantity-pro-detail">
                                     <span class="quantity-minus-pro-detail">-</span>
-                                    <input type="number" id="qty_product" class="qty-pro" min="1" value="1" data-max-quantity="{{ $qty }}" />
+                                    <input type="number" id="qty_product" class="qty-pro" min="1" value="1"
+                                        data-max-quantity="{{ $qty }}" />
                                     <span class="quantity-plus-pro-detail">+</span>
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div> 
                             <div class="cart-pro-detail d-flex flex-wrap align-items-center justify-content-between">
-                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center add-to-cart" href="{{route('add_index.cart', ['id' => $productDetail->id])}}" data-route="{{ route('add_index.cart', ['id' => $productDetail->id]) }}"><i class="bi bi-basket2"></i><span>Thêm vào giỏ hàng</span></a>
-                                <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center add-to-cart" data-route="{{ route('add_index.cart', ['id' => $productDetail->id]) }}" data-act="buynow" data-direct="{{route('user.cart')}}" ><i class="bi bi-cart2"></i><span>Mua ngay</span></a>
+                                <a class="transition buynow addcart text-decoration-none check-login d-flex align-items-center justify-content-center add-to-cart"
+                                    href="{{ route('add_index.cart', ['id' => $productDetail->id, 'quantity' => 1]) }}"
+                                    data-route="{{ route('add_index.cart', ['id' => $productDetail->id, 'quantity' => 1]) }}"><i
+                                        class="bi bi-basket2"></i><span>Thêm vào giỏ hàng</span></a>
+                                <a class="transition buynow addcart text-decoration-none check-login d-flex align-items-center justify-content-center add-to-cart"
+                                    data-route="{{ route('add_index.cart', ['id' => $productDetail->id, 'quantity' => 1]) }}"
+                                    data-act="buynow" data-direct="{{ route('user.cart') }}"><i
+                                        class="bi bi-cart2"></i><span>Mua ngay</span></a>
                             </div>
                         </div>
                     </div>

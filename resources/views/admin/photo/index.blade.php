@@ -10,7 +10,7 @@ $func = new App\Helpers\Func();
 @endsection
 @section('js')
     <script type="text/javascript">
-        var PERMISSION = @php echo $func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_slider')?'"true"':'"false"' @endphp;
+        var PERMISSION = @php echo $func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_photo')?'"true"':'"false"' @endphp;
     </script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
@@ -59,7 +59,7 @@ $func = new App\Helpers\Func();
                                 <td>
                                     <a href="{{ route('photo.edit', ['id' => $slider->id, 'type' => $type]) }}"
                                         class="btn btn-default">Sửa</a>
-                                    <a href=" "
+                                    <a href=""
                                         data-url="{{ route('photo.delete', ['id' => $slider->id, 'type' => $type]) }}"
                                         class="btn btn-danger action_delete">Xóa</a>
                                 </td>

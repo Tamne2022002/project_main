@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin') @section('title')
+@extends('admin.layout.head') @section('title')
     <title>Chi Tiết Hóa Đon Nhập</title>
     @endsection @section('content')
 @section('css')

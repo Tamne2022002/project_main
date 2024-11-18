@@ -35,13 +35,12 @@ class CHomeController extends Controller
             ->where('featured', 1)
             ->whereNull('deleted_at')
             ->get(); 
-        // if (Auth::guard('member')->user()) {
-        //     $user = Auth::guard('member')->user();
-
-        //     return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first', 'user'));
-
-        // }
-        return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first'));
+        if (Auth::guard('member')->user()) {
+            $user = Auth::guard('member')->user(); 
+        } else {
+            $user = '';
+        }
+        return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first', 'user')); 
 
     }
     public function PublisherProduct($id)
