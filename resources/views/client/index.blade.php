@@ -7,4 +7,5 @@ use App\Http\Controllers\Client\CHomeController;
     <title>{{ CHomeController::settings()->name }}</title>
 @endsection
 @section('content')
+
 @endsection
