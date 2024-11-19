@@ -13,23 +13,7 @@
         </div>
         <div class="content-main account-user">
             <form class="form w-50 m-auto" action="{{route('user.postregister')}}" method="POST">
-                @csrf
-                <div>
-                    <label class="mb-1">Họ:</label>
-                    <div class="input-group mb-2">
-                        <div class="input-group-append login-input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                        <input type="text" name="lastname" id="lastname" class="form-control text-sm"
-                        value="{{ old('lastname') }}" placeholder="Nhập họ" autocomplete="off" />
-                    </div>
-                </div>
-                @error('lastname')
-                    <div style="color: #dd0505;
-                    font-size: 1em;font-weight: bold;">{{ $message }}</div>
-                @enderror
+                @csrf 
                 <div>
                     <label class="mb-1">Tên:</label>
                     <div class="input-group mb-2">
@@ -38,11 +22,11 @@
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        <input type="text" name="firstname" id="firstname" class="form-control text-sm "
-                        value="{{ old('firstname') }}"  placeholder="Nhập tên" autocomplete="off" />
+                        <input type="text" name="name" id="name" class="form-control text-sm "
+                        value="{{ old('name') }}"  placeholder="Nhập tên" autocomplete="off" />
                     </div>
                 </div>
-                @error('firstname')
+                @error('name')
                     <div style="color: #dd0505;
                     font-size: 1em;font-weight: bold;">{{ $message }}</div>
                 @enderror
