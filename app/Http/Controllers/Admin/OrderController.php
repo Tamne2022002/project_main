@@ -43,7 +43,7 @@ class OrderController extends Controller
     public function view($id, Request $request)
     {
         $Order = $this->order->find($id);
-        $OrderDetail = OrderDetailModel::join('table_product', 'table_product.id', '=', 'order_details.id_product')->where('id_order', $id)->get();
+        $OrderDetail = OrderDetailModel::join('table_product', 'table_product.id', '=', 'table_order_detail.id_product')->where('id_order', $id)->get();
         $status = OrderStatusModel::get();
         try {
             $dataCreate = [

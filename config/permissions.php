@@ -7,11 +7,11 @@ return [
         'edit' => 'edit_category',
         'delete' => 'delete_category',
     ],
-    'slider' => [
-        'list' => 'list_slider',
-        'add' => 'add_slider',
-        'edit' => 'edit_slider',
-        'delete' => 'delete_slider',
+    'photo' => [
+        'list' => 'list_photo',
+        'add' => 'add_photo',
+        'edit' => 'edit_photo',
+        'delete' => 'delete_photo',
     ],
     'users' => [
         'list' => 'list_user',
@@ -58,7 +58,7 @@ return [
     ],
     'order' => [
         'list' => 'list_order',
-        'view_edit' => 'view_edit_order',
+        'view-edit' => 'view_edit_order',
     ],
     'statistic' => [
         'list' => 'list_statistic',

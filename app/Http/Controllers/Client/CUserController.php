@@ -15,11 +15,13 @@ class CUserController extends Controller
 {
     public function clientLogin()
     { 
-        return view('client.user.login');
+        $user = '';
+        return view('client.user.login', compact('user'));
     }
     public function clientRegister()
-    { 
-        return view('client.user.register');
+    {  
+        $user = '';
+        return view('client.user.register', compact('user'));
     }
     public function clientInfo(){
         return view('client.user.user-detail');
@@ -27,10 +29,6 @@ class CUserController extends Controller
 
     public function postlogin(LoginRequest $request)
     {
-        /*$credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-        ]);*/
 
         $cre = $request->only('email', 'password');
 
@@ -38,44 +36,16 @@ class CUserController extends Controller
             $user = Auth::guard('member')->user();
             Auth::guard('member')->login($user);
             $request->session()->put('id_user', Auth::guard('member')->user()->id);
-            //$request->session()->regenerate();
-            return redirect()->route('index');
-            //dd('đúng');
-            //dd($user);
+            $request->session()->regenerate();
+            return redirect()->route('index'); 
         }
-        //$email = $request->input('email');
-        //$password = $request->input('password');
-
-        /*$check = [
-        ['email', '=', $email],
-        //['password', '=', $password]
-        ];
-
-        $user = Member::where($check)->get();
-
-        if(Hash::check($password, $user[0]->password)){
-        return redirect()->route('index');
-        }*/
-
-        /*if($user)
-        {
-        $is_logged = 1;
-        $id = $user->id;
-        setcookie('is_logged', $is_logged, time() + 360000, '/');
-        setcookie('id', $id, time() + 360000, '/');
-        return redirect()->route('index');
-        }*/
+   
         return redirect()->route('user.login')->with('fail', 'Tài khoản hoặc mật khẩu không chính xác.');
 
-        //dd(Auth::guard('member')->attempt($credentials));
-
-        //dd(Hash::make('123456'));
-
-        //dd($user);
-        //dd(Hash::make('123456'));
     }
 
     public function postregister(RegisterRequest $request)
+
     {
         // $cre = $request->validate([
         // 'firstname' => ['required', 'string', 'max:20'],
@@ -86,6 +56,7 @@ class CUserController extends Controller
         // 'address' => ['required'],
         // 'phone' => ['required']
         // ]);
+
         $popularDomains = [
             'gmail.com',
             'yahoo.com',
@@ -119,7 +90,6 @@ class CUserController extends Controller
             ]);
 
             $member = MemberModel::where('email', $request->email)->first();
-
             /*Cart::create([
                 'member_id' => $member->id,
                 'cart_total' => 0,
@@ -128,15 +98,17 @@ class CUserController extends Controller
             return redirect()->route('index')->with('success', 'Đăng ký thành công');
             //dd($cre, 'true');
         }
-        return redirect()->route('user.register')->with('fail', 'Đã có lỗi xảy ra');
-        //dd($cre, 'false');
+        return redirect()->route('user.register')->with('fail', 'Đã có lỗi xảy ra'); 
     }
 
     public function logout()
     {
-        Auth::guard('member')->logout();
-        session()->forget('user_id');
-
+        Auth::guard('member')->logout(); 
+        session()->invalidate();
+     
+        session()->forget('id_user'); 
+        session()->regenerateToken(); 
+        
         return redirect()->route('index');
     }
 }

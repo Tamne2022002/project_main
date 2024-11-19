@@ -156,14 +156,14 @@ $func = new App\Helpers\Func();
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('photo_static.index') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-image"></i>
                                 <p class="text-capitalize">
                                     Logo
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('photo.index', ['type' => 'slider']) }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-image"></i>
@@ -186,8 +186,8 @@ $func = new App\Helpers\Func();
                         </p>
                     </a>
                 </li> --}}
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item">
+                    <a href="{{ route('news.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p class="text-capitalize">
                             Bài Viết tin tức
@@ -201,7 +201,7 @@ $func = new App\Helpers\Func();
                             Cấu Hình Chung
                         </p>
                     </a>
-                </li> --}}
+                </li>
             </ul>
         </nav>
     </div>

@@ -30,7 +30,7 @@ $func = new App\Helpers\Func();
                         <a href="{{ route('product.create') }}" class="btn btn-success m-2">Thêm</a>
                     </div>
                 </div>
-                @endif
+                @endif 
                 <div class="w-100 card card-primary card-outline text-sm px-3 py-3">
                     <div class="row">
                         <div class="col-md-4 filter-product-admin">

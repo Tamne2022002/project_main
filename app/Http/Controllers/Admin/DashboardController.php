@@ -36,8 +36,8 @@ class DashboardController extends Controller
         $monthStart = Carbon::create($now->year, $now->month, 1, 0, 0, 0);
         $monthEnd = Carbon::create($now->year, $now->month, $daysInMonth, 23, 59, 59);
 
-        $hdb = OrderModel::whereIn('status', [3, 5])->whereBetween('created_at', [$monthStart, $monthEnd])->get();
-
+        $hdb = OrderModel::whereIn('status', [2, 5])->whereBetween('created_at', [$monthStart, $monthEnd])->get();
+    
         //tính tổng doanh thu
         foreach ($hdb as $value) {
             $total_sale = $total_sale + $value->total_price;

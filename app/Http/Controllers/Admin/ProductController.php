@@ -36,7 +36,7 @@ class ProductController extends Controller
         $products = null;
         if ($search) {
             $searchUnicode = '%' . $search . '%';
-            $products = ProductModel::select('id', 'name', 'id_list','photo_path')
+            $products = ProductModel::select('id', 'name', 'id_list', 'photo_name', 'photo_path')
             ->where('name', 'LIKE', $searchUnicode)
             ->latest()
             ->paginate(15);
@@ -90,13 +90,14 @@ class ProductController extends Controller
                 }
             }
 
-        $warehouse->setPath('warehouse?search_keyword=' . $search);
+            $warehouse->setPath('warehouse?search_keyword=' . $search);
         } else {
-        $warehouse = WareHouseModel::latest()->paginate(15);
+        $warehouse = WareHouseModel::latest()->paginate(15); 
             foreach ($warehouse as $warehouseItem) {
                 $product = ProductModel::find($warehouseItem->id_parent);
                 $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
                 $warehouseItem->photo_path = $product ? $product->photo_path : 'Ảnh không có sẵn';
+                $warehouseItem->photo_name = $product ? $product->photo_name : 'Ảnh không có sẵn';
 
                 // Lấy id_list từ bảng Product
                 $id_list = $product ? $product->id_list : null;
@@ -110,7 +111,7 @@ class ProductController extends Controller
                     $warehouseItem->category_name = 'Không tìm thấy danh mục';
                 }
             }
-        }
+        } 
 
         return view('admin.warehouse.index', compact('warehouse','categories'));
     }
@@ -248,10 +249,11 @@ class ProductController extends Controller
     public function getCategoryId(Request $request)
     {
         $categoryIds = $request->query('categoryId');
+        dd($categoryIds);
         if (is_array($categoryIds)) {
-            $products = ProductModel::whereIn('category_id', $categoryIds)->with('category')->get();
+            $products = ProductModel::whereIn('id_list', $categoryIds)->with('table_product_list')->get();
         } else {
-            $products = ProductModel::with('category')->get();
+            $products = ProductModel::with('table_product_list')->get();
         }
         return response()->json(['products' => $products]);
     }

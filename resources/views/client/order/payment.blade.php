@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/rate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/style_custom.css') }}">
 @endsection
 
 @section('title')
@@ -9,155 +10,137 @@
 @endsection
 
 @section('content')
-    <div class="wrap-content">
-        <div class="wrap-pay">
-            @php
-                $shipping = 30000;
-                $total = 0;
-            @endphp
-            <div class="row">
-                <div class="top-cart col-12 col-lg-7">
-                    <p class="title-cart">Thanh toán</p>
-                    <div class="list-procart">
-                        <div class="procart procart-label">
-                            <div class="row row-10">
-                                <!--<div><input type="checkbox"></div>-->
-                                <div class="pic-procart col-3 col-md-2 mg-col-10">Hình ảnh</div>
-                                <div class="info-procart col-6 col-md-5 mg-col-10">Tên sản phẩm</div>
-                                <div class="quantity-procart col-3 col-md-2 mg-col-10">
-                                    <p>Số lượng</p>
-                                    <p>Thành tiền</p>
-                                </div>
-                                <div class="price-procart col-3 col-md-3 mg-col-10">Thành tiền</div>
-                            </div>
-                        </div>
-                        <!--thẻ sản phẩm giỏ hàng-->
-                        @foreach (session('cart') as $k => $v)
-                            @php $total += ($v['sale_price']?$v['sale_price']:$v['regular_price']) * $v['quantity'] @endphp
-                            <div class="procart procart">
-                                <div class="row row-10">
-                                    <!--<div><input type="checkbox"></div>-->
-                                    <div class="pic-procart col-3 col-md-2 mg-col-10">
-                                        <a class="text-decoration-none" target="_blank" title=""> <img width="85px"
-                                                height="85px" src="{{ asset($v['product_photo_path']) }}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="info-procart col-6 col-md-5 mg-col-10">
-                                        <h3 class="name-procart"><a class="text-decoration-none" target="_blank"
-                                                title=""> {{ $v['name'] }} </a></h3>
-                                    </div>
-                                    <div class="quantity-procart col-3 col-md-2 mg-col-10">{{ $v['quantity'] }}</div>
-                                    <div class="price-procart col-3 col-md-3 mg-col-10">
-                                        @if ($v['sale_price'])
-                                            <p class="price-new-cart load-price-new"> @formatmoney($v['sale_price'] * $v['quantity']) </p>
-                                            <p class="price-old-cart load-price"> @formatmoney($v['regular_price'] * $v['quantity'])</p>
-                                        @else
-                                            <p class="price-new-cart load-price"> @formatmoney($v['regular_price'] * $v['quantity']) </p>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                        <!-- end -->
+<div class="wrap-content">
+    <div class="container">
+        <div class="row cart_form">
+            <!-- Giỏ hàng -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <p>Thông tin giỏ hàng</p>
                     </div>
-                    <div class="money-procart">
-                        <div class="total-procart">
-                            <p>Tạm tính:</p>
-                            <p class="total-price load-price-temp">@formatmoney($total)</p>
+                    <div class="card-body">
+                        @php
+                            $shipping = 30000;
+                            $total = 0;
+                        @endphp
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Hình ảnh</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($products as $product)
+                                        @php 
+                                            $productPrice = ($product['sale_price'] ?? $product['regular_price']) * $product['quantity'];
+                                            $total += $productPrice;
+                                        @endphp
+                                        <tr>
+                                            <td>
+                                                <img src="{{ asset($product['photo_path']) }}" class="img-fluid rounded" width="80" alt="Ảnh sản phẩm">
+                                            </td>
+                                            <td>{{ $product['name'] }}</td>
+                                            <td>{{ $product['quantity'] }}</td>
+                                            <td>@formatmoney($productPrice)</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="total-procart">
-                            <p>Phí vận chuyển:</p>
-                            <p class="total-price load-price-ship">@formatmoney($shipping)</p>
-                        </div>
-                        <div class="total-procart">
-                            <p>Tổng tiền:</p>
-                            <p class="total-price load-price-total" id="sub-total">@formatmoney($total + $shipping)</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span><strong>Tạm tính:</strong> @formatmoney($total)</span>
+                            <span><strong>Phí vận chuyển:</strong> @formatmoney($shipping)</span>
+                            <span><strong>Tổng tiền:</strong> <span id="total-price">@formatmoney($total + $shipping)</span></span>
                         </div>
                     </div>
                 </div>
-                <div class="bottom-cart col-12 col-lg-5">
-                    <div class="section-cart">
-                        <p class="title-cart">Hình thức thanh toán:</p>
-                        <!--<div class="information-cart">
-                                    <div class="payments-cart form-check">
-                                        <input type="radio" class="form-check-input" id="payments-cod" name="dataOrder[payments]" value="cod" required checked>
-                                        <label class="payments-label form-check-label" for="payments-cod" data-payments="">
-                                            Thanh toán khi nhận hàng
-                                        </label>
-                                    </div>
-                                    <div class="payments-cart form-check">
-                                        <input type="radio" class="form-check-input" id="payments-vnpay" name="dataOrder[payments]" value="vnpay" required>
-                                        <label class="payments-label form-check-label" for="payments-vnpay" data-payments="">
-                                            Thanh toán trực tuyến qua VNPAY
-                                        </label>
-                                        <div class="payments-info payments-info- transition">
-                                        </div>
-                                    </div>
-                                </div>-->
-                        <!-- Form COD Payment -->
+            </div>
+
+            <!-- Thanh toán -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <p>Thông tin giao hàng</p>
+                    </div>
+                    <div class="card-body">
                         <form action="{{ url('/payment_return') }}" method="POST" id="paymentForm">
                             @csrf
-                            <p class="title-cart">Thông tin giao hàng:</p>
-                            <div class="information-cart">
-                                <div class="row row-10">
-                                    <div class="input-cart col-md-6 mg-col-10">
-                                        <div class="form-floating form-floating-cus">
-                                            <input type="text" class="form-control text-sm" id="fullname_vnpay"
-                                                name="fullname" placeholder="Họ tên"
-                                                value="{{ $user->last_name . ' ' . $user->first_name }}" required />
-                                            <label for="fullname_vnpay">Họ tên</label>
-                                        </div>
-                                        <div class="invalid-feedback">Vui lòng nhập họ tên</div>
-                                    </div>
-                                    <div class="input-cart col-md-6 mg-col-10">
-                                        <div class="form-floating form-floating-cus">
-                                            <input type="number" class="form-control text-sm" id="phone_vnpay"
-                                                name="phone" placeholder="Điện thoại" value="{{ $user->phone }}"
-                                                required />
-                                            <label for="phone_vnpay">Điện thoại</label>
-                                        </div>
-                                        <div class="invalid-feedback">Vui lòng nhập số điện thoại</div>
-                                    </div>
-                                </div>
-                                <div class="input-cart">
-                                    <div class="form-floating form-floating-cus">
-                                        <input type="text" class="form-control text-sm" id="address_vnpay" name="address"
-                                            placeholder="Địa chỉ" value="{{ $user->address }}" required />
-                                        <label for="address_vnpay">Địa chỉ</label>
-                                    </div>
-                                    <div class="invalid-feedback">Vui lòng nhập địa chỉ</div>
-                                </div>
-                                <div class="input-cart">
-                                    <div class="form-floating form-floating-cus">
-                                        <textarea class="form-control text-sm" id="note_vnpay" name="note" placeholder="Yêu cầu khác"></textarea>
-                                        <label for="note_vnpay">Yêu cầu khác</label>
-                                    </div>
-                                </div>
+                            <!-- Họ tên -->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="fullname_vnpay" name="fullname_vnpay" placeholder="Họ tên" value="{{ $user->name }}" required>
+                                <label for="fullname_vnpay">Họ tên</label>
                             </div>
-                            <input id="total-total" type="hidden" name="total" value="{{ $total + $shipping }}">
-                            <button type="submit" name="type" value="payment" class="btn btn-primary">Thanh toán khi
-                                nhận hàng</button>
-                            <button type="submit" name="type" value="payment_vnpay" class="btn btn-primary">Thanh
-                                toán bằng VNPAY</button>
-                            <button type="submit" name="type" value="online" id="vietqr"
-                                class="btn btn-primary">
-                                Thanh toán bằng QR
-                            </button>
+                            <!-- Điện thoại -->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="phone_vnpay" name="phone_vnpay" placeholder="Điện thoại" value="{{ $user->phone }}" required>
+                                <label for="phone_vnpay">Điện thoại</label>
+                            </div>
+                            <!-- Địa chỉ -->
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="address_vnpay" name="address_vnpay" placeholder="Địa chỉ" value="{{ $user->address }}" required>
+                                <label for="address_vnpay">Địa chỉ</label>
+                            </div>
+                            <!-- Ghi chú -->    
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="note" name="note" placeholder="Ghi chú"></textarea>
+                                <label for="note">Yêu cầu khác</label>
+                            </div>
+
+                            <!-- Phương thức thanh toán -->
+                            <div class="mb-3">
+                                <h6>Hình thức thanh toán:</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment_method" id="cod" value="cod" checked>
+                                    <label class="form-check-label" for="cod">Thanh toán khi nhận hàng</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment_method" id="vnpay" value="vnpay">
+                                    <label class="form-check-label" for="vnpay">Thanh toán qua VNPAY</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="payment_method" id="vietqr" value="vietqr">
+                                    <label class="form-check-label" for="vietqr">Thanh toán bằng QR</label>
+                                </div>
+                            </div> 
+                            <div id="qr-container" class="text-center mt-3" style="display: none;">
+                                <p>Quét mã QR để thanh toán:</p>
+                                <img id="qr-code-image" src="https://img.vietqr.io/image/MB-4660590747532-compact2.png?amount=500000&addInfo=TLBOOKSTORE" 
+                                     class="img-fluid" alt="Mã QR thanh toán" style="max-width: 200px;">
+                            </div>
+                            
+
+                            <button type="submit" class="btn btn-success w-100">Xác nhận thanh toán</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="popupContainer" class="popup-container">
-        <div class="popup-content">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
-            <img id="img-pay" alt="Popup Image">
-        </div>
-    </div>
+</div>
 @endsection
 @section('js')
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const qrContainer = document.getElementById('qr-container');
+        const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
+
+        // Xử lý khi thay đổi phương thức thanh toán
+        paymentRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                if (this.id === 'vietqr') {
+                    qrContainer.style.display = 'block'; // Hiện mã QR
+                } else {
+                    qrContainer.style.display = 'none'; // Ẩn mã QR
+                }
+            });
+        });
+    });
+
         function closePopup() {
             var popup = document.getElementById('popupContainer');
             popup.style.display = 'none'; // Ẩn popup bằng cách thay đổi thuộc tính display của nó
@@ -179,12 +162,10 @@
 
                 if (!fullname || !phone || !address) {
                     event.preventDefault(); // Ngăn không cho form submit
-                    if (!fullname) {
-                        alert('Vui lòng nhập họ tên');
-                    } else if (!phone) {
-                        alert('Vui lòng nhập số điện thoại');
-                    } else if (!address) {
-                        alert('Vui lòng nhập địa chỉ');
+                    if (!fullname || !phone || !address) {
+                        event.preventDefault();
+                        Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
+                        return;
                     }
                 } else {
                     event.preventDefault();

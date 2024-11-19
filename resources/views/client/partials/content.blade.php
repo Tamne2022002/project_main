@@ -1,10 +1,9 @@
 <?php
-use App\Http\Controllers\Client\CHomeController;
-
-?>
+use App\Http\Controllers\Client\CHomeController; 
+?> 
 
 @isset($productFeatured)
-    @if (!$productFeatured->isEmpty())
+    @if (!$productFeatured->isEmpty()) 
         {{-- productFeatured --}}
         <div class="wrap-product-outstanding py50">
             <div class="wrap-content">
@@ -86,9 +85,9 @@ use App\Http\Controllers\Client\CHomeController;
                             </div>
                         @endforeach
                     </div>
-                    <div class="paging-product-category-style paging-product-category-{{ $v->id }}"
+                    {{-- <div class="paging-product-category-style paging-product-category-{{ $v->id }}"
                         data-route="{{ route('add_index.cart') }}">
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         @endforeach
