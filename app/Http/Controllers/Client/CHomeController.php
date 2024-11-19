@@ -29,18 +29,23 @@ class CHomeController extends Controller
         ->whereNull('deleted_at')->get();
        
         $publisher = PublisherModel::select('id', 'name', 'photo_path')->get();
-        $category_first = ProductListModel::with('children')->where('featured', 1)->where('status', 1)->whereNull('deleted_at')->where('id_parent', 0)->get();
+        $category_first = ProductListModel::with('children')->where('featured', 1)->where('status', 1)
+        ->whereNull('deleted_at'
+        )->where('id_parent', 0)
+        ->get();
+
         $productFeatured = ProductModel::select('id', 'name', 'photo_path', 'regular_price', 'sale_price', 'discount', )
             ->where('status', 1)
             ->where('featured', 1)
             ->whereNull('deleted_at')
             ->get(); 
-        if (Auth::guard('member')->user()) {
-            $user = Auth::guard('member')->user(); 
-        } else {
-            $user = '';
-        }
+
+         if (Auth::guard('member')->user()) {
+             $user = Auth::guard('member')->user();
+             return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first', 'user'));
+         }
         return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first', 'user')); 
+
 
     }
     public function PublisherProduct($id)
@@ -68,7 +73,7 @@ class CHomeController extends Controller
     public static function MenuCategory()
     {
         $menufisrt = ProductListModel::with('children')->where('status', 1)->whereNull('deleted_at')->where('id_parent', 0)->get();
-        return $menufisrt;
+        return view('client.partials.categorymenu', compact('menufisrt'));
     }
     public static function getUserInfo()
     {

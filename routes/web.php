@@ -33,7 +33,7 @@ Route::post('check-login', [CUserController::class, 'postlogin'])->name('user.po
 Route::get('/check-login', function () {  return response()->json(['logged_in' => Auth::guard('member')->check()]);});
 Route::get('/signup', [CUserController::class, 'clientRegister'])->name('user.signup'); 
 Route::post('check-register', [CUserController::class, 'postregister'])->name('user.postregister');
-Route::get('logout', [CUserController::class, 'logout'])->name('user.logout');
+Route::get('logout', [CUserController::class, 'logout'])->name('client.user.logout');
 
 Route::prefix('/')->group(function () {
     /* Index */
