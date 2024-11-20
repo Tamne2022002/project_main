@@ -192,10 +192,13 @@
                                                         </p>
                                                     </label>
                                                     <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
-                                                        (.jpg|.png|.jpeg)</div>
+                                                        (.jpg|.png|.jpeg|.webp)</div>
                                                 </div>
                                             </div>
-
+                                            <div class="form-group">
+                                                <label>Hình Ảnh Chi Tiết</label>
+                                                <input type="file" multiple class="form-control-file" name="photo_path_multi[]">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

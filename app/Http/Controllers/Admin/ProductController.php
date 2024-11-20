@@ -131,8 +131,7 @@ class ProductController extends Controller
         return $htmlOption;
     }
     public function store(ProductAddRequest $request)
-    {
-        
+    { 
         try { 
             DB::beginTransaction();
             $dataProductCreate = [
@@ -149,8 +148,8 @@ class ProductController extends Controller
                 'publishing_year' => $request->publishing_year ?? '',
                 'status' => $request->filled('status') ? $request->status : false,
                 'featured' => $request->filled('featured') ? $request->featured : false,
-            ];
-            $dataUploadProductImage = $this->storagetrait($request, 'photo_path', 'product');
+            ]; 
+            $dataUploadProductImage = $this->storagetrait($request, 'photo_path', 'product'); 
             if (!empty($dataUploadProductImage)) {
                 $dataProductCreate['photo_name'] = $dataUploadProductImage['file_name'];
                 $dataProductCreate['photo_path'] = $dataUploadProductImage['file_path'];
@@ -166,14 +165,14 @@ class ProductController extends Controller
             ]; 
             WarehouseModel::create($dataWarehouseCreate);
             // /* Sub img */
-            if ($request->hasFile('photo_path')) {
-                foreach ($request->photo_path as $fileItem) {
+            if ($request->hasFile('photo_path_multi')) {
+                foreach ($request->photo_path_multi as $fileItem) {
                     $datagallery = $this->storagetraitmultiple($fileItem, 'product');
                     $product->images()->create([
                         'id_parent' => $product->id,
                         'photo_path' => $datagallery['file_path'],
                         'photo_name' => $datagallery['file_name'],
-                    ]);
+                    ]); 
                 }
             }
             DB::commit();
@@ -222,17 +221,17 @@ class ProductController extends Controller
             ProductModel::find($id)->update($dataProductUpdate);
             $product = ProductModel::find($id);
             /* Sub img */
-            // if ($request->hasFile('photo_path')) {
-            //     $this->gallery->where('product_id', $id)->delete();
-            //     foreach ($request->photo_path as $fileItem) {
-            //         $datagallery = $this->storagetraitmultiple($fileItem, 'product');
-            //         $product->images()->create([
-            //             'product_id' => $product->id,
-            //             'photo_path' => $datagallery['file_path'],
-            //             'photo_name' => $datagallery['file_name'],
-            //         ]);
-            //     }
-            // }
+            if ($request->hasFile('photo_path')) {
+                $this->gallery->where('product_id', $id)->delete();
+                foreach ($request->photo_path as $fileItem) {
+                    $datagallery = $this->storagetraitmultiple($fileItem, 'product');
+                    $product->images()->create([
+                        'id_parent' => $product->id,
+                        'photo_path' => $datagallery['file_path'],
+                    'photo_name' => $datagallery['file_name'],
+                    ]);
+                }
+            }
             DB::commit();
             return redirect()->route('product.index');
         } catch (\Exception $exception) {

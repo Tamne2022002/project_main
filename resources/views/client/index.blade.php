@@ -6,6 +6,5 @@ use App\Http\Controllers\Client\CHomeController;
 @section('title')
     <title>{{ CHomeController::settings()->name }}</title>
 @endsection
-@section('content')
-
+@section('content') 
 @endsection

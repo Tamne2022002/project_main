@@ -93,8 +93,18 @@ class CUserController extends Controller
                 'member_id' => $member->id,
                 'cart_total' => 0,
             ]);*/
-            
-            return redirect()->route('index')->with('success', 'Đăng ký thành công');
+
+            $cre = $request->only('email', 'password');
+        
+            if (Auth::guard('member')->attempt($cre)) {
+                $user = Auth::guard('member')->user();
+                Auth::guard('member')->login($user);
+                $request->session()->put('id_user', Auth::guard('member')->user()->id);
+                $request->session()->regenerate();
+                return redirect()->route('index')->with('success', 'Đăng ký thành công');
+
+            } 
+            // return redirect()->route('index')->with('success', 'Đăng ký thành công');
             //dd($cre, 'true');
         }
         return redirect()->route('user.register')->with('fail', 'Đã có lỗi xảy ra'); 

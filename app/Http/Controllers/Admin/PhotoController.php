@@ -100,7 +100,7 @@ class PhotoController extends Controller
 
         }
     }
-    public function delete($id, $type)
+    public function delete($type,$id)
     {
         return $this->deleteModelTrait($id, $this->photo);
 

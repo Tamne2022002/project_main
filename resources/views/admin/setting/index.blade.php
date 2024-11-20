@@ -43,7 +43,7 @@
                                         </p>
                                     </label>
                                     <div class="photoUpload-dimension">Width: 50 px - Height: 50 px
-                                        (.jpg|.png|.jpeg)</div>
+                                        (.jpg|.png|.jpeg|.webp)</div>
                                 </div>
                             </div>
                             <div class="form-group col-6">
@@ -63,7 +63,7 @@
                                         </p>
                                     </label>
                                     <div class="photoUpload-dimension">Width: 50 px - Height: 50 px
-                                        (.jpg|.png|.jpeg)</div>
+                                        (.jpg|.png|.jpeg|.webp)</div>
                                 </div>
                             </div>
                             <div class="form-group col-6">
