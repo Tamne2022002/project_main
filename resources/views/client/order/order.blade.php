@@ -11,26 +11,34 @@
         </div>
         @if (count($hdb) < 1)   
             <div class="form-add-top row">
-                <div class="col-md-6">
-                    <h4 class=""><a href="{{ route('user.info') }}">Thông tin tài khoản</a></h4>
-                    <h4 class=""><a href="{{ route('user.order') }}">Lịch sử mua hàng</a></h4>
-                    @if ($user->password != null)
-                        <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
-                    @else
-                        
-                    @endif
+                <div class="user-list-inf col-md-3">
+                    <h3 class="user-list-inf-item">
+                        <a href="{{route('user.info')}}"><span class="user-list-item-name">Thông tin tài khoản</span></a>
+                    </h3>
+                    <h3 class="user-list-inf-item">
+                        <a href="{{route('user.order')}}"><span class="user-list-item-name">Lịch sử mua hàng</a>
+                    </h3>
+                    <h3 class="user-list-inf-item">
+                        <a href="{{route('user.changepassword')}}"><span class="user-list-item-name">Đổi mật khẩu</a>
+                    </h3>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 text-align-center">
                     <div>Bạn chưa mua sản phẩm nào !</div>
                 </div>
             </div>
         @else
         <div class="content-main">
             <div class="form-add-top row">
-                <div class="col-md-3">
-                    <h4 class=""><a href="{{ route('user.info') }}">Thông tin tài khoản</a></h4>
-                    <h4 class=""><a href="{{ route('user.order') }}">Lịch sử mua hàng</a></h4>
-                    <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
+                <div class="user-list-inf col-md-3">
+                    <h3 class="user-list-inf-item">
+                        <a href="{{route('user.info')}}"><span class="user-list-item-name">Thông tin tài khoản</span></a>
+                    </h3>
+                    <h3 class="user-list-inf-item">
+                        <a href="{{route('user.order')}}"><span class="user-list-item-name">Lịch sử mua hàng</a>
+                    </h3>
+                    <h3 class="user-list-inf-item">
+                        <a href="{{route('user.changepassword')}}"><span class="user-list-item-name">Đổi mật khẩu</a>
+                    </h3>
                 </div>
                 <div class="col-md-9">
                     <table class="w-125 ">

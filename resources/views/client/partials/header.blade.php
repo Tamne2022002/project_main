@@ -32,19 +32,6 @@ use App\Http\Controllers\Client\CHomeController;
                                     <div class="menu-bottom-account-icon">
                                         <i class="fa-solid fa-user"></i>
                                     </div>
-                                    <div class="menu-bottom-account-text"
-                                        Xin chào, {{ CHomeController::getUserInfo()->name }}
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    @else
-                        <div class="menu-bottom-account-positon">
-                            <a href="{{ route('user.login') }}">
-                                <div class="menu-bottom-account">
-                                    <div class="menu-bottom-account-icon">
-                                        <i class="fa-solid fa-user"></i>
-                                    </div>
                                     <div class="menu-bottom-account-text">
                                         Tài khoản
                                     </div>
@@ -52,7 +39,7 @@ use App\Http\Controllers\Client\CHomeController;
                             </a>
                         </div>
                     @endif
-                </div>  --}}
+                </div>  
             </div>
         </div>
     </div>
@@ -74,10 +61,10 @@ use App\Http\Controllers\Client\CHomeController;
                     </div>
                 </div>
                 <div class="header-bottom-end">
-                    <div class="header-bottom-item">
+                    <a class="header-bottom-item" href="{{route('user.cart')}}">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <h6>Giỏ hàng</h6>
-                    </div>
+                    </a>
                     <div class="header-bottom-item">
                         <i class="fa-solid fa-truck"></i>
                         <h6>Đơn hàng</h6>

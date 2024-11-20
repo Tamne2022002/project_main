@@ -8,6 +8,7 @@
     <div class="wrap-content">
  
         <div class="content-main">
+            <h6 class="user-inf-title">Thông tin người dùng</h6>
             <div class="form-add-top row">
                 <div class="return">
                     @if ($message = Session::get('success'))
@@ -25,14 +26,16 @@
                         </div>
                     @endif
                 </div>
-                <div class="col-md-3">
-                    <h4 class=""><a href="{{ route('user.info') }}">Thông tin tài khoản</a></h4>
-                    <h4 class=""><a href="{{ route('user.order') }}">Lịch sử mua hàng</a></h4>
-                    @if ($user->password != null)
-                        <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
-                    @else
-                        
-                    @endif
+                <div class="user-list-inf col-md-3">
+                    <h3 class="user-list-inf-item">
+                        <a href="{{route('user.info')}}"><span class="user-list-item-name">Thông tin tài khoản</span></a>
+                    </h3>
+                    <h3 class="user-list-inf-item">
+                        <a href="{{route('user.order')}}"><span class="user-list-item-name">Lịch sử mua hàng</a>
+                    </h3>
+                    <h3 class="user-list-inf-item">
+                        <a href="{{route('user.changepassword')}}"><span class="user-list-item-name">Đổi mật khẩu</a>
+                    </h3>
                 </div>
                 <div class="col-md-9">
                     <form class="flex-user-infor" action="{{ route('user.info.update') }}" method="POST">
@@ -92,7 +95,7 @@
                                     <button type="submit" class="btn btn-primary" id="submitAddress">Cập nhật</button>
                                 </div>
                                 <div class="flex-btn">
-                                    <a href="{{ route('user.logout') }}" class="btn btn-danger" title="Đăng xuất">
+                                    <a href="{{ route('user.signout') }}" class="btn btn-danger" title="Đăng xuất">
                                         Đăng xuất
                                     </a>
                                 </div>

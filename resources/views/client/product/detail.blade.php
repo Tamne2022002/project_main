@@ -60,10 +60,10 @@
                             Năm xuất bản: <span
                                 class="attribute-product-detail-text">{{ $productDetail->publishing_year }}</span>
                         </div>
-                        <div class="attribute-product-detail">
+                        {{-- <div class="attribute-product-detail">
                             Số lượng tồn kho: <span class="attribute-product-detail-text"
                                 id="qty_shown">{{ $qty }}</span>
-                        </div>
+                        </div> --}}
                         <input type="hidden" id="qty" value="{{ $qty }}">
                         <div class="attribute-product-detail" style="display: none">
                             Số lượng có trong giỏ hàng: <span id="cqty_shown">{{ $cqtyincart }}</span>

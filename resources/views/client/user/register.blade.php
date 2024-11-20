@@ -21,29 +21,29 @@
                         </span>
                         <div class="signup-user-name d-flex">
                             <div class="wrap-input100 validate-input" >
-                                <input class="input100" type="text" name="firstname">
-                                <span class="focus-input100" data-placeholder="Họ"></span>
+                                <input class="input100" type="text" name="firstname" placeholder="Họ">
+                                
                             </div>
 
                             <div class="wrap-input100 validate-input" >
-                                <input class="input100" type="text" name="lastname">
-                                <span class="focus-input100" data-placeholder="Tên"></span>
+                                <input class="input100" type="text" name="lastname" placeholder="Tên">
+                                
                             </div>
                         </div>
 
                         <div class="wrap-input100 validate-input" >
-                            <input class="input100" type="text" name="address">
-                            <span class="focus-input100" data-placeholder="Địa chỉ"></span>
+                            <input class="input100" type="text" name="address" placeholder="Địa chỉ">
+                           
                         </div>
 
-                        <div class="wrap-input100 validate-input" data-validate = "">
-                            <input class="input100" type="number" name="phone">
-                            <span class="focus-input100" data-placeholder="Số điện thoại"></span>
+                        <div class="wrap-input100 validate-input">
+                            <input class="input100" type="number" name="phone" placeholder="Số điện thoại">
+                           
                         </div>
                         
                         <div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-                            <input class="input100" type="text" name="email">
-                            <span class="focus-input100" data-placeholder="Email"></span>
+                            <input class="input100" type="email" name="email" placeholder="Email">
+                           
                         </div>
                         @error('email')
                             <div style="color: #dd0505;
@@ -53,8 +53,8 @@
                             <span class="btn-show-pass">
                                 <i class="zmdi zmdi-eye"></i>
                             </span>
-                            <input class="input100" type="password" name="pass">
-                            <span class="focus-input100" data-placeholder="Password"></span>
+                            <input class="input100" type="password" name="password" placeholder="Password">
+                            
                         </div>
                         @error('password')
                             <div style="color: #dd0505;
@@ -63,7 +63,7 @@
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>
-                                <button class="login100-form-btn">
+                                <button class="login100-form-btn" type="submit">
                                     Đăng kí
                                 </button>
                             </div>
