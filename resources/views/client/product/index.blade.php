@@ -10,8 +10,7 @@
                     Sản phẩm
                 </span>
             </div>
-            <div class="content-main d-flex">
-                @include('client.partials.categorymenu')
+            <div class="content-main d-flex"> 
                 <div class="grid-profuct">
                     @isset($productInternal)
                         @if (!$productInternal->isEmpty())

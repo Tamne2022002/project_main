@@ -13,7 +13,7 @@ $func = new App\Helpers\Func();
 @endsection
 @section('js')
     <script type="text/javascript">
-        var PERMISSION =  @php echo $func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_product')?'"false"':'"false"' @endphp;
+        var PERMISSION =  @php echo $func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_product')?'"true"':'"false"' @endphp;
     </script>
     <script src="{{ asset('vendors/sweetarlert2/sweetarlert2.js') }}"></script>
     <script src="{{ asset('/admins/js/jquery.sumoselect.min.js') }}"></script>

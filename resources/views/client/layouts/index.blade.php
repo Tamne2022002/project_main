@@ -13,8 +13,11 @@
             {{-- @include('client.partials.menu') --}}
             @include('client.partials.slider')
             <div class="{{ Request::route()->getName() == 'index' ? 'external-content' : 'internal-content py50' }}">
-                @yield('content')
-                @include('client.partials.content')
+                @if (Request::route()->getName() == 'index')
+                    @include('client.partials.content')
+                @else
+                    @yield('content')
+                @endif
             </div>
             @include('client.partials.footer')
             @include('client.partials.modal')

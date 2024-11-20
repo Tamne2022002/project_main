@@ -58,7 +58,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <span><strong>Tạm tính:</strong> @formatmoney($total)</span>
                                 <span><strong>Phí vận chuyển:</strong> @formatmoney($shipping)</span>
-                                <span><strong>Tổng tiền:</strong> <span id="total-price">@formatmoney($total)</span></span>
+                                <span><strong>Tổng tiền:</strong> <span id="total-price">@formatmoney($total + $shipping)</span></span>
                             </div>
                         </div>
                     </div>
@@ -134,82 +134,93 @@
     </div>
 @endsection
 @section('js')
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const qrContainer = document.getElementById('qr-container');
-        const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
-        const totalPriceElement = document.getElementById('total-price');
-        const qrCodeImage = document.getElementById('qr-code-image');
-        const paymentForm = document.getElementById('paymentForm');
-        const checkAPIUrl = "https://script.google.com/macros/s/AKfycbxcrTkN4n8y84VESNeNE9mqeqdvPUKnnVuiFq4M3_YYMul-5EYRyJ-MeQuvwOofOeOv/exec";
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const qrContainer = document.getElementById('qr-container');
+            const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
+            const totalPriceElement = document.getElementById('total-price');
+            const qrCodeImage = document.getElementById('qr-code-image');
+            const paymentForm = document.getElementById('paymentForm');
+            const checkAPIUrl =
+                "https://script.google.com/macros/s/AKfycbxcrTkN4n8y84VESNeNE9mqeqdvPUKnnVuiFq4M3_YYMul-5EYRyJ-MeQuvwOofOeOv/exec";
+            const code = generateRandomNumbers();
+            // Xử lý hiển thị QR Code khi chọn phương thức thanh toán
+            paymentRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.id === 'vietqr') {
+                        const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''),
+                            10);
 
-        // Xử lý hiển thị QR Code khi chọn phương thức thanh toán
-        paymentRadios.forEach(radio => {
-            radio.addEventListener('change', function () {
-                if (this.id === 'vietqr') {
-                    const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''), 10);
-                    const code = generateRandomNumbers();
-                    const QR = `https://img.vietqr.io/image/970415-107871769484-compact2.png?amount=${total}&addInfo=TPStore_${code}&accountName=NGUYEN%20MINH%20TAM`;
+                        const QR =
+                            `https://img.vietqr.io/image/970415-107871769484-compact2.png?amount=${total}&addInfo=TPStore_${code}&accountName=NGUYEN%20MINH%20TAM`;
 
-                    qrCodeImage.setAttribute('src', QR);
-                    qrContainer.style.display = 'block';
-                } else {
-                    qrContainer.style.display = 'none';
+                        qrCodeImage.setAttribute('src', QR);
+                        qrContainer.style.display = 'block';
+                    } else {
+                        qrContainer.style.display = 'none';
+                    }
+                });
+            });
+
+            paymentForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const selectedPaymentMethod = document.querySelector(
+                    'input[name="payment_method"]:checked').id;
+                const fullname = document.getElementById('fullname_vnpay').value;
+                const phone = document.getElementById('phone_vnpay').value;
+                const address = document.getElementById('address_vnpay').value;
+                const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''), 10);
+
+                if (!fullname || !phone || !address) {
+                    Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
+                    return;
+                }
+
+                if (selectedPaymentMethod === 'cod' || selectedPaymentMethod === 'vnpay') {
+                    // Submit trực tiếp nếu chọn COD hoặc VNPAY
+                    paymentForm.submit();
+                } else if (selectedPaymentMethod === 'vietqr') {
+                    // Kiểm tra thanh toán thành công trước khi submit
+                    try {
+                        const response = await fetch(checkAPIUrl);
+                        const data = await response.json();
+
+                        if (data && data.data && data.data.length > 0) {
+                            const lastPaid = data.data[data.data.length - 1];
+                            const lastPrice = lastPaid["Giá trị"];
+                            const lastContent = lastPaid["Mô tả"];
+                            console.log(lastPrice);
+                            console.log(total);
+
+                            if (lastPrice === total && lastContent.includes(code)) {
+                                const confirmInput = document.createElement('input');
+                                confirmInput.type = 'hidden';
+                                confirmInput.name = 'xacnhanthanhtoan';
+                                confirmInput.value = 'true';
+                                paymentForm.appendChild(confirmInput);
+                                paymentForm.submit();
+                            } else {
+                                Swal.fire('Chưa thanh toán', 'Hóa đơn chưa được thanh toán!',
+                                'warning');
+                            }
+                        } else {
+                            Swal.fire('Lỗi', 'Không tìm thấy dữ liệu thanh toán!', 'error');
+                        }
+                    } catch (error) {
+                        Swal.fire('Lỗi', 'Không thể kiểm tra thanh toán, vui lòng thử lại!', 'error');
+                    }
                 }
             });
-        });
 
-        paymentForm.addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const fullname = document.getElementById('fullname_vnpay').value;
-            const phone = document.getElementById('phone_vnpay').value;
-            const address = document.getElementById('address_vnpay').value;
-            const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''), 10);
-
-            if (!fullname || !phone || !address) {
-                Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
-                return;
-            }
-
-            try {
-                const response = await fetch(checkAPIUrl);
-                const data = await response.json();
-
-                if (data && data.data && data.data.length > 0) {
-                    const lastPaid = data.data[data.data.length - 1];
-                    const lastPrice = lastPaid["Giá trị"];
-                    const lastContent = lastPaid["Mô tả"];
-                    const code = generateRandomNumbers();
-
-                    if (lastPrice === total && lastContent.includes(code)) {
-                        const confirmInput = document.createElement('input');
-                        confirmInput.type = 'hidden';
-                        confirmInput.name = 'xacnhanthanhtoan';
-                        confirmInput.value = 'true';
-                        paymentForm.appendChild(confirmInput);
-                        paymentForm.submit();
-                    } else {
-                        Swal.fire('Chưa thanh toán', 'Hóa đơn chưa được thanh toán!', 'warning');
-                    }
-                } else {
-                    Swal.fire('Lỗi', 'Không tìm thấy dữ liệu thanh toán!', 'error');
+            function generateRandomNumbers() {
+                const numbers = [];
+                for (let i = 0; i < 10; i++) {
+                    const randomNumber = Math.floor(Math.random() * 100) + 1;
+                    numbers.push(randomNumber);
                 }
-            } catch (error) {
-                Swal.fire('Lỗi', 'Không thể kiểm tra thanh toán, vui lòng thử lại!', 'error');
+                return numbers.join('');
             }
         });
-
-        // Hàm tạo số ngẫu nhiên
-        function generateRandomNumbers() {
-            const numbers = [];
-            for (let i = 0; i < 10; i++) {
-                const randomNumber = Math.floor(Math.random() * 100) + 1;
-                numbers.push(randomNumber);
-            }
-            return numbers.join('');
-        }
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection

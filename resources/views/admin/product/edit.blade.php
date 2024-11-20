@@ -158,10 +158,10 @@
                                                 <div class="form-group col-md-6">
                                                     <label>Nổi bật:</label>
                                                     <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" id="outstanding"
-                                                            name="outstanding" value="1"
-                                                            @if (old('outstanding', $product->outstanding) == 1) checked @endif>
-                                                        <label class="form-check-label" for="outstanding">Nổi bật</label>
+                                                        <input type="checkbox" class="form-check-input" id="featured"
+                                                            name="featured" value="1"
+                                                            @if (old('featured', $product->featured) == 1) checked @endif>
+                                                        <label class="form-check-label" for="featured">Nổi bật</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,21 +202,23 @@
                                                         </p>
                                                     </label>
                                                     <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
-                                                        (.jpg|.png|.jpeg)</div>
+                                                        (.jpg|.png|.jpeg|.webp)</div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="form-group">
-                                            <label>Hình Ảnh Chi Tiết</label>
-                                            <input type="file" multiple class="form-control-file" name="photo_path[]">
-                                            <div class="col-md-12 box-gallery">
-                                                @foreach ($product->productGallery as $productGalleryItem)
-                                                    <div class="box-gallery-item">
-                                                        <img class="image-gallery w-100"
-                                                            src="{{ $productGalleryItem->photo_path }}" alt="">
-                                                    </div>
-                                                @endforeach
+                                            <div class="form-group">
+                                                <label>Hình Ảnh Chi Tiết</label>
+                                                <input type="file" multiple class="form-control-file"
+                                                    name="photo_path[]">
+                                                <div class="col-md-12 box-gallery"> 
+                                                    @foreach ($product->productGallery as $productGalleryItem)
+                                                        <div class="box-gallery-item">
+                                                            <img class="image-gallery w-100"
+                                                                src="{{ $productGalleryItem->photo_path }}"
+                                                                alt="">
+                                                        </div>
+                                                    @endforeach 
+                                                </div>
                                             </div>
-                                        </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +228,7 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+            </div>
             </form>
         </div>
     </div>

@@ -82,7 +82,7 @@
                                             </p>
                                         </label>
                                         <div class="photoUpload-dimension">Width: 220 px - Height: 325 px
-                                            (.jpg|.png|.jpeg)</div>
+                                            (.jpg|.png|.jpeg|.webp)</div>
                                     </div> 
                                 </div>
                             </div>

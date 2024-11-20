@@ -1,9 +1,9 @@
 <?php
-use App\Http\Controllers\Client\CHomeController; 
-?> 
+use App\Http\Controllers\Client\CHomeController;
+?>
 
 @isset($productFeatured)
-    @if (!$productFeatured->isEmpty()) 
+    @if (!$productFeatured->isEmpty())
         {{-- productFeatured --}}
         <div class="wrap-product-outstanding py50">
             <div class="wrap-content">
@@ -18,8 +18,8 @@ use App\Http\Controllers\Client\CHomeController;
                                     <div class="product" data-aos="zoom-in-up">
                                         <div class="box-product text-decoration-none">
                                             <div class="position-relative overflow-hidden  ">
-                                                <a class="pic-product " href="{{ route('product.detail', ['id' => $v->id]) }}"
-                                                    title="Sản phẩm">
+                                                <a class="pic-product "
+                                                    href="{{ route('product.detail', ['id' => $v->id]) }}" title="Sản phẩm">
                                                     <div class="pic-product-img scale-img hover_light">
                                                         @if ($v->photo_path)
                                                             <img class="w-100" src="{{ $v->photo_path }}"
@@ -36,10 +36,10 @@ use App\Http\Controllers\Client\CHomeController;
                                                         href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                         title="{{ $v->name }}">{{ $v->name }}</a>
                                                 </div>
-                                                                                            <div class="price-product">
+                                                <div class="price-product">
                                                     @if ($v->discount)
                                                         <div class="price-new">
-                                                            {{ \App\Helpers\Func::formatMoney($v->regular_price)}}
+                                                            {{ \App\Helpers\Func::formatMoney($v->regular_price) }}
                                                         </div>
                                                         <div class="discount">
                                                             {{ $v->discount }}%
@@ -149,4 +149,3 @@ use App\Http\Controllers\Client\CHomeController;
         </div>
     @endif
 @endisset
- 

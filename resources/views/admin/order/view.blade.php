@@ -9,12 +9,17 @@
     <script src="{{ asset('/admins/js/jquery.sumoselect.min.js') }}"></script>
     <script script src="{{ asset('/admins/js/app.js') }}"></script>
 @endsection
-<div class="content-wrapper">
-
- 
+<div class="content-wrapper bg-white">
     <div class="content">
         <div class="container-fluid pt-3">
             <form action="" method="">
+                <div class="card card-primary card-outline text-sm">
+                    <div class="d-flex px-3 py-1 my-2 ">
+                        <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
+                        <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
+                        <a href="{{ route('order.index') }}" class="btn btn-danger">Thoát</a>
+                    </div>
+                </div>
                 @csrf 
                 <div class="row col-12">
                     <div class="col-md-3">
@@ -52,8 +57,8 @@
                     <div class="col-3">
                         <div class="form-group">
                             <label>Tổng tiền</label>
-                            <input type="number" class="form-control" name="total_price"
-                                value="{!! $Order->total_price !!}" readonly>
+                            <input type="text" class="form-control" name="total_price"
+                                value="@formatmoney($Order->total_price)" readonly>
                         </div>
                     </div>
                 </div>
@@ -92,8 +97,7 @@
                             @endif
                         </tbody>
                     </table>
-                </div>
-                <button type="submit" class="btn btn-primary">Lưu</button>
+                </div> 
             </form>
         </div>
         
