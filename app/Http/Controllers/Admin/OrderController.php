@@ -34,8 +34,7 @@ class OrderController extends Controller
                 ->paginate(10);
             $order->setPath('order?search_keyword=' . $search);
         } else {
-            $order = $this->order::latest()->paginate(15);
-
+            $order = $this->order::latest()->orderBy('id','asc')->paginate(15); 
         }
 
         return view('admin.order.index', compact('order', 'status'));

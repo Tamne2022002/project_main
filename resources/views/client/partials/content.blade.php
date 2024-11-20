@@ -1,9 +1,9 @@
 <?php
-use App\Http\Controllers\Client\CHomeController; 
-?> 
+use App\Http\Controllers\Client\CHomeController;
+?>
 
 @isset($productFeatured)
-    @if (!$productFeatured->isEmpty()) 
+    @if (!$productFeatured->isEmpty())
         {{-- productFeatured --}}
         <div class="wrap-product-outstanding py50">
             <div class="wrap-content">
@@ -18,11 +18,11 @@ use App\Http\Controllers\Client\CHomeController;
                                     <div class="product" data-aos="zoom-in-up">
                                         <div class="box-product text-decoration-none">
                                             <div class="position-relative overflow-hidden  ">
-                                                <a class="pic-product " href="{{ route('product.detail', ['id' => $v->id]) }}"
-                                                    title="Sản phẩm">
+                                                <a class="pic-product "
+                                                    href="{{ route('product.detail', ['id' => $v->id]) }}" title="Sản phẩm">
                                                     <div class="pic-product-img scale-img hover_light">
-                                                        @if ($v->product_photo_path)
-                                                            <img class="w-100" src="{{ $v->product_photo_path }}"
+                                                        @if ($v->photo_path)
+                                                            <img class="w-100" src="{{ $v->photo_path }}"
                                                                 alt="{{ $v->name }}">
                                                         @else
                                                             <img class="w-100" src="{{ asset('assets/noimage.jpg') }}"
@@ -36,10 +36,10 @@ use App\Http\Controllers\Client\CHomeController;
                                                         href="{{ route('product.detail', ['id' => $v->id]) }}"
                                                         title="{{ $v->name }}">{{ $v->name }}</a>
                                                 </div>
-                                                                                            <div class="price-product">
+                                                <div class="price-product">
                                                     @if ($v->discount)
                                                         <div class="price-new">
-                                                            {{ \App\Helpers\Func::formatMoney($v->regular_price)}}
+                                                            {{ \App\Helpers\Func::formatMoney($v->regular_price) }}
                                                         </div>
                                                         <div class="discount">
                                                             {{ $v->discount }}%
@@ -63,122 +63,7 @@ use App\Http\Controllers\Client\CHomeController;
                             @endforeach
                         </div>
                     </div>
-                </div>
-                <div class="product-flashsale">
-                    <div class="wrap-content">
-                        <div class="flashsale-title d-flex">
-                                <h6 class="flashsale-title-inner">
-                                    Flashsales
-                                </h6>
-                                <i class="fa-sharp fa-solid fa-bolt-lightning fa-fade" style="color:#F6C640"></i>
-                                <span class="flashsale-descripstions fa-beat-fade">
-                                    Mua ngay kẻo lỡ!!! Giảm giá lên tới 20%
-                                </span>
-                        </div>                      
-                        <div class="flashsale-content d-flex">
-                            <div class="flashsale-item" data-aos="zoom-in-up">
-                                <img src="../index/imgs/flash-sale-product.png" alt="" class="flashsale-product-img">
-                                <div class="flashsale-inf">                                   
-                                    <h6 class="flashsale-product-name">Vợt cầu lông Lining</h6>
-                                    <div class="star-comment d-flex">
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                    </div>
-                                    <div class="flashsale-product-price d-flex">
-                                            <span class="flashsale-old-price">1.990.000đ</span>
-                                            <h3 class="flashsale-new-price">1.499.000đ</h3>
-                                    </div>
-                                    <div class="flashsale-btn d-flex">
-                                        <button type="submit" class="flashsale-add-cart btn btn-primary">
-                                            <i class="fa-solid fa-cart-plus"></i>
-                                        </button>
-                                        <button class="flashsale-buying btn btn-primary" type="submit">
-                                            <span class="flashsale-buying-name">Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flashsale-item" data-aos="zoom-in-up">
-                                <img src="../index/imgs/flash-sale-product.png" alt="" class="flashsale-product-img">
-                                <div class="flashsale-inf">                                   
-                                    <h6 class="flashsale-product-name">Vợt cầu lông Lining</h6>
-                                    <div class="star-comment d-flex">
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                    </div>
-                                    <div class="flashsale-product-price d-flex">
-                                            <span class="flashsale-old-price">1.990.000đ</span>
-                                            <h3 class="flashsale-new-price">1.499.000đ</h3>
-                                    </div>
-                                    <div class="flashsale-btn d-flex">
-                                        <button type="submit" class="flashsale-add-cart btn btn-primary">
-                                            <i class="fa-solid fa-cart-plus"></i>
-                                        </button>
-                                        <button class="flashsale-buying btn btn-primary" type="submit">
-                                            <span class="flashsale-buying-name">Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flashsale-item" data-aos="zoom-in-up">
-                                <img src="../index/imgs/flash-sale-product.png" alt="" class="flashsale-product-img">
-                                <div class="flashsale-inf">                                   
-                                    <h6 class="flashsale-product-name">Vợt cầu lông Lining</h6>
-                                    <div class="star-comment d-flex">
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                    </div>
-                                    <div class="flashsale-product-price d-flex">
-                                            <span class="flashsale-old-price">1.990.000đ</span>
-                                            <h3 class="flashsale-new-price">1.499.000đ</h3>
-                                    </div>
-                                    <div class="flashsale-btn d-flex">
-                                        <button type="submit" class="flashsale-add-cart btn btn-primary">
-                                            <i class="fa-solid fa-cart-plus"></i>
-                                        </button>
-                                        <button class="flashsale-buying btn btn-primary" type="submit">
-                                            <span class="flashsale-buying-name">Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flashsale-item" data-aos="zoom-in-up">
-                                <img src="../index/imgs/flash-sale-product.png" alt="" class="flashsale-product-img">
-                                <div class="flashsale-inf">                                   
-                                    <h6 class="flashsale-product-name">Vợt cầu lông Lining</h6>
-                                    <div class="star-comment d-flex">
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                        <i class="fa-solid fa-star" style="color:#F6C640"></i>  
-                                    </div>
-                                    <div class="flashsale-product-price d-flex">
-                                            <span class="flashsale-old-price">1.990.000đ</span>
-                                            <h3 class="flashsale-new-price">1.499.000đ</h3>
-                                    </div>
-                                    <div class="flashsale-btn d-flex">
-                                        <button type="submit" class="flashsale-add-cart btn btn-primary">
-                                            <i class="fa-solid fa-cart-plus"></i>
-                                        </button>
-                                        <button class="flashsale-buying btn btn-primary" type="submit">
-                                            <span class="flashsale-buying-name">Mua ngay</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> 
             </div>
         </div>
     @endif
@@ -264,4 +149,3 @@ use App\Http\Controllers\Client\CHomeController;
         </div>
     @endif
 @endisset
- 

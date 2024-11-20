@@ -84,7 +84,7 @@
                                                 </p>
                                             </label>
                                             <div class="photoUpload-dimension">Width: 1366 px - Height: 775 px
-                                                (.jpg|.png|.jpeg)</div>
+                                                (.jpg|.png|.jpeg|.webp)</div>
                                         </div>
                                         @error('photo_path')
                                             <div class="alert alert-danger">{{ $message }}</div>

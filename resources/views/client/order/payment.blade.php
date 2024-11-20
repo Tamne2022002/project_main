@@ -142,13 +142,13 @@
         const qrCodeImage = document.getElementById('qr-code-image');
         const paymentForm = document.getElementById('paymentForm');
         const checkAPIUrl = "https://script.google.com/macros/s/AKfycbxcrTkN4n8y84VESNeNE9mqeqdvPUKnnVuiFq4M3_YYMul-5EYRyJ-MeQuvwOofOeOv/exec";
-
+        const code = generateRandomNumbers();
         // Xử lý hiển thị QR Code khi chọn phương thức thanh toán
         paymentRadios.forEach(radio => {
             radio.addEventListener('change', function () {
                 if (this.id === 'vietqr') {
                     const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''), 10);
-                    const code = generateRandomNumbers();
+     
                     const QR = `https://img.vietqr.io/image/970415-107871769484-compact2.png?amount=${total}&addInfo=TPStore_${code}&accountName=NGUYEN%20MINH%20TAM`;
 
                     qrCodeImage.setAttribute('src', QR);
@@ -160,17 +160,23 @@
         });
 
         paymentForm.addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const fullname = document.getElementById('fullname_vnpay').value;
-            const phone = document.getElementById('phone_vnpay').value;
-            const address = document.getElementById('address_vnpay').value;
-            const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''), 10);
+        event.preventDefault();
+        const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked').id;
+        const fullname = document.getElementById('fullname_vnpay').value;
+        const phone = document.getElementById('phone_vnpay').value;
+        const address = document.getElementById('address_vnpay').value;
+        const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''), 10);
 
-            if (!fullname || !phone || !address) {
-                Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
-                return;
-            }
+        if (!fullname || !phone || !address) {
+            Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
+            return;
+        }
 
+        if (selectedPaymentMethod === 'cod' || selectedPaymentMethod === 'vnpay') {
+            // Submit trực tiếp nếu chọn COD hoặc VNPAY
+            paymentForm.submit();
+        } else if (selectedPaymentMethod === 'vietqr') {
+            // Kiểm tra thanh toán thành công trước khi submit
             try {
                 const response = await fetch(checkAPIUrl);
                 const data = await response.json();
@@ -178,8 +184,9 @@
                 if (data && data.data && data.data.length > 0) {
                     const lastPaid = data.data[data.data.length - 1];
                     const lastPrice = lastPaid["Giá trị"];
-                    const lastContent = lastPaid["Mô tả"];
-                    const code = generateRandomNumbers();
+                    const lastContent = lastPaid["Mô tả"]; 
+                    console.log(lastPrice);
+                    console.log(total);
 
                     if (lastPrice === total && lastContent.includes(code)) {
                         const confirmInput = document.createElement('input');
@@ -197,9 +204,9 @@
             } catch (error) {
                 Swal.fire('Lỗi', 'Không thể kiểm tra thanh toán, vui lòng thử lại!', 'error');
             }
-        });
-
-        // Hàm tạo số ngẫu nhiên
+        }
+    });
+ 
         function generateRandomNumbers() {
             const numbers = [];
             for (let i = 0; i < 10; i++) {

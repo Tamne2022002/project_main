@@ -258,7 +258,7 @@ input[type=number] { -moz-appearance: textfield; }
 .attribute-product-detail-text-link { font-size: 16px; padding: 5px; color: #fff; background: red; border-radius: 5px; }
 .price-new-product-detail { font-size: 25px; color: red; font-weight: bold; }
 .price-old-product-detail { text-decoration: line-through; color: #ccc; font-size: 20px; }
-.product-image-detail img { width: 100% !important; height: 120px !important; object-fit: cover; }
+.product-image-detail img { width: 100% !important; height: 70px !important; object-fit: cover; }
 .slick-product-image-core { margin-bottom: 10px; border: solid 1px #ccc; padding: 5px; border-radius: 5px; }
 .product-image-detail { padding: 2px; border: solid 1px #ccc; border-radius: 2px; }
 .slick-product-image-detail { margin-right: -5px; }
