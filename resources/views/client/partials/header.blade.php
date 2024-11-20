@@ -11,6 +11,7 @@ use App\Http\Controllers\Client\CHomeController;
                     </marquee>
                 </div>
                 <div class="header-top-auth">
+
                     @if (Auth::guard('member')->check())
                         <div class="menu-bottom-account-positon">
                             <a href="{{ route('user.info') }}">
@@ -31,6 +32,19 @@ use App\Http\Controllers\Client\CHomeController;
                                     <div class="menu-bottom-account-icon">
                                         <i class="fa-solid fa-user"></i>
                                     </div>
+                                    <div class="menu-bottom-account-text"
+                                        Xin chào, {{ CHomeController::getUserInfo()->name }}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @else
+                        <div class="menu-bottom-account-positon">
+                            <a href="{{ route('user.login') }}">
+                                <div class="menu-bottom-account">
+                                    <div class="menu-bottom-account-icon">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
                                     <div class="menu-bottom-account-text">
                                         Tài khoản
                                     </div>
@@ -38,7 +52,7 @@ use App\Http\Controllers\Client\CHomeController;
                             </a>
                         </div>
                     @endif
-                </div> 
+                </div>  --}}
             </div>
         </div>
     </div>
@@ -51,15 +65,10 @@ use App\Http\Controllers\Client\CHomeController;
                 </div>
                 <div class="header-bottom-searchbox ">
                     <div class="search-box d-flex">
-                        <!-- <div class="searchbox-icon">
-                            <span>
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </span>
-                        </div> -->
                         <div class="container" style="width: 814px">
                             <form class="d-flex">
                                 <input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm">
-                                <button class="btn btn-primary" type="send">Tìm kiếm</button>
+                                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                             </form>
                         </div>
                     </div>

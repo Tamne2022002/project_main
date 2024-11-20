@@ -63,8 +63,8 @@ use App\Http\Controllers\Client\CHomeController;
                             @endforeach
                         </div>
                     </div>
-                </div> 
-            </div>
+                </div>
+            </div> 
         </div>
     @endif
 @endisset

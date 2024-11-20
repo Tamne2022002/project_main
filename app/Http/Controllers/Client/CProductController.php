@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductModel;
+use App\Models\ProductListModel;
 use App\Models\WarehouseModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -11,11 +12,12 @@ use Illuminate\Http\Request;
 class CProductController extends Controller
 {
     public function index()
-    {
+    {   
+        $category_first = ProductListModel::with('children')->where('featured', 1)->where('status', 1)->whereNull('deleted_at')->where('id_parent', 0)->get();
         $productInternal = ProductModel::select('id', 'name', 'photo_path', 'regular_price', 'sale_price', 'discount')->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
         $pageName = 'Sản phẩm';
 
-        return view('client.product.index', compact('productInternal', 'pageName'));
+        return view('client.product.index', compact('productInternal', 'pageName','category_first'));
     }
 
     public function detail($id)
