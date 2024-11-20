@@ -44,23 +44,23 @@
                             <div class="form-group mb-2">
                                 <!-- Set khi đăng nhập r thì hiện thông tin vào form sửa thì click vào r đổi thôi -->
                                 <label class="fw-bold mb-2" for>Họ: </label>
-                                <input type="text" class="form-control" id="last_name" name="last_name"
-                                    value="{{ $user->last_name }}" placeholder="Nhập họ và tên">
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="{{ $user->name }}" placeholder="Nhập họ và tên">
                             </div>
-                            @error('last_name')
+                            @error('name')
                                 <div style="color: #dd0505;
                                 font-size: 1em;font-weight: bold;">{{ $message }}</div>
                             @enderror
-                            <div class="form-group mb-2">
+                            {{-- <div class="form-group mb-2">
                                 <!-- Set khi đăng nhập r thì hiện thông tin vào form sửa thì click vào r đổi thôi -->
                                 <label class="fw-bold mb-2" for>Tên: </label>
                                 <input type="text" class="form-control" id="first_name" name="first_name"
                                     value="{{ $user->first_name }}" placeholder="Nhập họ và tên">
-                            </div>
+                            </div> 
                             @error('first_name')
                                 <div style="color: #dd0505;
                                 font-size: 1em;font-weight: bold;">{{ $message }}</div>
-                            @enderror
+                            @enderror --}}
                             <div class="form-group mb-2">
                                 <label class="fw-bold mb-2" for>Email: </label>
                                 <input type="text" class="form-control" id="email" name="email"

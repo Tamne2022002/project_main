@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="wrap-content">
-        <div class="grid-product-detail row">
+        <div class="grid-product-detail row" style="margin-top: 14em">
             <div class="left-product-detail col-md-6 col-lg-5 mb-4">
                 <div class="group-product-image">
                     <div class="slick-product-image-core">

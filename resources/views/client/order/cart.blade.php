@@ -1,5 +1,8 @@
 @extends('client.layouts.index')
 
+<?php
+use App\Models\WarehouseModel;
+?>
 @section('title')
     <title>Giỏ hàng</title>
 @endsection
@@ -22,10 +25,11 @@
                 </div>
             @endif
         </div>
-        <div class="wrap-cart">
+        <div class="wrap-cart" style="margin-top: 14em">
             @php
                 $total = 0;
             @endphp
+
             @if (session('cart') != null)
                 <div class="row">
                     <div class="top-cart col-md-12">
@@ -45,7 +49,12 @@
                                 </div>
                                 <!--thẻ sản phẩm giỏ hàng-->
                                 @foreach (session('cart') as $k => $v)
-                                    @php $total += ($v['sale_price']?$v['sale_price']:$v['regular_price']) * $v['quantity'] @endphp
+                                    @php
+                                        $slt = WarehouseModel::where('id_parent', $v['id_product'])->value('quantity');
+                                        $total +=
+                                            ($v['sale_price'] ? $v['sale_price'] : $v['regular_price']) *
+                                            $v['quantity'];
+                                    @endphp
                                     <div class="procart" data-route="{{ route('delete.cart', $k) }}"
                                         data-id="{{ $k }}">
                                         <div class="row row-10">
@@ -98,11 +107,15 @@
                                                     </p>
                                                 </div>
                                             @endif
-                                            <div
-                                                class="col-1 col-md-1 mg-col-2 d-flex align-items-center justify-content-center">
-                                                <input type="checkbox" name="selected_products[]"
-                                                    value="{{ $k }}" class="select-product">
-                                            </div>
+                                            @if ($slt > $v['quantity'])
+                                                <div
+                                                    class="col-1 col-md-1 mg-col-2 d-flex align-items-center justify-content-center">
+                                                    <input type="checkbox" name="selected_products[]"
+                                                        value="{{ $k }}" class="select-product">
+                                                </div>
+                                            @else 
+                                                <div class="hethang col-1 col-md-1 mg-col-2 d-flex align-items-center justify-content-center">Hiện tại đang hết hàng</div>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -138,13 +151,14 @@
 @section('js')
     <script>
         document.querySelector('#cart-form').addEventListener('submit', function(e) {
-            const checkedProducts = Array.from(document.querySelectorAll('input[name="selected_products[]"]:checked'))
+            const checkedProducts = Array.from(document.querySelectorAll(
+                    'input[name="selected_products[]"]:checked'))
                 .map(cb => cb.value);
- 
+
             if (checkedProducts.length === 0) {
                 e.preventDefault();
                 showErrorNotify("Vui lòng chọn ít nhất một sản phẩm để thanh toán.", "Thông báo", "error");
- 
+
             }
         });
     </script>

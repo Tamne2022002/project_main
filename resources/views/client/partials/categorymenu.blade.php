@@ -18,7 +18,7 @@ use App\Http\Controllers\Client\CHomeController;
             <ul class="category-drop-list">
                 @foreach ($category_first as $cate)
                     <li class="category-drop-item">
-                        <a class="category-drop-item-inner" href="">
+                        <a class="category-drop-item-inner" href="{{route('product')}}">
                             <h3 class="category-drop-name text-spit transition">{{$cate->name}}</h3>
                         </a>
                     </li>

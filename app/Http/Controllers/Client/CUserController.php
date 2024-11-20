@@ -73,7 +73,6 @@ class CUserController extends Controller
         ];
         
         $cre = $request->all();
-        dd($cre);
         $domain = substr(strrchr($request->email, "@"), 1);
 
         if(!in_array($domain, $popularDomains)) {

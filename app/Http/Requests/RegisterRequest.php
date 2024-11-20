@@ -22,7 +22,7 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'full_name' => [
+            'name' => [
                 'required',
                 'string',
                 'regex:/^[\pL0-9\s]*$/u',
@@ -42,7 +42,7 @@ class RegisterRequest extends FormRequest
             ],
             'email' => [
                 'required',
-                'unique:users,email',
+                'unique:table_member,email',
                 'max:255',
                 'email',
             ],
@@ -59,9 +59,9 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'full_name.required' => 'Tên không được để trống',
-            'full_name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
-            'full_name.max' => 'Tên không được vượt quá 255 ký tự',
+            'name.required' => 'Tên không được để trống',
+            'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
+            'name.max' => 'Tên không được vượt quá 255 ký tự',
             'phone.required' => 'Số điện thoại không được để trống',
             'phone.max' => 'Số điện thoại không được vượt quá 10 ký tự',
             'phone.regex' => 'Số điện thoại không hợp lệ',
