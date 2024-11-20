@@ -47,14 +47,16 @@ use App\Http\Controllers\Client\CHomeController;
         <div class="wrap-content">
             <div class="flex-header-bottom">
                 <div class="header-bottom-logo peShiner" width="20px">
-                    {{-- <img src="{{ CHomeController::settings()->logo_path }}" alt> --}}
-                    <img src="../index/imgs/logo.png" alt="tpstore-logo" width="250px" height="250px">
+                    <a href="{{route('index')}}">
+                        {{-- <img src="{{ CHomeController::settings()->logo_path }}" alt> --}}
+                        <img src="../index/imgs/logo.png" alt="tpstore-logo" width="250px" height="250px">
+                    </a>
                 </div>
                 <div class="header-bottom-searchbox ">
                     <div class="search-box">
-                        <form class="d-flex" action="" method="POST">
+                        <form class="d-flex"  method="GET">
                             <div class="search-box-group  d-flex" >
-                                    <input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm" autocomplete="off">
+                                    <input type="search" id="search-input" class="form-control" placeholder="Tìm kiếm sản phẩm" autocomplete="off">
                                     <button class="btn btn-primary" type="submit">
                                         <div class="search-icon">
                                             <i class="fa-regular fa-magnifying-glass"></i>
@@ -62,6 +64,13 @@ use App\Http\Controllers\Client\CHomeController;
                                     </button>
                             </div>
                         </form>
+                        {{-- <div class="search-result" id="search-result">
+                            <a href="">
+                                <div class="product-info-result">
+                                    <span>Ngày cuối h</span>
+                                </div>
+                            </a>                         
+                        </div> --}}
                     </div>
                 </div>
                 <div class="header-bottom-end">

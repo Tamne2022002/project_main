@@ -44,8 +44,8 @@ Route::prefix('/')->group(function () {
         Route::get('/categoryid/{id}', [CHomeController::class, 'categoryidproduct'])->name('categoryid.categoryidproduct');
     });
     /* Search */
-    Route::controller(CSearchController::class)->group(function () {
-        Route::get('/search', 'index')->name('search');
+    Route::controller(CProductController::class)->group(function () {
+        Route::get('/tim-kiem', 'search')->name('search');
     });
   
     

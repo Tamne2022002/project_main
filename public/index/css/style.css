@@ -11,7 +11,7 @@ a:focus { outline: none; box-shadow: none; border: none; }
 .text-split-6{overflow:hidden !important;text-overflow:ellipsis !important;white-space:normal !important;-webkit-box-orient:vertical !important;display:-webkit-box !important;-webkit-line-clamp:6 !important;}
 .text-split-7{overflow:hidden !important;text-overflow:ellipsis !important;white-space:normal !important;-webkit-box-orient:vertical !important;display:-webkit-box !important;-webkit-line-clamp:7 !important;}
 .text-split-8{overflow:hidden !important;text-overflow:ellipsis !important;white-space:normal !important;-webkit-box-orient:vertical !important;display:-webkit-box !important;-webkit-line-clamp:8 !important;}
-body{font-size:14px;}
+body{font-size:14px;background-color: #f7f7f7;}
 .wrap-content{max-width:1200px;margin:auto;width:calc(100% - 30px);}
 .wrap-container{position:relative;overflow:hidden;min-width:1200px;margin:0 auto;}
 .container-menu-cate{max-width: 270px;margin-right: 15px;}
@@ -38,9 +38,12 @@ a{color:#000;text-decoration:unset !important;}
 .header-bottom-banner img{width:500px;}
 .header-bottom-end{display: flex;}
 .search-box{margin: 0px 0px;}
-.search-box-group{width: 680px;background-color: #fff;border-radius: 10px;}
-.header-bottom-searchbox input{height: 45px;border-radius: 10px 0px 0px 10px;font-weight: 500;font-size: 15px;padding-left: 20px;border: none;}
+.search-box-group{width: 680px;background-color: #fff;border-radius: 7px;position: relative;}
+.header-bottom-searchbox input{height: 45px;border-radius: 7px;font-weight: 500;font-size: 15px;padding-left: 20px;border: none;}
 .header-bottom-searchbox input:focus{outline: none;}
+.search-result {width: 680px;background-color: #fff;z-index: 999;padding: 5px 10px;position: absolute;margin: 3px 0;border-radius: 5px;}
+.product-info-result{padding: 5px 15px;font-size: 14px;font-weight: 500;color: #212220;}
+.product-info-result:hover{background-color: #ededed;}
 .header-bottom-searchbox button{background-color: #455eb3;border:none;height: 34px;width: 78px;border-radius: 5px;font-size: 16px;font-weight: 600;margin: 5px 10px;}
 .header-bottom-searchbox button:hover{background-color: #3242b5;}
 .header-bottom-end .header-bottom-item{width: 68px;margin: 0px 10px;}
@@ -322,6 +325,7 @@ input[type=number] { -moz-appearance: textfield; }
 /* Search */
 .search-type { width: 15% !important; }
 .search-keyword { width: 80% !important; }
+
 
 /* Cart */
 .buymore-cart { color: #ec2d3f; cursor: pointer; margin: 0px; }
