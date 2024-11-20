@@ -31,7 +31,7 @@ class CUserController extends Controller
     {
 
         $cre = $request->only('email', 'password');
-
+        
         if (Auth::guard('member')->attempt($cre)) {
             $user = Auth::guard('member')->user();
             Auth::guard('member')->login($user);
@@ -71,9 +71,8 @@ class CUserController extends Controller
             'protonmail.com',
             'caothang.edu.vn'
         ];
-
+        
         $cre = $request->all();
-
         $domain = substr(strrchr($request->email, "@"), 1);
 
         if(!in_array($domain, $popularDomains)) {
@@ -95,7 +94,17 @@ class CUserController extends Controller
                 'cart_total' => 0,
             ]);*/
 
-            return redirect()->route('index')->with('success', 'Đăng ký thành công');
+            $cre = $request->only('email', 'password');
+        
+            if (Auth::guard('member')->attempt($cre)) {
+                $user = Auth::guard('member')->user();
+                Auth::guard('member')->login($user);
+                $request->session()->put('id_user', Auth::guard('member')->user()->id);
+                $request->session()->regenerate();
+                return redirect()->route('index')->with('success', 'Đăng ký thành công');
+
+            } 
+            // return redirect()->route('index')->with('success', 'Đăng ký thành công');
             //dd($cre, 'true');
         }
         return redirect()->route('user.register')->with('fail', 'Đã có lỗi xảy ra'); 

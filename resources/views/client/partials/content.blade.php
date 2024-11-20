@@ -64,7 +64,7 @@ use App\Http\Controllers\Client\CHomeController;
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     @endif
 @endisset

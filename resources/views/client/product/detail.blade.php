@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="wrap-content">
-        <div class="grid-product-detail row">
+        <div class="grid-product-detail row" style="margin-top: 14em">
             <div class="left-product-detail col-md-6 col-lg-5 mb-4">
                 <div class="group-product-image">
                     <div class="slick-product-image-core">
@@ -60,10 +60,10 @@
                             Năm xuất bản: <span
                                 class="attribute-product-detail-text">{{ $productDetail->publishing_year }}</span>
                         </div>
-                        <div class="attribute-product-detail">
+                        {{-- <div class="attribute-product-detail">
                             Số lượng tồn kho: <span class="attribute-product-detail-text"
                                 id="qty_shown">{{ $qty }}</span>
-                        </div>
+                        </div> --}}
                         <input type="hidden" id="qty" value="{{ $qty }}">
                         <div class="attribute-product-detail" style="display: none">
                             Số lượng có trong giỏ hàng: <span id="cqty_shown">{{ $cqtyincart }}</span>

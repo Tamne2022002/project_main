@@ -21,8 +21,7 @@ class CHomeController extends Controller
         return $settings;
     }
     public function index()
-    { 
-
+    {  
         $sliders = PhotoModel::select('name', 'desc', 'photo_path')->get();
         $news = NewsModel::select('id', 'name', 'desc', 'photo_path')->where('status', 1)
         ->where('featured', 1)
@@ -44,7 +43,7 @@ class CHomeController extends Controller
              $user = Auth::guard('member')->user();
              return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first', 'user'));
          }
-        return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first', 'user')); 
+        return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first')); 
 
 
     }

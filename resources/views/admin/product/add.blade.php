@@ -23,13 +23,7 @@
             <form action="{{ route('product.store') }} " method="POST" enctype="multipart/form-data">
                 <div class="container-fluid pt-3">
                     @csrf
-                    <div class="card card-primary card-outline text-sm">
-                        <div class="d-flex px-3 py-1 my-2 ">
-                            <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
-                            <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
-                            <a href="{{ route('product.index') }}" class="btn btn-danger">Thoát</a>
-                        </div>
-                    </div>
+                   
                     <div class="content">
 
                         <div class="row">
@@ -50,7 +44,8 @@
                                             <div class="form-group col-md-12">
                                                 <label>Tên sách</label>
                                                 <input type="text"
-                                                    class="text-capitalize form-control @error('name') is-invalid @enderror "
+                                                    class="text-capitalize form-control "
+                                                    {{-- @error('name') is-invalid @enderror " --}}
                                                     name="name" placeholder="Nhập tên sách" value="{{ old('name') }}">
                                                 @error('name')
                                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -208,6 +203,13 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="card card-primary card-outline text-sm">
+                        <div class="d-flex px-3 py-1 my-2 ">
+                            <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
+                            <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
+                            <a href="{{ route('product.index') }}" class="btn btn-danger">Thoát</a>
                         </div>
                     </div>
                 </div>
