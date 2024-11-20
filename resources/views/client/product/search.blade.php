@@ -80,7 +80,7 @@
                                                             @endif
                                                         @endif
                                                     </div>
-                                                    <!--<div class="product-button text-center">
+                                                    {{-- <!--<div class="product-button text-center">
                                                         <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
                                                             <a href="{{ route('add_index.cart', ['id' => $v->id, 'quantity' => 1]) }}"
                                                                 class="product-button-cart-action button-addnow text-light add-to-cart"
@@ -96,7 +96,7 @@
                                                                     class="fa-solid fa-basket-shopping-simple me-1"></i>Mua
                                                                 ngay</a>
                                                         </div>
-                                                    </div>-->
+                                                    </div>--> --}}
                                                 </div>
                                             </div>
                                         </div>

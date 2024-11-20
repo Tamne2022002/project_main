@@ -11,29 +11,16 @@ use App\Http\Controllers\Client\CHomeController;
                     </marquee>
                 </div>
                 <div class="header-top-auth">
-
-                    @if (Auth::guard('member')->check())
+                    @if (Auth::guard('member')->check() )
                         <div class="menu-bottom-account-positon">
                             <a href="{{ route('user.info') }}">
                                 <div class="menu-bottom-account">
-                                    <div class="menu-bottom-account-icon">
+                                    {{-- <div class="menu-bottom-account-icon">
                                         <i class="fa-solid fa-user"></i>
-                                    </div>
+                                    </div> --}}
                                     <div class="menu-bottom-account-text">
-                                        Xin chào, {{ CHomeController::getUserInfo()->name }}
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    @else
-                        <div class="menu-bottom-account-positon">
-                            <a href="{{ route('user.login') }}">
-                                <div class="menu-bottom-account">
-                                    <div class="menu-bottom-account-icon">
-                                        <i class="fa-solid fa-user"></i>
-                                    </div>
-                                    <div class="menu-bottom-account-text"
-                                        Xin chào, {{ CHomeController::getUserInfo()->name }}
+                                        Xin chào, 
+                                        <span class="header-user-name">{{ CHomeController::getUserInfo()->name }}</span>
                                     </div>
                                 </div>
                             </a>
@@ -52,7 +39,7 @@ use App\Http\Controllers\Client\CHomeController;
                             </a>
                         </div>
                     @endif
-                </div>  --}}
+                </div>  
             </div>
         </div>
     </div>
@@ -60,28 +47,32 @@ use App\Http\Controllers\Client\CHomeController;
         <div class="wrap-content">
             <div class="flex-header-bottom">
                 <div class="header-bottom-logo peShiner" width="20px">
-                    <img src="{{ CHomeController::settings()->logo_path }}" alt>
-                    {{-- <img src="../index/imgs/logo.png" alt="tpstore-logo"> --}}
+                    {{-- <img src="{{ CHomeController::settings()->logo_path }}" alt> --}}
+                    <img src="../index/imgs/logo.png" alt="tpstore-logo" width="250px" height="250px">
                 </div>
                 <div class="header-bottom-searchbox ">
-                    <div class="search-box d-flex">
-                        <div class="container" style="width: 814px">
-                            <form class="d-flex">
-                                <input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm">
-                                <button class="btn btn-primary" type="submit">Tìm kiếm</button>
-                            </form>
-                        </div>
+                    <div class="search-box">
+                        <form class="d-flex" action="" method="POST">
+                            <div class="search-box-group  d-flex" >
+                                    <input type="search" class="form-control" placeholder="Tìm kiếm sản phẩm" autocomplete="off">
+                                    <button class="btn btn-primary" type="submit">
+                                        <div class="search-icon">
+                                            <i class="fa-regular fa-magnifying-glass"></i>
+                                        </div>
+                                    </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="header-bottom-end">
-                    <div class="header-bottom-item">
+                    <a class="header-bottom-item" href="{{route('user.cart')}}">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <h6>Giỏ hàng</h6>
-                    </div>
-                    <div class="header-bottom-item">
+                    </a>
+                    <a class="header-bottom-item" href="{{route('user.order')}}">
                         <i class="fa-solid fa-truck"></i>
                         <h6>Đơn hàng</h6>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

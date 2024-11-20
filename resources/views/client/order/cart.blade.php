@@ -25,7 +25,7 @@ use App\Models\WarehouseModel;
                 </div>
             @endif
         </div>
-        <div class="wrap-cart">
+        <div class="wrap-cart" style="margin-top: 14em">
             @php
                 $total = 0;
             @endphp

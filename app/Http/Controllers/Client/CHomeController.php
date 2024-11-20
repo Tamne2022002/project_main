@@ -44,7 +44,7 @@ class CHomeController extends Controller
              $user = Auth::guard('member')->user();
              return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first', 'user'));
          }
-        return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first', 'user')); 
+        return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first')); 
 
 
     }
