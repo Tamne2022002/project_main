@@ -66,4 +66,19 @@ class CProductController extends Controller
 
         session()->put('cart', $cart);
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('q', '');
+
+        if (!empty($query)) {
+            $products = ProductModel::where('name', 'like', "%$query%")
+                ->orWhere('desc', 'like', "%$query%")
+                ->limit(10)
+                ->get();
+
+            return response()->json($products);
+        }
+        dd($product);
+        return response()->json([]);
+    }
 }

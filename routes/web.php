@@ -44,9 +44,8 @@ Route::prefix('/')->group(function () {
         Route::get('/categoryid/{id}', [CHomeController::class, 'categoryidproduct'])->name('categoryid.categoryidproduct');
     });
     /* Search */
-    Route::controller(CSearchController::class)->group(function () {
-        Route::get('/search', 'index')->name('search');
-    });
+    Route::controller(CProductController::class)->group(function () {
+        Route::get('/search-product', 'search')->name('product.search');
   
     
     /* News */
@@ -59,6 +58,8 @@ Route::prefix('/')->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
         Route::get('/product/{id}/buy-now', 'add')->name('product.add');
+        
+    });
     });
 
     /* Cart */

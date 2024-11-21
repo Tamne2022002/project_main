@@ -7,7 +7,7 @@
     <!-- Thông tin user -->
     <div class="wrap-content">
  
-        <div class="content-main">
+        <div class="content-main" style="margin-top: 8em">
             <h6 class="user-inf-title">Thông tin người dùng</h6>
             <div class="form-add-top row">
                 <div class="return">
@@ -43,7 +43,7 @@
                         <div class="user-infor-detail">
                             <div class="form-group mb-2">
                                 <!-- Set khi đăng nhập r thì hiện thông tin vào form sửa thì click vào r đổi thôi -->
-                                <label class="fw-bold mb-2" for>Họ: </label>
+                                <label class="fw-bold mb-2" for>Tên: </label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     value="{{ $user->name }}" placeholder="Nhập họ và tên">
                             </div>

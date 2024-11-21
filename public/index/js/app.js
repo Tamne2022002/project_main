@@ -797,3 +797,58 @@ $(document).ready(function () {
     SlickPage();
     AllRun();
 });
+
+// search with ajax 
+
+
+$(document).ready(function () {
+    function debounce(func, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+    const searchHandler = debounce(function () {
+        const query = $("#search-input").val();
+
+        if (query.length > 2) {
+            $.ajax({
+                url: "/search-product",
+                method: "GET",
+                data: { q: query },
+                beforeSend: function () {
+                    $("#loading").show();
+                },
+                success: function (data) {
+                    $("#loading").hide();
+                    let html = "";
+                    if (data.length > 0) {
+                        data.forEach(product => {
+                            html += `
+                                    <div id="search-result">
+                                        <a href="">
+                                            <div class="product-info-result">
+                                                <span>${product.name}</span>
+                                            </div>
+                                        </a>                         
+                                    </div>   
+                            `;
+                        });
+                    } else {
+                        html = "<p>Không tìm thấy kết quả phù hợp.</p>";
+                    }
+                    $("#search-result").html(html);
+                },
+                error: function () {
+                    $("#loading").hide();
+                    $("#search-result").html("<p>Đã xảy ra lỗi!</p>");
+                }
+            });
+        } else {
+            $("#search-result").html("");
+        }
+    }, 300);
+
+    $("#search-input").on("keyup", searchHandler);
+});

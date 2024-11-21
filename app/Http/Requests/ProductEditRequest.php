@@ -22,7 +22,7 @@ class ProductEditRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|regex:/^[\pL0-9\s]*$/u|max:255|min:10',
+            // 'name' => 'required|regex:/^[\pL0-9\s]*$/u|max:255|min:10',
             'id_list' => 'required',
             'id_publisher' => 'required',
             // 'desc' => 'required',
