@@ -46,7 +46,7 @@ use App\Http\Controllers\Client\CHomeController;
     <div class="header-bottom">
         <div class="wrap-content">
             <div class="flex-header-bottom">
-                <div class="header-bottom-logo peShiner" width="20px">
+                <div class="header-bottom-logo peShiner" width="20px" style="margin-top: 10px">
                     <a href="{{route('index')}}">
                         {{-- <img src="{{ CHomeController::settings()->logo_path }}" alt> --}}
                         <img src="../index/imgs/logo.png" alt="tpstore-logo" width="250px" height="250px">
