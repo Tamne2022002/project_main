@@ -814,25 +814,25 @@ $(document).ready(function () {
 
         if (query.length > 2) {
             $.ajax({
-                url: "/tim-kiem",
+                url: "/search-product",
                 method: "GET",
                 data: { q: query },
-                // beforeSend: function () {
-                //     $("#loading").show();
-                // },
+                beforeSend: function () {
+                    $("#loading").show();
+                },
                 success: function (data) {
                     $("#loading").hide();
                     let html = "";
                     if (data.length > 0) {
-                        data.forEach(item => {
+                        data.forEach(product => {
                             html += `
-                                <div class="search-result" id="search-result">
-                                    <a href="">
-                                        <div class="product-info-result">
-                                            <span>${product.name}</span>
-                                        </div>
-                                    </a>                         
-                                </div>
+                                    <div id="search-result">
+                                        <a href="">
+                                            <div class="product-info-result">
+                                                <span>${product.name}</span>
+                                            </div>
+                                        </a>                         
+                                    </div>   
                             `;
                         });
                     } else {

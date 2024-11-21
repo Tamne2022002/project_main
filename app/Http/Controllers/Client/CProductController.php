@@ -77,9 +77,8 @@ class CProductController extends Controller
                 ->get();
 
             return response()->json($products);
-            dd($product);
         }
-
+        dd($product);
         return response()->json([]);
     }
 }

@@ -45,8 +45,7 @@ Route::prefix('/')->group(function () {
     });
     /* Search */
     Route::controller(CProductController::class)->group(function () {
-        Route::get('/tim-kiem', 'search')->name('search');
-    });
+        Route::get('/search-product', 'search')->name('product.search');
   
     
     /* News */
@@ -59,6 +58,8 @@ Route::prefix('/')->group(function () {
         Route::get('/product', 'index')->name('product');
         Route::get('/product/{id}', [CProductController::class, 'detail'])->name('product.detail');
         Route::get('/product/{id}/buy-now', 'add')->name('product.add');
+        
+    });
     });
 
     /* Cart */

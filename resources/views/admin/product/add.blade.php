@@ -44,9 +44,7 @@
                                             <div class="form-group col-md-12">
                                                 <label>Tên sách</label>
                                                 <input type="text"
-                                                    class="text-capitalize form-control "
-                                                    {{-- @error('name') is-invalid @enderror " --}}
-                                                    name="name" placeholder="Nhập tên sách" value="{{ old('name') }}">
+                                                    class="text-capitalize form-control " name="name" placeholder="Nhập tên sách" value="{{ old('name') }}">
                                                 @error('name')
                                                     <div class="alert alert-danger">{{ $message }}</div>
                                                 @enderror
