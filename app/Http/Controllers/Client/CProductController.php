@@ -72,7 +72,7 @@ class CProductController extends Controller
 
         if (!empty($query)) {
             $products = ProductModel::where('name', 'like', "%$query%")
-                ->orWhere('desc', 'like', "%$query%")
+                ->orWhere('author', 'like', "%$query%")
                 ->limit(10)
                 ->get(); 
             return response()->json($products);
