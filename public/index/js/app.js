@@ -811,8 +811,8 @@ $(document).ready(function () {
     }
     const searchHandler = debounce(function () {
         const query = $("#search-input").val();
-
-        if (query.length > 2) {
+            urlProdct= "http://127.0.0.1:8000/product/";
+        if (query.length > 1) { 
             $.ajax({
                 url: "/search-product",
                 method: "GET",
@@ -827,7 +827,7 @@ $(document).ready(function () {
                         data.forEach(product => {
                             html += `
                                     <div id="search-result">
-                                        <a href="">
+                                        <a href="${urlProdct}${product.id}">
                                             <div class="product-info-result">
                                                 <span>${product.name}</span>
                                             </div>
