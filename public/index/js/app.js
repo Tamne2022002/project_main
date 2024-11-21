@@ -852,3 +852,54 @@ $(document).ready(function () {
 
     $("#search-input").on("keyup", searchHandler);
 });
+
+
+$(document).ready(function () {
+    $('#cart-province').on('change', function () {
+        var provinceId = $(this).val(); 
+        if (provinceId != 0) { 
+            $.ajax({
+                url: '/get-districts', 
+                type: 'GET',
+                data: { province_id: provinceId },
+                success: function (response) {
+                    var districtSelect = $('#cart-distrist');
+                    districtSelect.empty().append('<option value="0">Huyện / Quận:</option>');
+                    console.log(response.districts);
+                    response.districts.forEach(function (district) {
+                        districtSelect.append('<option value="' + district.id + '">' + district.Name + '</option>');
+                    });
+                },
+                error: function () {
+                    alert('Lỗi khi lấy danh sách huyện/quận!');
+                }
+            });
+        } else {
+            $('#cart-distrist').empty().append('<option value="0">Huyện / Quận:</option>');
+            $('#cart-ward').empty().append('<option value="0">Xã / Phường:</option>');
+        }
+    });
+ 
+    $('#cart-distrist').on('change', function () {
+        var districtId = $(this).val();
+        if (districtId != 0) {
+            $.ajax({
+                url: '/get-wards',
+                type: 'GET',
+                data: { district_id: districtId },
+                success: function (response) {
+                    var wardSelect = $('#cart-ward');
+                    wardSelect.empty().append('<option value="0">Xã / Phường:</option>');
+                    response.wards.forEach(function (ward) {
+                        wardSelect.append('<option value="' + ward.id + '">' + ward.Name + '</option>');
+                    });
+                },
+                error: function () {
+                    alert('Lỗi khi lấy danh sách xã/phường!');
+                }
+            });
+        } else {
+            $('#cart-ward').empty().append('<option value="0">Xã / Phường:</option>');
+        }
+    });
+});

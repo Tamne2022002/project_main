@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="wrap-content">
-        <div class="grid-product-detail row" style="margin-top: 14em">
+        <div class="grid-product-detail row" style="margin-top: 8em">
             <div class="left-product-detail col-md-6 col-lg-5 mb-4">
                 <div class="group-product-image">
                     <div class="slick-product-image-core">
@@ -109,62 +109,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-5">
-                        <div class="group-criteria-prouduct">
-                            <div class="criteria-prouduct-item">
-                                <div class="criteria-box d-flex align-items-center mb-3">
-                                    <div class="criteria-img">
-                                        <img src="{{ asset('index/imgs/tuvan.png') }}" alt="">
-                                    </div>
-                                    <div class="criteria-info">
-                                        <div class="criteria-name text-split1">
-                                            Tư vấn nhiệt tình
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="criteria-box d-flex align-items-center mb-3">
-                                    <div class="criteria-img">
-                                        <img src="{{ asset('index/imgs/chatluong.png') }}" alt="">
-                                    </div>
-                                    <div class="criteria-info">
-                                        <div class="criteria-name text-split1">
-                                            Sản phẩm chất lượng
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="criteria-box d-flex align-items-center mb-3">
-                                    <div class="criteria-img">
-                                        <img src="{{ asset('index/imgs/giaca.png') }}" alt="">
-                                    </div>
-                                    <div class="criteria-info">
-                                        <div class="criteria-name text-split1">
-                                            Giá cả cạnh tranh
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="criteria-box d-flex align-items-center mb-3">
-                                    <div class="criteria-img">
-                                        <img src="{{ asset('index/imgs/khuyenmai.png') }}" alt="">
-                                    </div>
-                                    <div class="criteria-info">
-                                        <div class="criteria-name text-split1">
-                                            Khuyến mãi ngập tràn
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="criteria-box d-flex align-items-center mb-3">
-                                    <div class="criteria-img">
-                                        <img src="{{ asset('index/imgs/giaohang.png') }}" alt="">
-                                    </div>
-                                    <div class="criteria-info">
-                                        <div class="criteria-name text-split1">
-                                            Giao hàng tận nơi
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

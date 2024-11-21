@@ -18,7 +18,7 @@ use App\Http\Controllers\Admin\SettingController;
 
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Client\CCartController;
-// use App\Http\Controllers\Client\CChangePasswordController;
+use App\Http\Controllers\Client\CChangePasswordController;
 use App\Http\Controllers\Client\CInfoController;
 use App\Http\Controllers\Client\CNewsController;
 use App\Http\Controllers\Client\COrderController;
@@ -69,6 +69,8 @@ Route::prefix('/')->group(function () {
         Route::get('/cart/update_quantity/{id?}&{method?}', 'changeQuantity')->name('update_quantity.cart');
         Route::get('/cart/delete/{id}', 'delete')->name('delete.cart');
         //Route::patch('/cart/update/{id}', 'update_qty')->name('update.cart');
+        Route::get('/get-districts', [CCartController::class, 'getDistricts']);
+        Route::get('/get-wards', [CCartController::class, 'getWards']);
 
     });
 
@@ -86,6 +88,9 @@ Route::prefix('/')->group(function () {
         Route::get('order/{id}', 'detail')->name('user.order.detail');
     });
 
+
+
+
     /*Address Change*/
     /*Route::controller(CChangeAddressController::class)->group(function() {
     Route::get('change-address', 'index')->name('user.changeaddress.index');
@@ -97,15 +102,7 @@ Route::prefix('/')->group(function () {
         Route::get('change-password', 'index')->name('user.changepassword');
         Route::post('change-password/update', 'update')->name('user.changepassword.update');
     });
-
-    /*Rate*/
-    Route::controller(CRateController::class)->group(function () {
-        Route::get('rate', 'index')->name('user.rate');
-        Route::get('/rate/{id}', 'rate')->name('user.rate.rate');
-        Route::get('/rate/{id}/{rate_id}', 'detail')->name('user.rate.detail');
-        Route::post('rate/store', 'store')->name('user.rate.store');
-    });
-
+  
     /* PAYMENT */
 
     Route::controller(PaymentController::class)->group(function () {

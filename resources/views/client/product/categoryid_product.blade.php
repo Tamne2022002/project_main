@@ -1,7 +1,7 @@
 @extends('client.layouts.index')
 
 @section('content')
-    <div class="wrap-content">
+    <div class="wrap-content"  style="margin-top:8em">
         <div class="title-main">
             <span>
                 <?= $pagename ?>
