@@ -85,9 +85,9 @@ use App\Http\Controllers\Client\CHomeController;
                             </div>
                         @endforeach
                     </div>
-                    {{-- <div class="paging-product-category-style paging-product-category-{{ $v->id }}"
-                        data-route="{{ route('add_index.cart') }}">
-                    </div> --}}
+                    <div class="paging-product-category-style paging-product-category-{{ $v->id }}"
+                        data-route="{{ route('add_index.cart', ['id'=> $v->id , 'quantity' => 1]) }}">
+                    </div>
                 </div>
             </div>
         @endforeach

@@ -235,7 +235,7 @@ class PaymentController extends Controller
             }
  
             OrderModel::where('order_code', $order_code)->update([
-                'status' => 2,
+                'status' => 1,
             ]);
 
             $array1 = session('selected_products', []);
@@ -282,14 +282,16 @@ class PaymentController extends Controller
 
             foreach (session('selected_products') as $id => $details) {
                 $total += ($details['sale_price'] ? $details['sale_price'] : $details['regular_price']) * $details['quantity'];
-            } 
-            
+            }
             $orderInfo->order_code = $order_code;
             $orderInfo->id_member = Auth::guard('member')->user()->id;
             $orderInfo->fullname = $request->fullname_vnpay;
             $orderInfo->phone = $request->phone_vnpay;
             $orderInfo->address = $request->address_vnpay;
             $orderInfo->note = $request->note_vnpay;
+            $orderInfo->province = $request->province;
+            $orderInfo->distrist = $request->distrist;
+            $orderInfo->ward = $request->ward;
             $orderInfo->total_price = $total;
             $orderInfo->status = 1; 
             $orderInfo->save();
@@ -305,12 +307,13 @@ class PaymentController extends Controller
                 $orderDetail->save();
     
                 $warehouse = WarehouseModel::where('id_parent', $details['id_product'])->first();
-                $warehouse->quantity -= $details['quantity'];
+
+                $warehouse->quantity -= $details['quantity']; 
                 $warehouse->save();
             }
  
             OrderModel::where('order_code', $order_code)->update([
-                'status' => 2,
+                'status' => 1,
             ]);
 
             $array1 = session('selected_products', []);
@@ -344,7 +347,7 @@ class PaymentController extends Controller
         }
         if ($request->vnp_ResponseCode == "00") { 
             OrderModel::where('order_code', $request->vnp_TxnRef)->update([
-                'status' => 2,
+                'status' => 1,
             ]); 
 
             foreach (session('selected_products') as $id => $details) {
