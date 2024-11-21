@@ -43,7 +43,6 @@ use App\Http\Controllers\Client\CHomeController;
                     <ul class="footer-policy">
                         <li class="footer-policy-item"><a href="#">Hướng dẫn mua hàng</a></li>
                         <li class="footer-policy-item"><a href="#">Chính sách đổi trả & hoàn tiền</a></li>
-                        <li class="footer-policy-item"><a href="#">Chương trình khuyến mãi</a></li>
                         <li class="footer-policy-item"><a href="#">Hướng dẫn thanh toán</a></li>
                         <li class="footer-policy-item"><a href="#">Chính sách giao hàng</a></li>
                         <li class="footer-policy-item"><a href="#">Chính sách bảo mật</a></li>
@@ -51,8 +50,8 @@ use App\Http\Controllers\Client\CHomeController;
                     <div class="footer-paymet">
                         <h6 class="footer-payment-title">Phương thức thanh toán</h6>
                         <div class="payment-list d-flex">                          
-                            <img src="../index/imgs/momo.png" alt="Momo" width="50px" height="50px" style="margin:8px"> 
-                            <img src="../index/imgs/zalo-pay.png" alt="zalo-pay" width="50px" height="50px" style="margin:8px" > 
+                            <img src="../index/imgs/money.png" alt="Momo" width="50px" height="50px" style="margin:8px"> 
+                            <img src="../index/imgs/napas.png" alt="zalo-pay" width="50px" height="50px" style="margin:8px" > 
                             <img src="../index/imgs/vn-pay.png" alt="vn-pay" width="50px" height="50px" style="margin:8px">                            
                         </div>
                         <img src="../index/imgs/visa.png" alt="the-ngan-hang" width="100px" height="50px" style="margin:8px"> 

@@ -2,54 +2,15 @@
 use App\Http\Controllers\Client\CHomeController;
 ?>
 <div class="header">
-    {{-- <div class="header-top">
-        <div class="wrap-content">
-            <div class="flex-header-top">
-                <div class="header-top-address w-25 text-light">
-                    <marquee behavior="" direction="">
-                        {{ CHomeController::settings()->description }}
-                    </marquee>
-                </div>
-                <div class="header-top-auth">
-                    @if (Auth::guard('member')->check() )
-                        <div class="menu-bottom-account-positon">
-                            <a href="{{ route('user.info') }}">
-                                <div class="menu-bottom-account">
-                                    <div class="menu-bottom-account-icon">
-                                        <i class="fa-solid fa-user"></i>
-                                    </div> 
-                                    <div class="menu-bottom-account-text">
-                                        Xin chào, 
-                                        <span class="header-user-name">{{ CHomeController::getUserInfo()->name }}</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    @else
-                        <div class="menu-bottom-account-positon">
-                            <a href="{{ route('user.login') }}">
-                                <div class="menu-bottom-account">
-                                    <div class="menu-bottom-account-icon">
-                                        <i class="fa-solid fa-user"></i>
-                                    </div>
-                                    <div class="menu-bottom-account-text">
-                                        Tài khoản
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    @endif
-                </div>  
-            </div>
-        </div>
-    </div> --}}
     <div class="header-bottom">
         <div class="wrap-content">
             <div class="flex-header-bottom">
-                <div class="header-bottom-logo peShiner" width="20px" style="margin-top: 10px">
+                <div class="header-bottom-logo peShiner">
                     <a href="{{route('index')}}">
-                        {{-- <img src="{{ CHomeController::settings()->logo_path }}" alt> --}}
-                        <img src="../index/imgs/logo.png" alt="tpstore-logo" width="250px" height="250px">
+                        <div class="main-logo" style="margin-top: 10px">
+                            {{-- <img src="{{ CHomeController::settings()->logo_path }}" alt> --}}
+                            <img src="../index/imgs/logo.png" alt="tpstore-logo" width="200px" height="200px">
+                        </div>
                     </a>
                 </div>
                 <div class="header-bottom-searchbox ">
@@ -72,7 +33,7 @@ use App\Http\Controllers\Client\CHomeController;
                 </div>
                 <div class="header-bottom-end">
                     <a class="header-bottom-item" href="{{route('user.cart')}}">
-                        <i class="fa-solid fa-cart-shopping"></i>
+                        <i class="fa-regular fa-cart-shopping"></i>
                         <h6>Giỏ hàng</h6>
                     </a>
                     <a class="header-bottom-item" href="{{route('user.info')}}">

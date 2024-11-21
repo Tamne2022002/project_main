@@ -51,16 +51,7 @@
                                 <div style="color: #dd0505;
                                 font-size: 1em;font-weight: bold;">{{ $message }}</div>
                             @enderror
-                            {{-- <div class="form-group mb-2">
-                                <!-- Set khi đăng nhập r thì hiện thông tin vào form sửa thì click vào r đổi thôi -->
-                                <label class="fw-bold mb-2" for>Tên: </label>
-                                <input type="text" class="form-control" id="first_name" name="first_name"
-                                    value="{{ $user->first_name }}" placeholder="Nhập họ và tên">
-                            </div> 
-                            @error('first_name')
-                                <div style="color: #dd0505;
-                                font-size: 1em;font-weight: bold;">{{ $message }}</div>
-                            @enderror --}}
+
                             <div class="form-group mb-2">
                                 <label class="fw-bold mb-2" for>Email: </label>
                                 <input type="text" class="form-control" id="email" name="email"
@@ -70,6 +61,7 @@
                                 <div style="color: #dd0505;
                                 font-size: 1em;font-weight: bold;">{{ $message }}</div>
                             @enderror
+
                             <div class="form-group mb-2">
                                 <label class="fw-bold mb-2" for>Số điện thoại: </label>
                                 <input type="number" class="form-control" id="phone" name="phone"
@@ -79,6 +71,7 @@
                                 <div style="color: #dd0505;
                                 font-size: 1em;font-weight: bold;">{{ $message }}</div>
                             @enderror
+
                             <div class="form-group mb-2">
                                 <label class="fw-bold mb-2" for>Địa chỉ: </label>
                                 <input type="text" class="form-control"
@@ -90,6 +83,7 @@
                                 <div style="color: #dd0505;
                                 font-size: 1em;font-weight: bold;">{{ $message }}</div>
                             @enderror
+                            
                             <div class="d-flex gap-2 mt-2">
                                 <div class="flex-btn">
                                     <button type="submit" class="btn btn-primary" id="submitAddress">Cập nhật</button>

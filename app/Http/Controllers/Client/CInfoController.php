@@ -55,7 +55,6 @@ class CInfoController extends Controller
         }
 
         $address = $request->input('address');
-        dd($request->all());
 
         $all = $request->all();
         $user = Auth::guard('member')->user();

@@ -1,10 +1,9 @@
 <?php
-use App\Http\Controllers\Client\CHomeController;
+    use App\Http\Controllers\Client\CHomeController;
 ?>
 
 @isset($productFeatured)
     @if (!$productFeatured->isEmpty())
-        {{-- productFeatured --}}
         <div class="wrap-product-outstanding py50">
             <div class="wrap-content">
                 <div class="feature-product">
@@ -73,21 +72,26 @@ use App\Http\Controllers\Client\CHomeController;
         @foreach ($category_first as $v)
             <div class="wrap-product-list-cat product-from-ajax">
                 <div class="wrap-content">
-                    <div class="title-main categoryfirst">
-                        <span>{{ $v->name }}</span>
-                    </div>
-                    <div class="flex-categorysecond">
-                        @foreach ($v->children()->where('featured', 1)->where('status', 1)->whereNull('deleted_at')->get() as $category_second)
-                            <div class="categorysecond" data-idf="{{ $v->id }}"
-                                data-ids="{{ $category_second->id }}"
-                                data-url="{{ route('get-category-data', ['categoryId' => $category_second->id]) }}">
-                                {{ $category_second->name }}
+                    <div class="d-flex justify-content-between flex-wrap relative">
+                        <div class="title-main categoryfirst">
+                            <div class="wrap-name">
+                                <span>{{ $v->name }}</span>
                             </div>
-                        @endforeach
+                        </div>
+                        
+                        <div class="flex-categorysecond">
+                            @foreach ($v->children()->where('featured', 1)->where('status', 1)->whereNull('deleted_at')->get() as $category_second)
+                                <div class="categorysecond" data-idf="{{ $v->id }}"
+                                    data-ids="{{ $category_second->id }}"
+                                    data-url="{{ route('get-category-data', ['categoryId' => $category_second->id]) }}">
+                                  <div class="category-second-name">{{ $category_second->name }}</div>  
+                                </div>
+                            @endforeach 
+                        </div>
                     </div>
-                    {{-- <div class="paging-product-category-style paging-product-category-{{ $v->id }}"
-                        data-route="{{ route('add_index.cart') }}">
-                    </div> --}}
+                    <div class="paging-product-category-style paging-product-category-{{ $v->id }}"
+                        data-route="{{ route('add_index.cart', ['id'=> $v->id , 'quantity' => 1]) }}">
+                    </div>
                 </div>
             </div>
         @endforeach
