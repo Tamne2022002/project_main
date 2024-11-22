@@ -56,6 +56,14 @@ class CHomeController extends Controller
         $publisherproduct = ProductModel::where('id_publisher', $id)->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
         return view('client.product.publisher_product', compact('publisherproduct', 'pagename',));
     }
+    // public function CategoryIdProduct($id)
+    // {
+    //     $category = ProductListModel::where('id', $id)->firstOrFail();
+    //     $pagename = $category->name;
+    //     $categoryidproduct = ProductModel::where('id_list', $id)->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
+    //     return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename'));
+    // }
+
     public function CategoryIdProduct($id)
     {
         $category = ProductListModel::where('id', $id)->firstOrFail();
@@ -72,7 +80,7 @@ class CHomeController extends Controller
     public function getCategoryData(Request $request)
     {
         $categoryId = $request->input('categoryId');
-        $products = ProductModel::where('id_list', $categoryId)->get();
+        $products = ProductModel::where('id_list', $categoryId)->get(); 
         return response()->json(['products' => $products]);
     }
 

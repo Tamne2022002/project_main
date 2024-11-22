@@ -14,7 +14,7 @@
         <div class="container" style="margin-top: 14em">
             <div class="row cart_form">
                 <!-- Giỏ hàng -->
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <div class="card shadow-sm">
                         <div class="card-header bg-primary text-white">
                             <p>Thông tin giỏ hàng</p>
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- Thanh toán -->
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <div class="card shadow-sm">
                         <div class="card-header bg-success text-white">
                             <p>Thông tin giao hàng</p>
@@ -74,17 +74,54 @@
                             <form action="{{ url('/payment_return') }}" method="POST" id="paymentForm">
                                 @csrf
                                 <!-- Họ tên -->
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="fullname_vnpay" name="fullname_vnpay"
-                                        placeholder="Họ tên" value="{{ $user->name }}" required>
-                                    <label for="fullname_vnpay">Họ tên</label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="fullname_vnpay"
+                                                name="fullname_vnpay" placeholder="Họ tên" value="{{ $user->name }}"
+                                                required>
+                                            <label for="fullname_vnpay">Họ tên</label>
+                                        </div>
+                                    </div>
+                                    <!-- Điện thoại -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="phone_vnpay" name="phone_vnpay"
+                                                placeholder="Điện thoại" value="{{ $user->phone }}" required>
+                                            <label for="phone_vnpay">Điện thoại</label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- Điện thoại -->
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="phone_vnpay" name="phone_vnpay"
-                                        placeholder="Điện thoại" value="{{ $user->phone }}" required>
-                                    <label for="phone_vnpay">Điện thoại</label>
+                                @php
+                                    $province = DB::table('table_provinces')->get();
+                                @endphp
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-floating mb-3">
+                                            <select class="cart-select form-control" id="cart-province" name="province">
+                                                <option value="0">Tỉnh:</option>
+                                                @foreach ($province as $v)
+                                                    <option value="{{ $v->id }}">{{ $v->Name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-floating mb-3">
+                                            <select class="cart-select form-control" id="cart-distrist" name="distrist">
+                                                <option value="0">Huyện / Quận:</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-floating mb-3">
+                                            <select class="cart-select form-control" id="cart-ward" name="ward">
+                                                <option value="0">Xã / Phường:</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <!-- Địa chỉ -->
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="address_vnpay" name="address_vnpay"
@@ -111,8 +148,8 @@
                                         <label class="form-check-label" for="vnpay">Thanh toán qua VNPAY</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="payment_method" id="vietqr"
-                                            value="vietqr">
+                                        <input class="form-check-input" type="radio" name="payment_method"
+                                            id="vietqr" value="vietqr">
                                         <label class="form-check-label" for="vietqr">Thanh toán bằng QR</label>
                                     </div>
                                 </div>
@@ -145,23 +182,6 @@
                 "https://script.google.com/macros/s/AKfycbxcrTkN4n8y84VESNeNE9mqeqdvPUKnnVuiFq4M3_YYMul-5EYRyJ-MeQuvwOofOeOv/exec";
             const code = generateRandomNumbers();
             // Xử lý hiển thị QR Code khi chọn phương thức thanh toán
-            paymentRadios.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    if (this.id === 'vietqr') {
-                        const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''),
-                            10);
-
-                        const QR =
-                            `https://img.vietqr.io/image/970415-107871769484-compact2.png?amount=${total}&addInfo=TPStore_${code}&accountName=NGUYEN%20MINH%20TAM`;
-
-                        qrCodeImage.setAttribute('src', QR);
-                        qrContainer.style.display = 'block';
-                    } else {
-                        qrContainer.style.display = 'none';
-                    }
-                });
-            });
-
             paymentForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
                 const selectedPaymentMethod = document.querySelector(
@@ -175,12 +195,23 @@
                     Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
                     return;
                 }
+                const phoneRegex = /^[0-9]{10}$/;
+
+                // Kiểm tra thông tin
+                if (!fullname || !phone || !address) {
+                    Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
+                    return;
+                }
+
+                if (!phoneRegex.test(phone)) {
+                    Swal.fire('Lỗi', 'Vui lòng nhập số điện thoại hợp lệ 10 số !', 'error');
+                    return;
+                }
+
 
                 if (selectedPaymentMethod === 'cod' || selectedPaymentMethod === 'vnpay') {
-                    // Submit trực tiếp nếu chọn COD hoặc VNPAY
                     paymentForm.submit();
                 } else if (selectedPaymentMethod === 'vietqr') {
-                    // Kiểm tra thanh toán thành công trước khi submit
                     try {
                         const response = await fetch(checkAPIUrl);
                         const data = await response.json();
@@ -201,7 +232,7 @@
                                 paymentForm.submit();
                             } else {
                                 Swal.fire('Chưa thanh toán', 'Hóa đơn chưa được thanh toán!',
-                                'warning');
+                                    'warning');
                             }
                         } else {
                             Swal.fire('Lỗi', 'Không tìm thấy dữ liệu thanh toán!', 'error');

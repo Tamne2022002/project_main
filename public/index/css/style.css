@@ -23,8 +23,7 @@ a{color:#000;text-decoration:unset !important;}
 /* Header */
 .header{z-index: 100;position: fixed;left: 0;top: 0;right: 0;display: block;background-color: #5070C0;}
 .social-item a:hover{color:#fff !important;}
-.social-item a{font-size:25px;}
-.header-top{}
+.social-item a{font-size:25px;} 
 .header-user-name{font-style: italic;font-size: 15px;}
 .flex-header-top{display:flex;align-items:center;justify-content:space-between;}
 .header-top-address{width:50%;}
@@ -425,11 +424,19 @@ input[type=number] { -moz-appearance: textfield; }
 .btn-back-to-home:hover{background:#fff;color:#0063B6;}
 .empty-cart span{display:inline-block;border:1px solid #2e9ef2;border-radius:3px;padding:10px;font-size:16px;text-transform:uppercase;width:100%;max-width:325px;}
 /* Info*/
-.user-inf-title{text-align: center;font-size: 30px;font-weight: 700;padding: 30px 0px;color: #212220;}
-.user-list-inf{padding: 0px 30px;}
-.user-list-inf-item{padding: 5px 0;}
+.user-inf-title {text-align: center;font-size: 25px;font-weight: 700;padding: 7px 0;border-bottom: 1px solid #d1d1d1;color: #212220;}
+.box-form,.user-box-left {box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);border: 1px solid #d1d1d1;padding: 10px;border-radius: 20px;background: white;}
+.user-list-inf{padding: 0px 15px;}
+.user-list-inf-item{padding: 5px 0 10px;}
+.user-list-inf-item:not(:last-child) {border-bottom: 1px solid #d1d1d1;}
 .user-list-item-name{font-size: 14px;color: #212220;font-weight: 600;}
 .user-list-item-name:hover{font-size: 16px;color: #5070C0;font-weight: 700;}
+.title__form {font-weight: 500;font-size: 16px;padding: 0px 15px 10px;border-bottom: 1px solid #d1d1d1;margin-bottom: 1rem;}
+.content__form th {font-size: 16px;padding: 10px 3px;.content__formth {
+    font-size: 16px;padding: 10px 3px;
+};}
+.content__form td {padding: 6px 2px;}
+.content__form tbody {text-align: center;}
 
 /**/
 /* Product detail cart */
@@ -457,3 +464,5 @@ input[type=number] { -moz-appearance: textfield; }
 .quantity-counter-procart .quantity-procart{width:40%;-webkit-box-sizing:border-box;box-sizing:border-box;border:0px;border-right:1px solid #dfdfdf;border-left:1px solid #dfdfdf;outline:none;-webkit-box-shadow:none;box-shadow:none;padding:0px;color:#333;text-align:center;}
 .price-procart{width:20%;text-align:right;}
 
+.form-floating input {height: 52px !important;}
+.form-floating select {height: 52px !important; padding: 10px !important;}

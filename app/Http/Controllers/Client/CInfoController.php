@@ -60,7 +60,7 @@ class CInfoController extends Controller
         $user = Auth::guard('member')->user();
 
         $first_name_check = $all['name'] == $user->name;
-
+        dd($all);
         $check = MemberModel::where('id', $user->id)->update([
             'name' => $all['name'], 
             'phone' => $all['phone'],

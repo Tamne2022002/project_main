@@ -5,34 +5,28 @@
 @endsection
 
 @section('content')
-    <div class="wrap-content">
-        <div class="title-main">
-            <span>
-                Đổi mật khẩu
-            </span>
-        </div>
-        <div class="content-main">
+    <div class="wrap-content"> 
+        <div class="content-main" style="margin-top: 8em">
             <div class="form-add-top row">
-                <div class="return">
-                    @if ($message = Session::get('success'))
-                        <div>
-                            <div style="color: #12c300;
-                font-size: 1.2em;font-weight: bold;">
-                                {{ $message }}</div>
+               
+                <div class="user-list-inf col-md-3">
+                    <div class="user-box-left">
+                        <h6 class="user-inf-title">Đổi mật khẩu</h6>
+                        <div class="box">
+                            <h3 class="user-list-inf-item">
+                                <a href="{{route('user.info')}}"><span class="user-list-item-name">Thông tin tài khoản</span></a>
+                            </h3>
+                            <h3 class="user-list-inf-item">
+                                <a href="{{route('user.order')}}"><span class="user-list-item-name">Lịch sử mua hàng</a>
+                            </h3>
+                            <h3 class="user-list-inf-item">
+                                <a href="{{route('user.changepassword')}}"><span class="user-list-item-name">Đổi mật khẩu</a>
+                            </h3>
+                            <h3 class="user-list-inf-item">
+                                <a href="{{ route('user.signout') }}"><span class="user-list-item-name">Đăng xuất</a>
+                            </h3>
                         </div>
-                    @endif
-                    @if ($message = Session::get('fail'))
-                        <div>
-                            <div style="color: #dd0505;
-                font-size: 1.2em;font-weight: bold;">
-                                {{ $message }}</div>
-                        </div>
-                    @endif
-                </div>
-                <div class="col-md-3">
-                    <h4 class=""><a href="{{ route('user.info') }}">Thông tin tài khoản</a></h4>
-                    <h4 class=""><a href="{{ route('user.order') }}">Lịch sử mua hàng</a></h4>
-                    <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
+                    </div>
                 </div>
                 <div class="col-md-6">
                     <form action="{{ route('user.changepassword.update') }}" class="form " method="POST">
@@ -100,6 +94,22 @@
                         <div style="color: #dd0505;
                             font-size: 1em;font-weight: bold;">{{ $message }}</div>
                         @enderror
+                        <div class="return">
+                            @if ($message = Session::get('success'))
+                                <div>
+                                    <div style="color: #12c300;
+                        font-size: 1.2em;font-weight: bold;">
+                                        {{ $message }}</div>
+                                </div>
+                            @endif
+                            @if ($message = Session::get('fail'))
+                                <div>
+                                    <div style="color: #dd0505;
+                        font-size: 1.2em;font-weight: bold;">
+                                        {{ $message }}</div>
+                                </div>
+                            @endif
+                        </div>
                         <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
                     </form>
                 </div>

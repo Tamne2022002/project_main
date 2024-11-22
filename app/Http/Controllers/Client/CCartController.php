@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ProductModel;
 use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
+use DB;
 
 class CCartController extends Controller
 {
@@ -83,5 +84,24 @@ class CCartController extends Controller
         $isEmpty = session()->get('cart') && count(session()->get('cart')) == 0;
 
         return response()->json(['is_passed' => 'true', 'total' => $total, 'is_empty' => $isEmpty]);
+    }
+    public function getDistricts(Request $request)
+    {
+        $provinceId = $request->input('province_id');
+        $districts = DB::table('table_districts')
+                    ->where('ProvinceId', $provinceId)
+                    ->get(); 
+
+        return response()->json(['districts' => $districts]);
+    }
+
+    public function getWards(Request $request)
+    {
+        $districtId = $request->input('district_id'); 
+        $wards = DB::table('table_wards')
+        ->where('DistrictId', $districtId)
+        ->get(); 
+
+        return response()->json(['wards' => $wards]);
     }
 }

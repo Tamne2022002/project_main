@@ -19,7 +19,7 @@
                     @yield('content')
                 @endif
             </div>
-            @include('client.partials.footer')
+            @include('client.partials.footer')  
             @include('client.partials.modal')
             @include('client.partials.support')
             @include('client.partials.anticopy')

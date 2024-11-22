@@ -107,7 +107,7 @@ use App\Models\WarehouseModel;
                                                     </p>
                                                 </div>
                                             @endif
-                                            @if ($slt > $v['quantity'])
+                                            @if ($slt > $v['quantity']) 
                                                 <div
                                                     class="col-1 col-md-1 mg-col-2 d-flex align-items-center justify-content-center">
                                                     <input type="checkbox" name="selected_products[]"
