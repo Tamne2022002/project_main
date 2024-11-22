@@ -18,9 +18,18 @@ use App\Http\Controllers\Client\CHomeController;
             <ul class="category-drop-list">
                 @foreach ($category_first as $cate)
                     <li class="category-drop-item">
-                        <a class="category-drop-item-inner" href="{{route('categoryid.categoryidproduct', ['id' => $cate->id])}}">
+                        <div class="category-drop-item-inner">
                             <h3 class="category-drop-name text-spit transition">{{$cate->name}}</h3>
-                        </a>
+                            <ul class="sub-category-drop-right">
+                                @foreach($cate->children()->where('featured', 1)->where('status', 1)->whereNull('deleted_at')->get() as $sub_cate)
+                                    <a href="{{route('categoryid.categoryidproduct', ['id' => $sub_cate->id])}}">
+                                        <li class="sub-category-drop-item">
+                                            <span class="sub-category-drop-name">{{$sub_cate->name}}</span>
+                                        </li>
+                                    </a>
+                                @endforeach
+                            </ul>
+                        </div>
                     </li>
                 @endforeach
             </ul>

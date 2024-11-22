@@ -150,7 +150,7 @@ function SlickPage() {
         $(".slick-slideshow").slick({
             dots: false,
             infinite: true,
-            autoplaySpeed: 3000,
+            autoplaySpeed: 1500,
             slidesToShow: 1,
             slidesToScroll: 1,
             adaptiveHeight: false,
@@ -163,7 +163,7 @@ function SlickPage() {
         $(".slick-news-ex").slick({
             dots: false,
             infinite: true,
-            autoplaySpeed: 3500,
+            autoplaySpeed: 1500,
             slidesToShow: 4,
             slidesToScroll: 1,
             adaptiveHeight: false,
@@ -176,7 +176,7 @@ function SlickPage() {
         $(".slick-criteria").slick({
             dots: false,
             infinite: true,
-            autoplaySpeed: 3500,
+            autoplaySpeed: 1500,
             slidesToShow: 4,
             slidesToScroll: 1,
             adaptiveHeight: false,
@@ -189,7 +189,7 @@ function SlickPage() {
         $(".slick-product-outstanding").slick({
             dots: false,
             infinite: true,
-            autoplaySpeed: 3500,
+            autoplaySpeed: 1500,
             slidesToShow: 5,
             slidesToScroll: 1,
             adaptiveHeight: false,
@@ -202,7 +202,7 @@ function SlickPage() {
         $(".slick-publisher-ex").slick({
             dots: false,
             infinite: true,
-            autoplaySpeed: 3500,
+            autoplaySpeed: 1500,
             slidesToShow: 8,
             slidesToScroll: 1,
             adaptiveHeight: false,
@@ -215,7 +215,7 @@ function SlickPage() {
         $(".slick-other-news-internal").slick({
             dots: false,
             infinite: true,
-            autoplaySpeed: 5000,
+            autoplaySpeed: 1500,
             slidesToShow: 3,
             slidesToScroll: 1,
             adaptiveHeight: true,
@@ -417,7 +417,7 @@ function AllRun() {
                                     .slick({
                                         dots: false,
                                         infinite: true,
-                                        autoplaySpeed: 3500,
+                                        autoplaySpeed: 1500,
                                         slidesToShow: 5,
                                         slidesToScroll: 1,
                                         adaptiveHeight: false,

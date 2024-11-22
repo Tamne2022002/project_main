@@ -2,7 +2,7 @@
 use App\Http\Controllers\Client\CHomeController;
 ?>
 <div class="footer">
-    
+
 </div>
 
 <div class="scrollToTop cursor-pointer active-progress">

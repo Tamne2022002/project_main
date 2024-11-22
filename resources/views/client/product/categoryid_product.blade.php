@@ -35,39 +35,59 @@
                                                     <div class="price-new">
                                                         @formatmoney($v->sale_price)
                                                     </div>
-                                                    <div class="price-old">
-                                                        @formatmoney($v->regular_price)
-                                                    </div>
-                                                    <div class="discount">
-                                                        {{ $v->discount }}%
-                                                    </div>
-                                                @else
-                                                    @if ($v->regular_price)
+                                                </a>
+                                            </div>
+                                            <div class="info-product">
+                                                <div class="name-product"><a class="text-split-2"
+                                                        href="{{ route('product.detail', ['id' => $v->id]) }}"
+                                                        title="{{ $v->name }}">{{ $v->name }}</a>
+                                                </div>
+                                                
+                                                <div class="price-product">
+                                                    @if ($v->discount)
                                                         <div class="price-new">
+                                                            @formatmoney($v->sale_price)
+                                                        </div>
+                                                        <div class="price-old">
                                                             @formatmoney($v->regular_price)
                                                         </div>
-                                                    @else
-                                                        <div class="price-new">
-                                                            Liên hệ
+                                                        <div class="discount">
+                                                            {{ $v->discount }}%
                                                         </div>
+                                                    @else
+                                                        @if ($v->regular_price)
+                                                            <div class="price-new">
+                                                                @formatmoney($v->regular_price)
+                                                            </div>
+                                                        @else
+                                                            <div class="price-new">
+                                                                Liên hệ
+                                                            </div>
+                                                        @endif
                                                     @endif
-                                                @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="col-md-12 mt-3 text-center">
-                        {{ $categoryidproduct->links('pagination::bootstrap-5') }}
+                        <div class="col-md-12 mt-3 text-center">
+                            {{ $categoryidproduct->links('pagination::bootstrap-5') }}
+                        </div>
+                    @else
+                    <div class="product-grid-content d-flex">
+                        <div class="col-4-md">
+                            @include('client.partials.categorymenu')
+                        </div>
+                        <div class="alert alert-warning w-100">
+                            <strong>Đang cập nhật dữ liệu !!</strong>
+                        </div>
                     </div>
-                @else
-                    <div class="alert alert-warning w-100">
-                        <strong>Đang cập nhật dữ liệu !!</strong>
-                    </div>
-                @endif
-            @endisset
+                    @endif
+                @endisset
+            </div>
         </div>
     </div>
 @endsection
