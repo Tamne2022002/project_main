@@ -26,10 +26,7 @@
                     <div class="form-group">
                         <label>Tên Nhân Viên</label>
                         <input type="text" class="text-capitalize form-control @error('name') is-invalid @enderror"
-                            name="name" placeholder="" value="{{ $member->name }}" required>
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                            name="name" placeholder="" value="{{ $member->name }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>Số Điện Thoại</label>

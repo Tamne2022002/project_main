@@ -67,12 +67,12 @@
         </div>
     @endif
 @endisset
-@isset($category_first)
-    @if (!$category_first->isEmpty())
-        @foreach ($category_first as $v)
+@isset($category_child)
+    @if (!$category_child->isEmpty())
+        @foreach ($category_child as $v)
             <div class="wrap-product-list-cat product-from-ajax">
                 <div class="wrap-content">
-                    <div class="d-flex justify-content-between flex-wrap relative">
+                    <div class="category-group d-flex justify-content-between flex-wrap relative">
                         <div class="title-main categoryfirst">
                             <div class="wrap-name">
                                 <span>{{ $v->name }}</span>

@@ -59,10 +59,10 @@ $func = new App\Helpers\Func();
                                             <a href="{{ route('import_order.view', ['id' => $v->id]) }}"
                                                 class="btn btn-default">Xem</a>
                                         @endif 
-                                        @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_import_order'))
+                                        {{-- @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_import_order'))
                                             <a data-url="{{ route('import_order.delete', ['id' => $v->id]) }}"
                                                 class="action_delete btn btn-danger">Xóa</a>
-                                        @endif 
+                                        @endif  --}}
                                     </td>
                                 </tr>
                             @endforeach

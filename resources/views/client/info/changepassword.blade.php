@@ -5,36 +5,34 @@
 @endsection
 
 @section('content')
-    <div class="wrap-content">
-        <div class="title-main">
-            <span>
-                Đổi mật khẩu
-            </span>
-        </div>
-        <div class="content-main">
+    <div class="wrap-content"> 
+        <div class="content-main" style="margin-top: 8em">
             <div class="form-add-top row">
-                <div class="return">
-                    @if ($message = Session::get('success'))
-                        <div>
-                            <div style="color: #12c300;
-                font-size: 1.2em;font-weight: bold;">
-                                {{ $message }}</div>
+               
+                <div class="user-list-inf col-md-3">
+                    <div class="user-box-left">
+                        <h6 class="user-inf-title">Đổi mật khẩu</h6>
+                        <div class="box">
+                            <h3 class="user-list-inf-item">
+                                <a href="{{route('user.info')}}"><span class="user-list-item-name">Thông tin tài khoản</span></a>
+                            </h3>
+                            <h3 class="user-list-inf-item">
+                                <a href="{{route('user.order')}}"><span class="user-list-item-name">Lịch sử mua hàng</a>
+                            </h3>
+                            <h3 class="user-list-inf-item">
+                                <a href="{{route('user.changepassword')}}">
+                                    <span class="user-list-item-name" style="font-size: 15px;color:#5070C0;font-weight: 700">
+                                        Đổi mật khẩu
+                                    </span>
+                                </a>
+                            </h3>
+                            <h3 class="user-list-inf-item">
+                                <a href="{{ route('user.signout') }}"><span class="user-list-item-name">Đăng xuất</a>
+                            </h3>
                         </div>
-                    @endif
-                    @if ($message = Session::get('fail'))
-                        <div>
-                            <div style="color: #dd0505;
-                font-size: 1.2em;font-weight: bold;">
-                                {{ $message }}</div>
-                        </div>
-                    @endif
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <h4 class=""><a href="{{ route('user.info') }}">Thông tin tài khoản</a></h4>
-                    <h4 class=""><a href="{{ route('user.order') }}">Lịch sử mua hàng</a></h4>
-                    <h4 class=""><a href="{{ route('user.changepassword') }}">Đổi mật khẩu</a></h4>
-                </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <form action="{{ route('user.changepassword.update') }}" class="form " method="POST">
                         @csrf
                         <div class="form-group">
@@ -100,10 +98,92 @@
                         <div style="color: #dd0505;
                             font-size: 1em;font-weight: bold;">{{ $message }}</div>
                         @enderror
+                        <div class="return">
+                            @if ($message = Session::get('success'))
+                                <div>
+                                    <div style="color: #12c300;
+                        font-size: 1.2em;font-weight: bold;">
+                                        {{ $message }}</div>
+                                </div>
+                            @endif
+                            @if ($message = Session::get('fail'))
+                                <div>
+                                    <div style="color: #dd0505;
+                        font-size: 1.2em;font-weight: bold;">
+                                        {{ $message }}</div>
+                                </div>
+                            @endif
+                        </div>
                         <button type="submit" class="btn btn-primary">Đổi mật khẩu</button>
                     </form>
+                </div> --}}
+                <div class="col-md-9">  
+                    <div class="box-form">
+                        <div class="title__form">Đổi mật khẩu</div>
+                        <div class="content__form">
+                            <form class="flex-user-infor" action="{{ route('user.info.update') }}" method="POST">
+                                @csrf
+                                <div class="user-infor-detail">
+                                    <div class="form-group mb-2"> 
+                                        <label class="fw-bold mb-2" for>Mật khẩu cũ</label>
+                                        <div class="wrap-input100">
+                                            <input type="password" class="input100" id="current-password" name="current-password"
+                                             placeholder="Nhập mật khẩu cũ">
+                                        </div>
+                                    </div>
+                                    @error('current-password')
+                                        <div style="color: #dd0505;
+                                        font-size: 1em;font-weight: bold;">{{ $message }}</div>
+                                    @enderror 
+                                    <div class="form-group mb-2">
+                                        <label class="fw-bold mb-2" for>Mật khẩu mới</label>
+                                       <div class="wrap-input100">
+                                        <input type="password" class="input100" id="new-password" name="new-password"
+                                        placeholder="Nhập mật khẩu mới" >
+                                       </div>
+                                    </div> 
+                                    @error('new-password')
+                                        <div style="color: #dd0505;
+                                        font-size: 1em;font-weight: bold;">{{ $message }}</div>
+                                    @enderror
+                                    <div class="form-group mb-2">
+                                        <label class="fw-bold mb-2" for>Xác nhận mật khẩu mới</label>
+                                        <div class="wrap-input100">
+                                            <input type="password" class="input100" id="confirm-new-pasword" name="confirm-new-pasword" 
+                                              placeholder="Xác nhân mật khẩu">
+                                        </div>
+                                    </div>
+                                    @error('confirm-new-pasword')
+                                        <div style="color: #dd0505;
+                                        font-size: 1em;font-weight: bold;">{{ $message }}</div>
+                                    @enderror
+                                    <div id="message" style="color: #dd0505"></div>
+                                    <div class="d-flex gap-2 mt-2">
+                                        <div class="flex-btn">
+                                            <button type="submit" class="btn btn-primary" id="submitAddress" onclick="validatePassword()">Cập nhật</button>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+         function validatePassword() {
+            const password = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-new-password').value;
+            const message = document.getElementById('message');
+
+            if (password === confirmPassword) {
+                message.textContent = "Mật khẩu trùng khớp!";
+                message.className = "success";
+            } else {
+                message.textContent = "Mật khẩu không trùng khớp, vui lòng thử lại.";
+                message.className = "error";
+            }
+        }
+    </script>
 @endsection

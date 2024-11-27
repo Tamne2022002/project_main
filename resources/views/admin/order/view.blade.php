@@ -16,7 +16,7 @@
                 <div class="card card-primary card-outline text-sm">
                     <div class="d-flex px-3 py-1 my-2 ">
                         <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
-                        <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
+                        {{-- <button type="reset" class="btn btn-secondary mr-2">Làm lại</button> --}}
                         <a href="{{ route('order.index') }}" class="btn btn-danger">Thoát</a>
                     </div>
                 </div>

@@ -247,10 +247,9 @@ class ProductController extends Controller
     }
     public function getCategoryId(Request $request)
     {
-        $categoryIds = $request->query('categoryId');
-        dd($categoryIds);
+        $categoryIds = $request->query('categoryId'); 
         if (is_array($categoryIds)) {
-            $products = ProductModel::whereIn('id_list', $categoryIds)->with('table_product_list')->get();
+            $products = ProductModel::whereIn('id_list', $categoryIds)->get(); 
         } else {
             $products = ProductModel::with('table_product_list')->get();
         }

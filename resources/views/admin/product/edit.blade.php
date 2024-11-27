@@ -130,7 +130,7 @@
                                                     <input type="text" class="text-capitalize form-control"
                                                         name="author" value="{{ $product->author }}">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-6 d-none">
                                                     <label>Giá mới</label>
                                                     <input type="number" class="form-control format-price sale_price "
                                                         name="sale_price" value="{{ $product->sale_price }}">
@@ -140,7 +140,7 @@
                                                     <input type="text" class="form-control" name="publishing_year"
                                                         value="{{ $product->publishing_year }}">
                                                 </div>
-                                                <div class="form-group col-md-6">
+                                                <div class="form-group col-md-6 d-none">
                                                     <label>Chiết khấu(%):</label>
                                                     <input type="number" class="form-control discount" name="discount"
                                                         value="{{ $product->discount }}" readonly>

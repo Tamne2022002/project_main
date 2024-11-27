@@ -37,16 +37,6 @@ use App\Http\Controllers\Client\CHomeController;
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                     </div>
-                </div>
-                <div class="footer-news">
-                    <h6 class="footer-policy-title">Chính sách mua hàng tại TP Store</h6>
-                    <ul class="footer-policy">
-                        <li class="footer-policy-item"><a href="#">Hướng dẫn mua hàng</a></li>
-                        <li class="footer-policy-item"><a href="#">Chính sách đổi trả & hoàn tiền</a></li>
-                        <li class="footer-policy-item"><a href="#">Hướng dẫn thanh toán</a></li>
-                        <li class="footer-policy-item"><a href="#">Chính sách giao hàng</a></li>
-                        <li class="footer-policy-item"><a href="#">Chính sách bảo mật</a></li>
-                    </ul>
                     <div class="footer-paymet">
                         <h6 class="footer-payment-title">Phương thức thanh toán</h6>
                         <div class="payment-list d-flex">                          
@@ -58,11 +48,17 @@ use App\Http\Controllers\Client\CHomeController;
                     </div>
                 </div>
                 <div class="footer-news">
+                    <div class="footer-fanpage">
+                        {!! CHomeController::settings()->fanpage !!}
+                    </div>            
+                </div>
+                <div class="footer-news">
                     <div class="footer-map">
                         <div class="footer-map-iframe">
                             {!! CHomeController::settings()->iframe_map !!}
                         </div>
                     </div>
+                   
                 </div>
             </div>
         </div>

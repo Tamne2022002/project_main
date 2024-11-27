@@ -60,14 +60,14 @@ class CInfoController extends Controller
         $user = Auth::guard('member')->user();
 
         $first_name_check = $all['name'] == $user->name;
-
         $check = MemberModel::where('id', $user->id)->update([
             'name' => $all['name'], 
             'phone' => $all['phone'],
             'address' => $all['address'],
             'email' => $all['email'],
         ]);
-
+            $all->session()->put('id_user', Auth::guard('member')->user()->id);
+            //$all->session()->regenerate();
         if($check) 
         {
             return redirect()->route('user.info')->with('success','Cập nhật thành công');

@@ -114,9 +114,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 mb-3">
-                    <button type="submit" class="btn btn-primary">Lưu</button>
-                </div>
             </form>
         </div>
     </div>
