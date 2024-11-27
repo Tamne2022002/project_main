@@ -24,10 +24,8 @@
                             <label>Tên Nhân Viên</label>
                             <input type="text"
                                 class="text-capitalize form-control @error('full_name') is-invalid @enderror"
-                                name="full_name" placeholder="" value="{{ $user->full_name }}" required>
-                            @error('full_name')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                                name="full_name" placeholder="" value="{{ $user->full_name }}" readonly>
+                           
                         </div>
                         <div class="form-group">
                             <label>Số Điện Thoại</label>
@@ -55,7 +53,7 @@
                         </div>
                         <div class="form-group">
                             <label>Mật Khẩu</label>
-                            <input type="password" class="form-control " name="password" placeholder="Nhập mật khẩu">
+                            <input type="password" class="form-control " name="password" placeholder="Nhập mật khẩu" value="{{$user->password}}">
                         </div>
                         <div class="form-group">
                             <label>Vai Trò</label>

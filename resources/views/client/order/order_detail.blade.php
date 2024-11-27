@@ -25,8 +25,11 @@
                                             khoản</span></a>
                                 </h3>
                                 <h3 class="user-list-inf-item">
-                                    <a href="{{ route('user.order') }}"><span class="user-list-item-name">Lịch sử mua
-                                            hàng</a>
+                                    <a href="{{ route('user.order') }}">
+                                        <span class="user-list-item-name"  style="font-size: 16px;color:#5070C0;font-weight: 700">
+                                            Lịch sử mua hàng
+                                        </span>
+                                    </a>
                                 </h3>
                                 <h3 class="user-list-inf-item">
                                     <a href="{{ route('user.changepassword') }}"><span class="user-list-item-name">Đổi mật
@@ -62,7 +65,7 @@
                                             <th>Mã Sản Phẩm</th>
                                             <th>Tên Sản Phẩm</th>
                                             <th>Số Lượng</th>
-                                            <th>Tổng cộng</th>
+                                            <th>Đơn giá</th>
                                         </tr> 
                                         @foreach ($cthdb as $item)
                                             <tr>
@@ -85,13 +88,60 @@
                                 <div class="title-name2"><strong>Tổng tiền:</strong> @formatmoney($hdb[0]->total_price)</div>
                                 </div>
                             </div>
-                            <div>
+                            <div class="d-flex justify-content-end">
                                 <a href="#" class="btn btn-danger mt-2" onclick="history.back()">Thoát</a>
+                                <div>  </div>
+                                <span  class="btn btn-danger mt-2" id="cancelButton">Hủy đơn hàng</a>
                             </div> 
-                        </div>
+                            
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+<script>
+    // Mở form hủy đơn hàng
+    document.getElementById('cancelButton').addEventListener('click', function() {
+      document.getElementById('cancelForm').classList.add('active');
+    });
+
+    // Đóng form hủy đơn hàng
+    document.getElementById('cancelFormClose').addEventListener('click', function() {
+      document.getElementById('cancelForm').classList.remove('active');
+    });
+
+    // Xử lý gửi form
+    document.getElementById('cancelOrderForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Ngăn chặn việc reload trang
+      const reason = document.getElementById('reason').value;
+      const comments = document.getElementById('comments').value;
+
+      // Gửi dữ liệu hủy đơn hàng đến server
+      fetch('/api/cancel-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          orderId: '12345', // Thay bằng mã đơn hàng thực tế
+          reason,
+          comments,
+        }),
+      })
+      .then(response => {
+        if (response.ok) {
+          // Cập nhật trạng thái đơn hàng trên giao diện
+          document.getElementById('orderStatus').innerText = 'Đang hủy hàng';
+
+          // Chuyển hướng về trang danh sách đơn hàng
+          setTimeout(() => {
+            window.location.href = '/orders'; // Đường dẫn trang danh sách đơn hàng
+          }, 2000); // Chờ 2 giây trước khi chuyển trang
+        } else {
+          alert('Có lỗi xảy ra khi hủy đơn hàng. Vui lòng thử lại.');
+        }
+      })
+      .catch(error => console.error('Lỗi:', error));
+    });
+  </script>

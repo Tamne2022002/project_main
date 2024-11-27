@@ -22,7 +22,7 @@ class PhotoEditRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|regex:/^[\pL0-9\s]*$/u|max:255',
+            // 'name' => 'required|regex:/^[\pL0-9\s]*$/u|max:255',
             // 'desc' => 'required',
             // 'photo_path' => 'mimes:jpg,jpeg,png|max:20480',
         ];

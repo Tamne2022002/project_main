@@ -31,7 +31,11 @@
                         <h6 class="user-inf-title">Thông tin cá nhân</h6>
                         <div class="box">
                             <h3 class="user-list-inf-item">
-                                <a href="{{route('user.info')}}"><span class="user-list-item-name">Thông tin tài khoản</span></a>
+                                <a href="{{route('user.info')}}">
+                                    <span class="user-list-item-name"  style="font-size: 15px;color:#5070C0;font-weight: 700">
+                                        Thông tin tài khoản
+                                    </span>
+                                </a>
                             </h3>
                             <h3 class="user-list-inf-item">
                                 <a href="{{route('user.order')}}"><span class="user-list-item-name">Lịch sử mua hàng</a>

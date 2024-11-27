@@ -19,13 +19,13 @@ $func = new App\Helpers\Func();
 <div class="content-wrapper bg-white">
     <div class="content">
         <div class="container-fluid pt-3">
-            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'add_member'))
+            {{-- @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'add_member'))
                 <div class="w-100 card card-primary card-outline text-sm">
                     <div class="col-md-6">
                         <a href="{{ route('member.create') }}" class="btn btn-success m-2">Thêm</a>
                     </div>
                 </div>
-            @endif
+            @endif --}}
             <div class="w-100 card card-primary card-outline text-sm px-3 py-3">
 
                 <form action="" class="form-inline" method="GET">
@@ -59,10 +59,10 @@ $func = new App\Helpers\Func();
                                         <td>{{ $member->name }}</td>
                                         <td>{{ $member->email }}</td>
                                         <td>
-                                            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'edit_member'))
+                                            {{-- @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'edit_member'))
                                                 <a href="{{ route('member.edit', ['id' => $member->id]) }} "
                                                     class="btn btn-default">Sửa</a>
-                                            @endif
+                                            @endif --}}
                                             @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_member'))
                                                 <a href=""
                                                     data-url="{{ route('member.delete', ['id' => $member->id]) }}"

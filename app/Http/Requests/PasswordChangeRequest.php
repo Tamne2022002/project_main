@@ -47,11 +47,11 @@ class PasswordChangeRequest extends FormRequest
     {
         return [
             'current_password.required' => 'Mật khẩu hiện tại không được để trống',
-            'new_password.required' => 'Mật khẩu mới không được để trống',
-            'new_password.min' => 'Mật khẩu mới không được dưới 8 ký tự',
-            'new_password.max' => 'Mật khẩu mới không được quá 32 ký tự',
-            'new_password_confirm.required' => 'Xác nhận mật khẩu không được để trống',
-            'new_password.regex' => 'Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa, chữ thường, và ký tự đặc biệt',
+            'new-password.required' => 'Mật khẩu mới không được để trống',
+            'new-password.min' => 'Mật khẩu mới không được dưới 8 ký tự',
+            'new-password.max' => 'Mật khẩu mới không được quá 32 ký tự',
+            'confirm-new-password.required' => 'Xác nhận mật khẩu không được để trống',
+            'new-password.regex' => 'Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa, chữ thường, và 1 ký tự đặc biệt',
         ];
     }
 }

@@ -18,16 +18,36 @@
                                     <a href="{{route('user.info')}}"><span class="user-list-item-name">Thông tin tài khoản</span></a>
                                 </h3>
                                 <h3 class="user-list-inf-item">
-                                    <a href="{{route('user.order')}}"><span class="user-list-item-name">Lịch sử mua hàng</a>
+                                    <a href="{{route('user.order')}}">
+                                        <span class="user-list-item-name" style="font-size: 15px;color:#5070C0;font-weight: 700">
+                                            Lịch sử mua hàng
+                                        </span>
+                                    </a>
                                 </h3>
                                 <h3 class="user-list-inf-item">
-                                    <a href="{{route('user.changepassword')}}"><span class="user-list-item-name">Đổi mật khẩu</a>
+                                    <a href="{{route('user.changepassword')}}"><span class="user-list-item-name">Đổi mật khẩu</span></a>
                                 </h3>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 text-align-center">
-                        <div>Bạn chưa mua sản phẩm nào !</div>
+                    <div class="col-md-9">
+                        <div class="box-form">
+                            <div class="title__form">Thông tin</div>
+                            <div class="content__form">
+                                <table class="w-100 table table-bordered table-striped">
+                                    <tr class="">
+                                        <th class="col-md-3">Mã đơn hàng:</th>
+                                        <th class="col-md-3">Ngày đặt</th>
+                                        <th class="col-md-3">Trạng thái</th>
+                                        <th class="col-md-3">Tổng tiền</th>
+                                        <!--<th class="col-md-3">Đánh giá</th>-->
+                                    </tr>
+                                    <div class="text-no-order text-align-center">
+                                        Bạn chưa mua sản phẩm nào!
+                                    </div>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @else
@@ -41,7 +61,11 @@
                                     <a href="{{route('user.info')}}"><span class="user-list-item-name">Thông tin tài khoản</span></a>
                                 </h3>
                                 <h3 class="user-list-inf-item">
-                                    <a href="{{route('user.order')}}"><span class="user-list-item-name">Lịch sử mua hàng</a>
+                                    <a href="{{route('user.order')}}">
+                                        <span class="user-list-item-name" style="font-size: 15px;color:#5070C0;font-weight: 700">
+                                         Lịch sử mua hàng
+                                        </span>
+                                    </a>
                                 </h3>
                                 <h3 class="user-list-inf-item">
                                     <a href="{{route('user.changepassword')}}"><span class="user-list-item-name">Đổi mật khẩu</a>
@@ -90,6 +114,9 @@
                                                         Đã giao
                                                     @break
                                                     @case(6)
+                                                        Đang chờ hủy
+                                                    @break
+                                                    @case(7)
                                                         Đã huỷ
                                                     @break
                                                 @endswitch

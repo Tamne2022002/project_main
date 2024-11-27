@@ -28,7 +28,7 @@ class CHomeController extends Controller
         ->whereNull('deleted_at')->get();
        
         $publisher = PublisherModel::select('id', 'name', 'photo_path')->get();
-        $category_first = ProductListModel::with('children')
+        $category_child = ProductListModel::with('children')
         ->where('status', 1)
         ->whereNull('deleted_at')
         ->where('id_parent', 0)
@@ -43,9 +43,9 @@ class CHomeController extends Controller
 
          if (Auth::guard('member')->user()) {
              $user = Auth::guard('member')->user();
-             return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first', 'user'));
+             return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_child', 'user'));
          }
-        return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_first')); 
+        return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_child')); 
 
 
     }
@@ -56,26 +56,25 @@ class CHomeController extends Controller
         $publisherproduct = ProductModel::where('id_publisher', $id)->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
         return view('client.product.publisher_product', compact('publisherproduct', 'pagename',));
     }
-    // public function CategoryIdProduct($id)
-    // {
-    //     $category = ProductListModel::where('id', $id)->firstOrFail();
-    //     $pagename = $category->name;
-    //     $categoryidproduct = ProductModel::where('id_list', $id)->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
-    //     return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename'));
-    // }
+   
 
     public function CategoryIdProduct($id)
-    {
+    { 
         $category = ProductListModel::where('id', $id)->firstOrFail();
-        $category_first = ProductListModel::with('children')
+        $category_child = ProductListModel::with('children')
         ->where('status', 1)
         ->whereNull('deleted_at')
         ->where('id_parent', 0)
         ->get();
-        $pagename = $category->name;
-        $categoryidproduct = ProductModel::where('id_list', $id)->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
-        return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename','category_first'));
+        $pagename = $category->name; 
+        $categoryidproduct = ProductModel::where('id_list', $id)
+        ->where('status', 1)
+        ->whereNull('deleted_at')
+        ->latest()
+        ->paginate(20);
+        return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename','category_child'));
     }
+
 
     public function getCategoryData(Request $request)
     {
@@ -84,11 +83,7 @@ class CHomeController extends Controller
         return response()->json(['products' => $products]);
     }
 
-    public static function MenuCategory()
-    {
-        $menufisrt = ProductListModel::with('children')->where('status', 1)->whereNull('deleted_at')->where('id_parent', 0)->get();
-        return view('client.partials.categorymenu', compact('menufisrt'));
-    }
+    
     public static function getUserInfo()
     {
         $id = session()->get('id_user');
@@ -100,13 +95,5 @@ class CHomeController extends Controller
         }
         
         return $user;
-    }
-    public static function productCategory($category_chil){
-        $product_category = ProductModel::select('id', 'name', 'photo_path', 'regular_price', 'sale_price', 'discount')
-        ->where('id_list',$category_chil)
-        ->where('status',1)
-        ->whereNull('deleted_at')
-        ->get();
-        return $product_category;
     }
 }
