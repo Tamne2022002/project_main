@@ -208,7 +208,7 @@
                                             <div class="form-group">
                                                 <label>Hình Ảnh Chi Tiết</label>
                                                 <input type="file" multiple class="form-control-file"
-                                                    name="photo_path[]">
+                                                    name="photo_path_multi[]">
                                                 <div class="col-md-12 box-gallery"> 
                                                     @foreach ($product->productGallery as $productGalleryItem)
                                                         <div class="box-gallery-item">

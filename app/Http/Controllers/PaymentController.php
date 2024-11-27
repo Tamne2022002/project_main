@@ -92,6 +92,9 @@ class PaymentController extends Controller
             $orderInfo->phone = $request->phone_vnpay;
             $orderInfo->address = $request->address_vnpay;
             $orderInfo->note = $request->note_vnpay;
+            $orderInfo->province = $request->province;
+            $orderInfo->distrist = $request->distrist;
+            $orderInfo->ward = $request->ward;
             $orderInfo->total_price = $total;
             $orderInfo->status = 1; 
             $orderInfo->save();
@@ -215,6 +218,9 @@ class PaymentController extends Controller
             $orderInfo->phone = $request->phone_vnpay;
             $orderInfo->address = $request->address_vnpay;
             $orderInfo->note = $request->note_vnpay;
+            $orderInfo->province = $request->province;
+            $orderInfo->distrist = $request->distrist;
+            $orderInfo->ward = $request->ward;
             $orderInfo->total_price = $total;
             $orderInfo->status = 1;
             $orderInfo->save();

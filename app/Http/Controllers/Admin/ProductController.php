@@ -149,13 +149,13 @@ class ProductController extends Controller
                 'status' => $request->filled('status') ? $request->status : false,
                 'featured' => $request->filled('featured') ? $request->featured : false,
             ]; 
-            $dataUploadProductImage = $this->storagetrait($request, 'photo_path', 'product'); 
+            $dataUploadProductImage = $this->storagetrait($request, 'photo_path', 'product');
+
             if (!empty($dataUploadProductImage)) {
                 $dataProductCreate['photo_name'] = $dataUploadProductImage['file_name'];
                 $dataProductCreate['photo_path'] = $dataUploadProductImage['file_path'];
             }
             $product = $this->product->create($dataProductCreate);
- 
 
             $product_id = $product->id;
             $dataWarehouseCreate = [
@@ -212,18 +212,19 @@ class ProductController extends Controller
                 'featured' => $request->filled('featured') ? $request->featured : false,
             ];
             $dataUploadProductImage = $this->storagetrait($request, 'photo_path', 'product');
+            
             if (!empty($dataUploadProductImage)) {
-
+                
                 $dataProductUpdate['photo_name'] = $dataUploadProductImage['file_name'];
                 $dataProductUpdate['photo_path'] = $dataUploadProductImage['file_path'];
-            }
+            } 
 
             ProductModel::find($id)->update($dataProductUpdate);
             $product = ProductModel::find($id);
             /* Sub img */
-            if ($request->hasFile('photo_path')) {
-                $this->gallery->where('product_id', $id)->delete();
-                foreach ($request->photo_path as $fileItem) {
+            if ($request->hasFile('photo_path_multi')) {
+                $product->images()->where('id_parent', $id)->delete();
+                foreach ($request->photo_path_multi as $fileItem) {
                     $datagallery = $this->storagetraitmultiple($fileItem, 'product');
                     $product->images()->create([
                         'id_parent' => $product->id,

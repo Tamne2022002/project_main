@@ -49,12 +49,11 @@ $func = new App\Helpers\Func();
                 <tbody>
                     @if (!$sliders->isEmpty())
                         @foreach ($sliders as $slider)
-                            <tr>
-
+                            <tr> 
                                 <td class="text-capitalize">{{ $slider->name }}</td>
 
                                 <td>
-                                    <img class="slider-image-thumb" src="{{ $slider->photo_path }}" alt="">
+                                    <img class="slider-image-thumb" src="{{ (!empty($slider->photo_name) && !empty($slider->photo_path)) ? $slider->photo_path : asset('assets/noimage.jpg') }}" alt="">
                                 </td>
                                 <td>
                                     <a href="{{ route('photo.edit', ['id' => $slider->id, 'type' => $type]) }}"

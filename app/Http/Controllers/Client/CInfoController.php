@@ -29,43 +29,17 @@ class CInfoController extends Controller
         if(!Auth::guard('member')->check())
         {
             return redirect()->route('user.login');
-        }
-
-        $popularDomains = [
-            'gmail.com',
-            'yahoo.com',
-            'hotmail.com',
-            'gmail.com.vn',
-            'outlook.com',
-            'live.com',
-            'aol.com',
-            'icloud.com',
-            'mail.com',
-            'yandex.com',
-            'protonmail.com'
-        ];
-
-        $cre = $request->all();
-
-        $domain = substr(strrchr($request->email, "@"), 1);
-
-        if(!in_array($domain, $popularDomains)) {
-            //return response()->json(['error' => 'Email domain is not popular.'], 400);
-            redirect()->route('user.register')->with('fail', 'Địa chỉ email không xác định');
-        }
-
-        $address = $request->input('address');
+        } 
+        $address = $request->input('address'); 
 
         $all = $request->all();
         $user = Auth::guard('member')->user();
 
-        $first_name_check = $all['name'] == $user->name;
-        dd($all);
+        $first_name_check = $all['name'] == $user->name; 
         $check = MemberModel::where('id', $user->id)->update([
             'name' => $all['name'], 
             'phone' => $all['phone'],
-            'address' => $all['address'],
-            'email' => $all['email'],
+            'address' => $all['address'], 
         ]);
 
         if($check) 

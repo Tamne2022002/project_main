@@ -22,7 +22,7 @@ class ProductAddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name' => 'bail|required|unique:table_product|regex:/^[\pL0-9\s]*$/u|max:255|min:10',
+            'name' => 'bail|required|unique:table_product|regex:/^[\pL0-9\s]*$/u|max:255|min:10',
             'id_list' => 'required',
             'id_publisher' => 'required',
             // 'desc' => 'required',
