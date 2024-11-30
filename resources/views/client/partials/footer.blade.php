@@ -6,6 +6,18 @@ use App\Http\Controllers\Client\CHomeController;
         <div class="wrap-content">
             <div class="footer-row d-flex justify-content-between align-items-center">
                 <div class="footer-news">
+                    <div class="footer-fanpage">
+                        <div class="fb-page" data-href="https://www.facebook.com/profile.php?id=61569640587376&amp;is_tour_dismissed" 
+                            data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true">
+                            <blockquote cite="https://www.facebook.com/profile.php?id=61569640587376&amp;is_tour_dismissed" class="fb-xfbml-parse-ignore">
+                                <a href="https://www.facebook.com/profile.php?id=61569640587376&amp;is_tour_dismissed">
+                                    TP Store
+                                </a>
+                            </blockquote>
+                        </div>
+                    </div>            
+                </div>
+                <div class="footer-news">
                     <div class="footer-inf align-items-center">
                         <div class="footer-company-name">
                             {{ CHomeController::settings()->name }}
@@ -20,10 +32,6 @@ use App\Http\Controllers\Client\CHomeController;
                         </div>
                         <div class="footer-info-item">
                             <span>Địa chỉ: {{ CHomeController::settings()->address }}</span>
-                        </div>
-                        <div class="footer-info-item">
-                            <span><a href="{{ CHomeController::settings()->link_map }}" target="_blank">Xem bản
-                                    đồ</a></span>
                         </div>
                     </div>
                     <div class="footer-social d-flex">
@@ -47,11 +55,7 @@ use App\Http\Controllers\Client\CHomeController;
                         <img src="../index/imgs/visa.png" alt="the-ngan-hang" width="100px" height="50px" style="margin:8px"> 
                     </div>
                 </div>
-                <div class="footer-news">
-                    <div class="footer-fanpage">
-                        {!! CHomeController::settings()->fanpage !!}
-                    </div>            
-                </div>
+               
                 <div class="footer-news">
                     <div class="footer-map">
                         <div class="footer-map-iframe">
@@ -80,3 +84,5 @@ use App\Http\Controllers\Client\CHomeController;
         </path>
     </svg>
 </div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v21.0"></script>
+
