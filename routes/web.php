@@ -87,16 +87,7 @@ Route::prefix('/')->group(function () {
         Route::get('order', 'index')->name('user.order');
         Route::get('order/{id}', 'detail')->name('user.order.detail');
     });
-
-
-
-
-    /*Address Change*/
-    /*Route::controller(CChangeAddressController::class)->group(function() {
-    Route::get('change-address', 'index')->name('user.changeaddress.index');
-    Route::post('change-address/update', 'update')->name('user.changeaddress.update');
-    });*/
-
+ 
     /*Password Change*/
     Route::controller(CChangePasswordController::class)->group(function () {
         Route::get('change-password', 'index')->name('user.changepassword');
@@ -126,7 +117,8 @@ Route::get('/adminlogout', [HomeController::class, 'logoutAdmin'])->name('admin.
 Route::middleware(['auth', 'user-access:admin'])->group(function () {  
     Route::prefix('admin')->group(function () { 
         Route::get('', [DashboardController::class, 'index'])->name('admin.dashboard.dashboard');
-        Route::get('/dashboard/{month?}&{year}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
+        Route::get('/{month?}&{year}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
+        Route::get('/{month?}&{year}', [DashboardController::class, 'filter'])->name('ajax.dashboard');
         
         /* Order */
         Route::prefix('order')->group(function () {
@@ -211,10 +203,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
         /* Photo */
         Route::prefix('photo/{type}')->group(function () {
-            Route::get('', [PhotoController::class, 'index'])->name('photo.index')->middleware('can:photo-delete');
-            Route::get('/create', [PhotoController::class, 'create'])->name('photo.create')->middleware('can:photo-delete');
+            Route::get('', [PhotoController::class, 'index'])->name('photo.index')->middleware('can:photo-list');
+            Route::get('/create', [PhotoController::class, 'create'])->name('photo.create')->middleware('can:photo-add');
             Route::post('/store', [PhotoController::class, 'store'])->name('photo.store');
-            Route::get('/edit/{id}', [PhotoController::class, 'edit'])->name('photo.edit')->middleware('can:photo-delete');
+            Route::get('/edit/{id}', [PhotoController::class, 'edit'])->name('photo.edit')->middleware('can:photo-edit');
             Route::post('/update/{id}', [PhotoController::class, 'update'])->name('photo.update');
             Route::get('/delete/{id}', [PhotoController::class, 'delete'])->name('photo.delete')->middleware('can:photo-delete');
         });   

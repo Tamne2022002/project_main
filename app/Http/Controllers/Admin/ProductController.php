@@ -251,8 +251,12 @@ class ProductController extends Controller
         $categoryIds = $request->query('categoryId'); 
         if (is_array($categoryIds)) {
             $products = ProductModel::whereIn('id_list', $categoryIds)->get(); 
+ 
         } else {
             $products = ProductModel::with('table_product_list')->get();
+        }
+        foreach ($products as $key => $product) {
+            $products[$key]['dm'] = ProductListModel::where('id', $product->id_list)->first();
         }
         return response()->json(['products' => $products]);
     }
@@ -262,12 +266,13 @@ class ProductController extends Controller
         $categoryIds = $request->query('categoryId');
         
         if (is_array($categoryIds)) {
-            $products = ProductModel::whereIn('category_id', $categoryIds)->with('category')->get();
+            $products = ProductModel::whereIn('id_list', $categoryIds)->with('category')->get();
         } else {
-            $products = ProductModel::with('category')->get();
+            $products = ProductModel::with('table_product_list')->get();
         }
+        
         foreach ($products as $key => $product) {
-            $products[$key]['quantity'] = Warehouse::where('product_id', $product->id)->pluck('quantity');
+            $products[$key]['quantity'] = Warehouse::where('id_parent', $product->id)->pluck('quantity');
         }
         return response()->json(['products' => $products]);
     }

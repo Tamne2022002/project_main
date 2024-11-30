@@ -146,7 +146,7 @@ $func = new App\Helpers\Func();
                     </ul>
                 </li>
                 @endif
-               
+                @if ($func->CheckPermissionAdmin($user->id, 'add_photo,edit_photo,delete_photo'))
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
                         <i class="nav-icon text-sm fas fa-users"></i>
@@ -155,15 +155,7 @@ $func = new App\Helpers\Func();
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        {{-- <li class="nav-item">
-                            <a href="{{ route('photo_static.index') }}" class="nav-link">
-                                <i class="nav-icon fa-solid fa-image"></i>
-                                <p class="text-capitalize">
-                                    Logo
-                                </p>
-                            </a>
-                        </li> --}}
+                    <ul class="nav nav-treeview"> 
                         <li class="nav-item">
                             <a href="{{ route('photo.index', ['type' => 'slider']) }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-image"></i>
@@ -177,15 +169,9 @@ $func = new App\Helpers\Func();
                             </a>
                         </li>                        
                     </ul>
-                </li>
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link ">
-                        <i class="nav-icon far fa-image"></i>
-                        <p class="text-capitalize">
-                            Photo
-                        </p>
-                    </a>
-                </li> --}}
+                </li> 
+                @endif
+                @if ($func->CheckPermissionAdmin($user->id, 'list_news','add_news','edit_news','delete_news'))
                 <li class="nav-item">
                     <a href="{{ route('news.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
@@ -194,6 +180,8 @@ $func = new App\Helpers\Func();
                         </p>
                     </a>
                 </li>
+                @endif
+                @if ($func->CheckPermissionAdmin($user->id, 'list_setting','edit_setting'))
                 <li class="nav-item">
                     <a href="{{ route('setting.index') }}" class="nav-link">
                         <i class="nav-icon text-sm fas fa-cogs"></i>
@@ -202,6 +190,7 @@ $func = new App\Helpers\Func();
                         </p>
                     </a>
                 </li>
+                @endif
             </ul>
         </nav>
     </div>

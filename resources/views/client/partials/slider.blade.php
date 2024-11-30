@@ -11,11 +11,14 @@ use App\Http\Controllers\Client\CHomeController;
                         @foreach ($sliders as $v)
                             <div class="slideshow-item" owl-item-animation>
                                 <a href="{{ $v->description }}" class="slideshow-image" target="_blank" title="{{ $v->name }}">
-                                    <img class="w-100 slider-style" src= "../index/imgs/slide0.png"
-                                        alt="{{ $v->name }}">
+                                    <img class="w-100 slider-style" src= "{{$v->photo_path}}"
+                                        alt="{{ $v->desc }}">
                                 </a>
+                                {{-- //<img class="w-100 slider-style" src= "../index/imgs/slide0.png" --}}
+                                {{-- alt=""> --}}
                             </div>
                         @endforeach
+                       
                     </div>
                 </div>
             </div>

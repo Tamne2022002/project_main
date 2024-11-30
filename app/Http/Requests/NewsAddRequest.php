@@ -22,7 +22,7 @@ class NewsAddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|regex:/^[\pL0-9\s]*$/u|unique:table_news|max:255',
+            // 'name' => 'required|regex:/^[\pL0-9\s]*$/u|unique:table_news|max:255',
             // 'desc' => 'required',
             // 'content' => 'required',
             // 'photo_path' => 'required|mimes:jpg,jpeg,png|max:20480',

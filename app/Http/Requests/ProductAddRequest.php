@@ -22,7 +22,7 @@ class ProductAddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'bail|required|unique:table_product|regex:/^[\pL0-9\s]*$/u|max:255|min:10',
+            'name' => 'bail|required|unique:table_product|regex:/^[\pL0-9\s]*$/u|max:255|min:1',
             'id_list' => 'required',
             'id_publisher' => 'required',
             // 'desc' => 'required',
@@ -33,7 +33,7 @@ class ProductAddRequest extends FormRequest
             // 'discount' => 'nullable|numeric|between:1,99',
             // 'publishing_year' => 'required|integer|min:1900',
             // 'code' => 'required|unique:table_product|string|max:255',
-            // 'author' => 'required|regex:/^[\pL\s]*$/u|max:255',
+            // 'author' => 'required|regex:/^[\pL\s]*$/|max:255',
         ];
     }
     public function messages()
@@ -42,7 +42,7 @@ class ProductAddRequest extends FormRequest
             'name.required' => 'Tên không được để trống',
             'name.unique' => 'Tên không được phép trùng',
             'name.max' => 'Tên không vượt quá 255 ký tự',
-            'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
+            'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái, số và khoảng trắng',
             'name.min' => 'Tên không được rỗng',
             'id_list.required' => 'Danh mục không được để trống',
             'id_publisher.required' => 'Nhà xuất bản không được để trống',

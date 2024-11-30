@@ -41,7 +41,8 @@ class CInfoController extends Controller
             'phone' => $all['phone'],
             'address' => $all['address'], 
         ]);
-
+            // $all->session()->put('id_user', Auth::guard('member')->user()->id);
+            //$all->session()->regenerate();
         if($check) 
         {
             return redirect()->route('user.info')->with('success','Cập nhật thành công');

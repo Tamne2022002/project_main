@@ -22,7 +22,7 @@ class SettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'regex:/^[\pL0-9\s]*$/u|max:20',
+            // 'name' => 'regex:/^[\pL0-9\s]*$/u|max:1',
             // 'desc' => 'max:255',
             // 'phone' => 'max:10',
             // 'email' => 'max:255|email|unique:users,email',
@@ -38,8 +38,8 @@ class SettingRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
-            'name.max' => 'Tên không được vượt quá 20 ký tự',
+            // 'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
+            // 'name.max' => 'Tên không được vượt quá 20 ký tự',
             // 'desc.max' => 'Email không vượt quá 255 ký tự',
             // 'phone.max' => 'Số điện thoại không được vượt quá 10 ký tự',
             // 'email.max' => 'Email không vượt quá 255 ký tự',

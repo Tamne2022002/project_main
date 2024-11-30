@@ -86,33 +86,33 @@ class PaymentController extends Controller
                 $total += ($details['sale_price'] ? $details['sale_price'] : $details['regular_price']) * $details['quantity'];
             } 
      
-            $orderInfo->order_code = $order_code;
-            $orderInfo->id_member = Auth::guard('member')->user()->id;
-            $orderInfo->fullname = $request->fullname_vnpay;
-            $orderInfo->phone = $request->phone_vnpay;
-            $orderInfo->address = $request->address_vnpay;
-            $orderInfo->note = $request->note_vnpay;
-            $orderInfo->province = $request->province;
-            $orderInfo->distrist = $request->distrist;
-            $orderInfo->ward = $request->ward;
-            $orderInfo->total_price = $total;
-            $orderInfo->status = 1; 
-            $orderInfo->save();
+            // $orderInfo->order_code = $order_code;
+            // $orderInfo->id_member = Auth::guard('member')->user()->id;
+            // $orderInfo->fullname = $request->fullname_vnpay;
+            // $orderInfo->phone = $request->phone_vnpay;
+            // $orderInfo->address = $request->address_vnpay;
+            // $orderInfo->note = $request->note_vnpay;
+            // $orderInfo->province = $request->province;
+            // $orderInfo->distrist = $request->distrist;
+            // $orderInfo->ward = $request->ward;
+            // $orderInfo->total_price = $total;
+            // $orderInfo->status = 1; 
+            // $orderInfo->save();
 
-            foreach (session('selected_products') as $id => $details) {
-                $orderDetail = new OrderDetailModel();
+            // foreach (session('selected_products') as $id => $details) {
+            //     $orderDetail = new OrderDetailModel();
     
-                $orderDetail->id_order = $orderInfo->id;
-                $orderDetail->id_product = $details['id_product'];
-                $orderDetail->quantity = $details['quantity'];
-                $orderDetail->regular_price = $details['regular_price'];
-                $orderDetail->sale_price = $details['sale_price'] ?? 0;
-                $orderDetail->save();
+            //     $orderDetail->id_order = $orderInfo->id;
+            //     $orderDetail->id_product = $details['id_product'];
+            //     $orderDetail->quantity = $details['quantity'];
+            //     $orderDetail->regular_price = $details['regular_price'];
+            //     $orderDetail->sale_price = $details['sale_price'] ?? 0;
+            //     $orderDetail->save();
     
-                $warehouse = WarehouseModel::where('id_parent', $details['id_product'])->first();
-                $warehouse->quantity -= $details['quantity'];
-                $warehouse->save();
-            } 
+            //     $warehouse = WarehouseModel::where('id_parent', $details['id_product'])->first();
+            //     $warehouse->quantity -= $details['quantity'];
+            //     $warehouse->save();
+            // } 
 
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html"; 
             $vnp_Returnurl = route('vnpay.return');
@@ -355,10 +355,40 @@ class PaymentController extends Controller
             OrderModel::where('order_code', $request->vnp_TxnRef)->update([
                 'status' => 1,
             ]); 
-
+            
             foreach (session('selected_products') as $id => $details) {
                 $warehouse = WarehouseModel::where('id_parent', $details['id_product'])->first();
                 $warehouse->quantity -= $details['quantity'];
+                $warehouse->save(); 
+            }
+            $orderInfo = new OrderModel(); 
+            $orderInfo->order_code = $order_code;
+            $orderInfo->id_member = Auth::guard('member')->user()->id;
+            $orderInfo->fullname = $request->fullname_vnpay;
+            $orderInfo->phone = $request->phone_vnpay;
+            $orderInfo->address = $request->address_vnpay;
+            $orderInfo->note = $request->note_vnpay;
+            $orderInfo->province = $request->province;
+            $orderInfo->distrist = $request->distrist;
+            $orderInfo->ward = $request->ward;
+            $orderInfo->total_price = $total;
+            $orderInfo->status = 1; 
+            $orderInfo->save();
+    
+            foreach (session('selected_products') as $id => $details) {
+                $orderDetail = new OrderDetailModel;
+    
+                $orderDetail->id_order = $orderInfo->id;
+                $orderDetail->id_product = $details['id_product'];
+                $orderDetail->quantity = $details['quantity'];
+                $orderDetail->regular_price = $details['regular_price'];
+                $orderDetail->sale_price = $details['sale_price'] ?? 0;
+                $orderDetail->save();
+    
+                $warehouse = WarehouseModel::where('id_parent', $details['id_product'])->first();
+
+                $warehouse->quantity -= $details['quantity']; 
+                $warehouse->save();
             }
             $array1 = session('selected_products', []);
             $array2 = session('cart', []); 
