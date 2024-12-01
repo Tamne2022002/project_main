@@ -42,12 +42,14 @@
                                         <th class="col-md-3">Tổng tiền</th>
                                         <!--<th class="col-md-3">Đánh giá</th>-->
                                     </tr>
-                                    <div class="text-no-order text-align-center">
-                                        Bạn chưa mua sản phẩm nào!
-                                    </div>
+                                    
                                 </table>
+                                <div class="text-no-order text-align-center">
+                                    Bạn chưa mua sản phẩm nào!
+                                </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             @else

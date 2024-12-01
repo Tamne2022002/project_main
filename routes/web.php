@@ -86,7 +86,10 @@ Route::prefix('/')->group(function () {
     Route::controller(COrderController::class)->group(function () {
         Route::get('order', 'index')->name('user.order');
         Route::get('order/{id}', 'detail')->name('user.order.detail');
+        // Route::get('order/cancel/{id}', 'cancel')->name('user.order.cancel');
+        Route::post('/api/cancel-order', 'cancelOrder')->name('order.cancel');
     });
+    
 
 
 

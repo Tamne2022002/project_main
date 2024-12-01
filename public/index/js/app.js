@@ -601,48 +601,6 @@ function AllRun() {
             }
         });
 
-    // Quantity detail page 2
-    /*$(".quantity-minus-pro-detail,.quantity-plus-pro-detail,input.qty-pro").on(
-        "click change",
-        function (event) {
-            const _target = event.target;
-
-            switch (_target.classList[0]) {
-                case "quantity-minus-pro-detail":
-                    if (_target.nextElementSibling.value < 1) {
-                        _target.nextElementSibling.value =
-                            parseInt(_target.nextElementSibling.value) - 1;
-                    } else {
-                        _target.nextElementSibling.value = 1;
-                        showNotify(
-                            "Số lượng không được nhỏ hơn 1",
-                            "Thông báo",
-                            "error"
-                        );
-                        return false;
-                    }
-                    break;
-                case "quantity-plus-pro-detail":
-                    _target.previousElementSibling.value =
-                        parseInt(_target.previousElementSibling.value) + 1;
-                    break;
-                case "qty-pro":
-                    if (_target.value < 1) {
-                        _target.value = 1;
-                        showNotify(
-                            "Số lượng không được nhỏ hơn 1",
-                            "Thông báo",
-                            "error"
-                        );
-                        return false;
-                    }
-                    break;
-                default:
-                    showNotify("Không hợp lệ", "Thông báo", "error");
-                     break;
-            }
-        }
-    );*/
 
     // Quantity with AJAX || cart page
     $("body").on(
@@ -903,3 +861,59 @@ $(document).ready(function () {
         }
     });
 });
+//show notification delete
+// function actionDeleteOrder() {
+//     let noti = {
+//             title: "Bạn muốn hủy đơn hàng này?",
+//             text: "Bạn sẽ không thể hoàn tác hành động này!",
+//             icon: "warning",
+//             showCancelButton: true,
+//             confirmButtonColor: "#3085d6",
+//             cancelButtonColor: "#d33",
+//             confirmButtonText: "Có!",
+//         };
+//     let urlRequest = $(this).data("url");
+//     console.log(urlRequest);
+//     let that = $(this);
+//     Swal.fire(noti).then((result) => {
+//         if (result.isConfirmed) {
+//             $.ajax({
+//                 type: "POST", 
+//                 url: urlRequest, 
+//                 headers: {
+//                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 
+//                 },
+//                 success: function (data) {
+//                     if (data.code === 200) {
+//                         // Cập nhật giao diện
+//                         that.closest(".order-item").find(".order-status").text(data.data.status_name);
+//                         Swal.fire({
+//                             title: "Thành công!",
+//                             text: data.message,
+//                             icon: "success",
+//                         });
+//                     } else {
+//                         Swal.fire({
+//                             title: "Thất bại!",
+//                             text: data.message,
+//                             icon: "error",
+//                         });
+//                     }
+//                 },
+//                 error: function (xhr) {
+//                     Swal.fire({
+//                         title: "Lỗi!",
+//                         text: "Không thể cập nhật trạng thái đơn hàng.",
+//                         icon: "error",
+//                     });
+//                     console.error(xhr.responseText);
+//                 },
+//             });
+//         }
+//     });
+// }
+// $(function () {
+//     if (isExist("cancel-order-button")) {
+//         $(document).on("click", ".cancel-order-button", actionDeleteOrder);
+//     }
+// });

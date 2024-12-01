@@ -7,7 +7,6 @@
 @section('content')
     <!-- Thông tin đơn hàng -->
     <div class="wrap-content" style="margin-top: 8em">
-
         <div class="title-main">
             <span>
                 <title>Chi tiết lịch sử đơn hàng</title>
@@ -89,59 +88,80 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <a href="#" class="btn btn-danger mt-2" onclick="history.back()">Thoát</a>
-                                <div>  </div>
-                                <span  class="btn btn-danger mt-2" id="cancelButton">Hủy đơn hàng</a>
+                                @if($hdb[0]->status == 1 || $hdb[0]->status == 2 || $hdb[0]->status == 3)
+                                    {{-- <button class="btn btn-danger mt-2 cancel-order-button"
+                                        data-url = "{{route('user.order.cancel',['id'=> $hdb[0]->id])}}">Hủy đơn hàng</button> --}}
+                                        <button class="btn btn-danger mt-2" id="cancelOrderButton">Hủy đơn hàng</button> 
+                                @endif
+                                <div class="back-buton" style="padding: 0 5px">
+                                    <a href="#" class="btn btn-secondary mt-2" onclick="history.back()">Thoát</a>
+                                </div>
                             </div> 
-                            
-                    </div>
+                        </div>
+                    </div> 
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cancelOrderButton = document.getElementById('cancelOrderButton');
+
+            if (cancelOrderButton) {
+                cancelOrderButton.addEventListener('click', function() { 
+                    Swal.fire({
+                        title: 'Bạn có chắc chắn?',
+                        text: "Đơn hàng sẽ bị hủy và không thể khôi phục!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Vâng, hủy đơn hàng!',
+                        cancelButtonText: 'Không, quay lại'
+                    }).then((result) => {
+                        if (result.isConfirmed) { 
+                            fetch('/api/cancel-order', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    },
+                                    body: JSON.stringify({
+                                        orderId: '{{ $hdb[0]->order_code }}',
+                                    }),
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        Swal.fire(
+                                            'Đã hủy!',
+                                            'Đơn hàng đã được hủy thành công.',
+                                            'success'
+                                        ).then(() => {
+                                            window.location.href = data.redirect_url; 
+                                        });
+                                    } else {
+                                        Swal.fire(
+                                            'Lỗi!',
+                                            'Có lỗi xảy ra khi hủy đơn hàng. Vui lòng thử lại.',
+                                            'error'
+                                        );
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Lỗi:', error);
+                                    Swal.fire(
+                                        'Lỗi!',
+                                        'Không thể kết nối đến server. Vui lòng thử lại sau.',
+                                        'error'
+                                    );
+                                });
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
-<script>
-    // Mở form hủy đơn hàng
-    document.getElementById('cancelButton').addEventListener('click', function() {
-      document.getElementById('cancelForm').classList.add('active');
-    });
 
-    // Đóng form hủy đơn hàng
-    document.getElementById('cancelFormClose').addEventListener('click', function() {
-      document.getElementById('cancelForm').classList.remove('active');
-    });
-
-    // Xử lý gửi form
-    document.getElementById('cancelOrderForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Ngăn chặn việc reload trang
-      const reason = document.getElementById('reason').value;
-      const comments = document.getElementById('comments').value;
-
-      // Gửi dữ liệu hủy đơn hàng đến server
-      fetch('/api/cancel-order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          orderId: '12345', // Thay bằng mã đơn hàng thực tế
-          reason,
-          comments,
-        }),
-      })
-      .then(response => {
-        if (response.ok) {
-          // Cập nhật trạng thái đơn hàng trên giao diện
-          document.getElementById('orderStatus').innerText = 'Đang hủy hàng';
-
-          // Chuyển hướng về trang danh sách đơn hàng
-          setTimeout(() => {
-            window.location.href = '/orders'; // Đường dẫn trang danh sách đơn hàng
-          }, 2000); // Chờ 2 giây trước khi chuyển trang
-        } else {
-          alert('Có lỗi xảy ra khi hủy đơn hàng. Vui lòng thử lại.');
-        }
-      })
-      .catch(error => console.error('Lỗi:', error));
-    });
-  </script>
