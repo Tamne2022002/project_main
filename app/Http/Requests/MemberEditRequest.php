@@ -21,7 +21,7 @@ class MemberEditRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [ 
+        return [
             'name' => [
                 'required',
                 'string',
@@ -39,11 +39,11 @@ class MemberEditRequest extends FormRequest
                 'max:255',
             ],
             'email' => [
-                'required',               
+                'required',
                 'max:255',
                 'email',
             ],
-             
+
         ];
     }
     public function messages()
@@ -56,9 +56,9 @@ class MemberEditRequest extends FormRequest
             'phone.max' => 'Số điện thoại không được vượt quá 10 ký tự',
             'address.required' => 'Địa chỉ không được để trống',
             'address.max' => 'Địa chỉ không được vượt quá 255 ký tự',
-            'email.required' => 'Email không được để trống',           
+            'email.required' => 'Email không được để trống',
             'email.max' => 'Email không vượt quá 255 ký tự',
             'email.email' => 'Vui lòng nhập đúng định dạng email',
-                ];
+        ];
     }
 }

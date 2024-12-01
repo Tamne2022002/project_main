@@ -56,11 +56,11 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        if (auth()->attempt(['email' => $input['email'], 'password' => $input['password']])) { 
+        if (Auth::attempt(['email' => $input['email'],'password' => $input['password']])) { 
             $account = User::where('email', $request->email)->first();
             if(!empty($account)){
                 session(['user' => $account]);
-                if (auth()->user()->type == 'admin') {
+                if (Auth::user()->type == 'admin') {
                     return redirect()->route('admin.dashboard.dashboard'); 
                 } else { 
                     return redirect()->route('admin.login');

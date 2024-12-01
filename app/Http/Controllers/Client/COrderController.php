@@ -37,4 +37,20 @@ class COrderController extends Controller
         }
         return redirect()->route('login');
     }
+
+    public function cancelOrder(Request $request)
+    {
+        $orderId = $request->input('orderId');
+ 
+        $order = OrderModel::where('order_code', $orderId)->first();
+
+        if (!$order) {
+            return response()->json(['success' => false, 'message' => 'Đơn hàng không tồn tại.'], 404);
+        }
+
+        OrderModel::where('order_code', $orderId)->update(['status' => '6', 'updated_at' => now()]);
+
+        return response()->json(['success' => true, 'message' => 'Đơn hàng đã được hủy thành công.']);
+    }
+
 }

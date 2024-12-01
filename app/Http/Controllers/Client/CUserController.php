@@ -28,10 +28,14 @@ class CUserController extends Controller
     }
 
     public function postlogin(LoginRequest $request)
-    {
-
+    { 
         $cre = $request->only('email', 'password');
-        
+        $userExists = MemberModel::where('email', $cre['email'])->exists();
+    
+        if (!$userExists) {
+            return redirect()->route('user.login')->with('fail', 'Email không tồn tại trong hệ thống.');
+        }
+    
         if (Auth::guard('member')->attempt($cre)) {
             $user = Auth::guard('member')->user();
             Auth::guard('member')->login($user);
@@ -39,9 +43,8 @@ class CUserController extends Controller
             $request->session()->regenerate();
             return redirect()->route('index'); 
         }
-   
-        return redirect()->route('user.login')->with('fail', 'Tài khoản hoặc mật khẩu không chính xác.');
-
+    
+        return redirect()->route('user.login')->with('fail', 'Tài khoản hoặc mật khẩu không chính xác.');
     }
 
     public function postregister(RegisterRequest $request)
@@ -69,14 +72,15 @@ class CUserController extends Controller
             'mail.com.vn',
             'yandex.com',
             'protonmail.com',
-            'caothang.edu.vn'
+            'caothang.edu.vn',
+            'email.com'
         ];
         
         $cre = $request->all();
         $domain = substr(strrchr($request->email, "@"), 1);
 
         if(!in_array($domain, $popularDomains)) {
-            return redirect()->route('user.register')->with('fail', 'Địa chỉ email không xác định');
+            return redirect()->route('user.signup')->with('fail', 'Địa chỉ email không xác định');
         }
 
         if ($cre) {

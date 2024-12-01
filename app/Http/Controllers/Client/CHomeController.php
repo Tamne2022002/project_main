@@ -22,7 +22,7 @@ class CHomeController extends Controller
     }
     public function index()
     {  
-        $sliders = PhotoModel::select('name', 'desc', 'photo_path')->get();
+        $sliders = PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'slider')->get();
         $news = NewsModel::select('id', 'name', 'desc', 'photo_path')->where('status', 1)
         ->where('featured', 1)
         ->whereNull('deleted_at')->get();

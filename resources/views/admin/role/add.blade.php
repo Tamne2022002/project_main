@@ -16,7 +16,7 @@
                     <div class="col-12">
                         <div class="card card-primary card-outline text-sm">
                             <div class="d-flex px-3 py-1 my-2 ">
-                                <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
+                                <button type="submit" class="btn btn-primary check-roles submit-check mr-2">Lưu</button>
                                 <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
                                 <a href="{{ route('roles.index') }}" class="btn btn-danger">Thoát</a>
                             </div>
@@ -105,7 +105,32 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"].checkbox_children');
+    const submitButton = document.querySelector('.submit-check');
 
+    form.addEventListener('submit', function (e) {
+        let isChecked = false;
+ 
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                isChecked = true;
+            }
+        });
+
+        if (!isChecked) {
+            e.preventDefault();
+            Swal.fire('Thông báo', 'Vui lòng chọn ít nhất một quyền trước khi lưu!',
+            'warning');
+        }
+    });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @endsection
+ 
+    

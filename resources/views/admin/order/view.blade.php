@@ -20,7 +20,7 @@
                         <a href="{{ route('order.index') }}" class="btn btn-danger">Thoát</a>
                     </div>
                 </div>
-                @csrf 
+                @csrf  
                 <div class="row col-12">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-md-3">
                         <label>Trạng thái</label> 
-                        @if ($Order->status == 5 || $Order->status == 6)
+                        @if ($Order->status == 7)
                         @php
                             $order_status = $Order->status-1;
                         @endphp
@@ -98,6 +98,41 @@
                         </tbody>
                     </table>
                 </div> 
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Thông tin người đặt:</label>
+                    </div>
+                    @php 
+                        $nameMb = DB::table('table_member')->where('id', $Order->id_member)->first(); 
+                        $city = DB::table('table_provinces')->where('id', $Order->province)->first(); 
+                        $district = DB::table('table_districts')->where('id', $Order->distrist)->first(); 
+                        $ward = DB::table('table_wards')->where('id', $Order->ward)->first(); 
+                    @endphp
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tên khách hàng</th>
+                                <th scope="col">Số điện thoại</th>
+                                <th scope="col">Địa chỉ</th>
+                                <th scope="col">Xã/Phường</th>
+                                <th scope="col">Quận/Huyện</th>
+                                <th scope="col">Tỉnh</th>
+                                <th scope="col">Yêu cầu</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            <tr>
+                                <td class="">{{ $nameMb->name }}</td>
+                                <td class="">{{ $Order->phone }}</td> 
+                                <td class="">{{ $Order->address }}</td> 
+                                <td class="">{{ $ward->Name }}</td> 
+                                <td class="">{{ $district->Name }}</td> 
+                                <td class="">{{ $city->Name }}</td> 
+                                <td class="">{{ $Order->note }}</td> 
+                            </tr> 
+                        </tbody>
+                    </table>
+                </div>
             </form>
         </div>
         

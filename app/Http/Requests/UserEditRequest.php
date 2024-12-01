@@ -22,12 +22,12 @@ class UserEditRequest extends FormRequest
     public function rules(): array
     {
         return [ 
-            'full_name' => [
-                'required',
-                'string',
-                'regex:/^[\pL0-9\s]*$/u',
-                'max:100',
-            ],
+            // 'name' => [
+            //     'required',
+            //     'string',
+            //     'regex:/^[\pL0-9\s]*$/u',
+            //     'max:100',
+            // ],
             'phone' => [
                 'required',
                 'string',
@@ -38,30 +38,28 @@ class UserEditRequest extends FormRequest
                 'string',
                 'max:255',
             ],
-            'email' => [
-                'required',
-                'string',            
-                'max:255',
-                'email',
-                'unique:table_member,email'
-            ],
+            // 'email' => [
+            //     'required',
+            //     'max:255',
+            //     'email',
+            // ],
              
         ];
     }
     public function messages()
     {
         return [
-            'full_name.required' => 'Tên không được để trống',
-            'full_name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
-            'full_name.max' => 'Tên không được vượt quá 20 ký tự', 
+            // 'name.required' => 'Tên không được để trống',
+            // 'name.regex' => 'Tên chỉ được bao gồm các ký tự chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng',
+            // 'name.max' => 'Tên không được vượt quá 20 ký tự', 
             'phone.required' => 'Số điện thoại không được để trống',
             'phone.max' => 'Số điện thoại không được vượt quá 10 ký tự',
             'address.required' => 'Địa chỉ không được để trống',
             'address.max' => 'Địa chỉ không được vượt quá 255 ký tự',
-            'email.required' => 'Email không được để trống',           
-            'email.max' => 'Email không vượt quá 255 ký tự',
-            'email.email' => 'Vui lòng nhập đúng định dạng email',
-            'email.unique' => 'Email đã được sử dụng ở tài khoản khác',
+            // 'email.required' => 'Email không được để trống',           
+            // 'email.max' => 'Email không vượt quá 255 ký tự',
+            // 'email.email' => 'Vui lòng nhập đúng định dạng email',
+            // 'email.unique' => 'Email đã được sử dụng ở tài khoản khác',
         ];
     }
 }

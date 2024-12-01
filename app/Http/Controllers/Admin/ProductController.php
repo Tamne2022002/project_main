@@ -67,7 +67,7 @@ class ProductController extends Controller
                 $product = ProductModel::find($warehouseItem->id);
                 $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
                 $warehouseItem->photo_path = $product ? $product->photo_path : 'Ảnh không có sẵn';
-                $warehousedata = WarehouseModel::find($warehouseItem->id);
+                $warehousedata = WarehouseModel::where('id_parent',$warehouseItem->id)->first();
 
                 if ($warehousedata) {
                     $warehouseItem->quantity = $warehousedata->quantity;
@@ -149,13 +149,13 @@ class ProductController extends Controller
                 'status' => $request->filled('status') ? $request->status : false,
                 'featured' => $request->filled('featured') ? $request->featured : false,
             ]; 
-            $dataUploadProductImage = $this->storagetrait($request, 'photo_path', 'product'); 
+            $dataUploadProductImage = $this->storagetrait($request, 'photo_path', 'product');
+
             if (!empty($dataUploadProductImage)) {
                 $dataProductCreate['photo_name'] = $dataUploadProductImage['file_name'];
                 $dataProductCreate['photo_path'] = $dataUploadProductImage['file_path'];
             }
             $product = $this->product->create($dataProductCreate);
- 
 
             $product_id = $product->id;
             $dataWarehouseCreate = [
@@ -212,18 +212,19 @@ class ProductController extends Controller
                 'featured' => $request->filled('featured') ? $request->featured : false,
             ];
             $dataUploadProductImage = $this->storagetrait($request, 'photo_path', 'product');
+            
             if (!empty($dataUploadProductImage)) {
-
+                
                 $dataProductUpdate['photo_name'] = $dataUploadProductImage['file_name'];
                 $dataProductUpdate['photo_path'] = $dataUploadProductImage['file_path'];
-            }
+            } 
 
             ProductModel::find($id)->update($dataProductUpdate);
             $product = ProductModel::find($id);
             /* Sub img */
-            if ($request->hasFile('photo_path')) {
-                $this->gallery->where('product_id', $id)->delete();
-                foreach ($request->photo_path as $fileItem) {
+            if ($request->hasFile('photo_path_multi')) {
+                $product->images()->where('id_parent', $id)->delete();
+                foreach ($request->photo_path_multi as $fileItem) {
                     $datagallery = $this->storagetraitmultiple($fileItem, 'product');
                     $product->images()->create([
                         'id_parent' => $product->id,
@@ -250,8 +251,12 @@ class ProductController extends Controller
         $categoryIds = $request->query('categoryId'); 
         if (is_array($categoryIds)) {
             $products = ProductModel::whereIn('id_list', $categoryIds)->get(); 
+ 
         } else {
             $products = ProductModel::with('table_product_list')->get();
+        }
+        foreach ($products as $key => $product) {
+            $products[$key]['dm'] = ProductListModel::where('id', $product->id_list)->first();
         }
         return response()->json(['products' => $products]);
     }
@@ -261,12 +266,13 @@ class ProductController extends Controller
         $categoryIds = $request->query('categoryId');
         
         if (is_array($categoryIds)) {
-            $products = ProductModel::whereIn('category_id', $categoryIds)->with('category')->get();
+            $products = ProductModel::whereIn('id_list', $categoryIds)->with('category')->get();
         } else {
-            $products = ProductModel::with('category')->get();
+            $products = ProductModel::with('table_product_list')->get();
         }
+        
         foreach ($products as $key => $product) {
-            $products[$key]['quantity'] = Warehouse::where('product_id', $product->id)->pluck('quantity');
+            $products[$key]['quantity'] = Warehouse::where('id_parent', $product->id)->pluck('quantity');
         }
         return response()->json(['products' => $products]);
     }

@@ -23,7 +23,13 @@
             <form action="{{ route('product.store') }} " method="POST" enctype="multipart/form-data">
                 <div class="container-fluid pt-3">
                     @csrf
-                   
+                    <div class="card card-primary card-outline text-sm">
+                        <div class="d-flex px-3 py-1 my-2 ">
+                            <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
+                            <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
+                            <a href="{{ route('product.index') }}" class="btn btn-danger">Thoát</a>
+                        </div>
+                    </div>
                     <div class="content">
 
                         <div class="row">
@@ -123,24 +129,13 @@
                                                     <input type="text" class="text-capitalize form-control"
                                                         name="author" placeholder="Nhập tác giả:"
                                                         value="{{ old('author') }}">
-                                                </div>
-                                                <div class="form-group col-md-6 hidden">
-                                                    <label>Giá mới</label>
-                                                    <input type="number" class="form-control format-price sale_price"
-                                                        name="sale_price" placeholder="Nhập giá mới"
-                                                        value="{{ old('sale_price') }}">
-                                                </div>
+                                                </div> 
                                                 <div class="form-group col-md-6">
                                                     <label>Năm xuất bản:</label>
                                                     <input type="text" class="form-control" name="publishing_year"
                                                         placeholder="Nhập năm xuất bản"
                                                         value="{{ old('publishing_year') }}">
-                                                </div>
-                                                <div class="form-group col-md-6 hidden">
-                                                    <label>Chiết khấu(%):</label>
-                                                    <input type="number" class="form-control discount" name="discount"
-                                                        placeholder="" value="{{ old('discount') }}" readonly>
-                                                </div>
+                                                </div> 
                                                 <div class="form-group col-md-6">
                                                     <label>Hiển thị:</label>
                                                     <div class="form-check">
@@ -203,13 +198,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card card-primary card-outline text-sm">
-                        <div class="d-flex px-3 py-1 my-2 ">
-                            <button type="submit" class="btn btn-primary submit-check mr-2">Lưu</button>
-                            <button type="reset" class="btn btn-secondary mr-2">Làm lại</button>
-                            <a href="{{ route('product.index') }}" class="btn btn-danger">Thoát</a>
-                        </div>
-                    </div>
+                   
                 </div>
             </form>
         </div>

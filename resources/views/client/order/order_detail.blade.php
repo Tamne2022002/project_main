@@ -26,10 +26,11 @@
                                 </h3>
                                 <h3 class="user-list-inf-item">
                                     <a href="{{ route('user.order') }}">
-                                        <span class="user-list-item-name"  style="font-size: 16px;color:#5070C0;font-weight: 700">
+                                        <span class="user-list-item-name"
+                                            style="font-size: 16px;color:#5070C0;font-weight: 700">
                                             Lịch sử mua hàng
                                         </span>
-                                    </a>
+                                    </a> 
                                 </h3>
                                 <h3 class="user-list-inf-item">
                                     <a href="{{ route('user.changepassword') }}"><span class="user-list-item-name">Đổi mật
@@ -41,37 +42,50 @@
                             </div>
                         </div>
                     </div>
-                    @php 
-                        $province = DB::table('table_provinces')->where('id',$hdb[0]->province)->get();
-                        $districts = DB::table('table_districts')->where('id',$hdb[0]->distrist)->get();
-                        $ward = DB::table('table_wards')->where('id',$hdb[0]->ward)->get(); 
+                    @php
+                        $province = DB::table('table_provinces')
+                            ->where('id', $hdb[0]->province)
+                            ->get();
+                        $districts = DB::table('table_districts')
+                            ->where('id', $hdb[0]->distrist)
+                            ->get();
+                        $ward = DB::table('table_wards')
+                            ->where('id', $hdb[0]->ward)
+                            ->get();
+                        $statusOrder = DB::table('table_order_status')
+                            ->where('id', $hdb[0]->status)
+                            ->get();
 
-                    @endphp
+                    @endphp 
                     <div class="col-md-9">
                         <div class="box-form">
                             <div class="title__form">Thông tin</div>
-                            <div class="content__form"> 
+                            <div class="content__form">
                                 <div class="flex-infor-bill mb-4">
                                     <div class="infor-bill">
                                         <div class="infor-bill-item"></div>
-                                        <div class="title-name2">Địa chỉ nhận hàng: {{ $user->address }}, {{ $ward[0]->Name ?? '' }} {{ $districts[0]->Name ?? '' }}  {{ $province[0]->Name ?? ''}}</div>
-                                        <div class="infor-bill-item">Tên: {{ $user->name }} </div> 
+                                        <div class="title-name2">Địa chỉ nhận hàng: {{ $user->address }},
+                                            {{ $ward[0]->Name ?? '' }} {{ $districts[0]->Name ?? '' }}
+                                            {{ $province[0]->Name ?? '' }}</div>
+                                        <div class="infor-bill-item">Tên: {{ $user->name }} </div>
                                         <div class="infor-bill-item">Số điện thoại: {{ $user->phone }}</div>
-                                    </div> 
+                                    </div>
                                 </div>
-                                <table class="table table-bordered table-striped">  
+                                <table class="table table-bordered table-striped">
                                     <tbody>
                                         <tr>
                                             <th>Mã Sản Phẩm</th>
                                             <th>Tên Sản Phẩm</th>
                                             <th>Số Lượng</th>
+                                            <th>Trạng thái</th>
                                             <th>Đơn giá</th>
-                                        </tr> 
+                                        </tr>
                                         @foreach ($cthdb as $item)
                                             <tr>
                                                 <td>{{ $item->code }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->quantity }}</td>
+                                                <td>{{ $statusOrder[0]->name }}</td>
                                                 @if ($item->sale_price > 0)
                                                     <td>@formatmoney($item->sale_price)</td>
                                                 @else
@@ -82,66 +96,81 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-between py-3">
-                                    
-                                <div class="title-name2"><strong>Tạm tính:</strong> @formatmoney($hdb[0]->total_price - 30000)</div>
-                                <div class="title-name2"><strong>Phí ship:</strong> @formatmoney(30000)</div>
-                                <div class="title-name2"><strong>Tổng tiền:</strong> @formatmoney($hdb[0]->total_price)</div>
+                                    <div class="title-name2"><strong>Tạm tính:</strong> @formatmoney($hdb[0]->total_price - 30000)</div>
+                                    <div class="title-name2"><strong>Phí ship:</strong> @formatmoney(30000)</div>
+                                    <div class="title-name2"><strong>Tổng tiền:</strong> @formatmoney($hdb[0]->total_price)</div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <a href="#" class="btn btn-danger mt-2" onclick="history.back()">Thoát</a>
-                                <div>  </div>
-                                <span  class="btn btn-danger mt-2" id="cancelButton">Hủy đơn hàng</a>
-                            </div> 
-                            
+                                <div class="d-flex justify-content-end">
+                                    <a href="#" class="btn btn-danger mt-2" onclick="history.back()">Thoát</a>
+                                    <button class="btn btn-danger mt-2" id="cancelOrderButton">Hủy đơn hàng</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cancelOrderButton = document.getElementById('cancelOrderButton');
+
+            if (cancelOrderButton) {
+                cancelOrderButton.addEventListener('click', function() { 
+                    Swal.fire({
+                        title: 'Bạn có chắc chắn?',
+                        text: "Đơn hàng sẽ bị hủy và không thể khôi phục!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Vâng, hủy đơn hàng!',
+                        cancelButtonText: 'Không, quay lại'
+                    }).then((result) => {
+                        if (result.isConfirmed) { 
+                            fetch('/api/cancel-order', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    },
+                                    body: JSON.stringify({
+                                        orderId: '{{ $hdb[0]->order_code }}',
+                                    }),
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        Swal.fire(
+                                            'Đã hủy!',
+                                            'Đơn hàng đã được hủy thành công.',
+                                            'success'
+                                        ).then(() => {
+                                            window.history.back(); // Tải lại trang
+                                        });
+                                    } else {
+                                        Swal.fire(
+                                            'Lỗi!',
+                                            'Có lỗi xảy ra khi hủy đơn hàng. Vui lòng thử lại.',
+                                            'error'
+                                        );
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Lỗi:', error);
+                                    Swal.fire(
+                                        'Lỗi!',
+                                        'Không thể kết nối đến server. Vui lòng thử lại sau.',
+                                        'error'
+                                    );
+                                });
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
-<script>
-    // Mở form hủy đơn hàng
-    document.getElementById('cancelButton').addEventListener('click', function() {
-      document.getElementById('cancelForm').classList.add('active');
-    });
-
-    // Đóng form hủy đơn hàng
-    document.getElementById('cancelFormClose').addEventListener('click', function() {
-      document.getElementById('cancelForm').classList.remove('active');
-    });
-
-    // Xử lý gửi form
-    document.getElementById('cancelOrderForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Ngăn chặn việc reload trang
-      const reason = document.getElementById('reason').value;
-      const comments = document.getElementById('comments').value;
-
-      // Gửi dữ liệu hủy đơn hàng đến server
-      fetch('/api/cancel-order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          orderId: '12345', // Thay bằng mã đơn hàng thực tế
-          reason,
-          comments,
-        }),
-      })
-      .then(response => {
-        if (response.ok) {
-          // Cập nhật trạng thái đơn hàng trên giao diện
-          document.getElementById('orderStatus').innerText = 'Đang hủy hàng';
-
-          // Chuyển hướng về trang danh sách đơn hàng
-          setTimeout(() => {
-            window.location.href = '/orders'; // Đường dẫn trang danh sách đơn hàng
-          }, 2000); // Chờ 2 giây trước khi chuyển trang
-        } else {
-          alert('Có lỗi xảy ra khi hủy đơn hàng. Vui lòng thử lại.');
-        }
-      })
-      .catch(error => console.error('Lỗi:', error));
-    });
-  </script>

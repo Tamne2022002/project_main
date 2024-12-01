@@ -84,10 +84,10 @@
                             </div>
                             <div class="form-group col-6">
                                 <label>Mô tả</label>
-                                <textarea type="text" class="form-control @error('description') is-invalid @enderror" name="description"
-                                    placeholder="Nhập mô tả" value="">{{ $settings->description }}
+                                <textarea type="text" class="form-control @error('desc') is-invalid @enderror" name="desc"
+                                    placeholder="Nhập mô tả" value="">{{ $settings->desc }}
                                 </textarea>
-                                @error('description')
+                                @error('desc')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>

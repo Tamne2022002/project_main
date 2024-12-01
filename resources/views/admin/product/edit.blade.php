@@ -130,22 +130,11 @@
                                                     <input type="text" class="text-capitalize form-control"
                                                         name="author" value="{{ $product->author }}">
                                                 </div>
-                                                <div class="form-group col-md-6 d-none">
-                                                    <label>Giá mới</label>
-                                                    <input type="number" class="form-control format-price sale_price "
-                                                        name="sale_price" value="{{ $product->sale_price }}">
-                                                </div>
                                                 <div class="form-group col-md-6">
                                                     <label>Năm xuất bản:</label>
                                                     <input type="text" class="form-control" name="publishing_year"
                                                         value="{{ $product->publishing_year }}">
-                                                </div>
-                                                <div class="form-group col-md-6 d-none">
-                                                    <label>Chiết khấu(%):</label>
-                                                    <input type="number" class="form-control discount" name="discount"
-                                                        value="{{ $product->discount }}" readonly>
-
-                                                </div>
+                                                </div> 
                                                 <div class="form-group col-md-6">
                                                     <label>Hiển thị:</label>
                                                     <div class="form-check">
@@ -208,7 +197,7 @@
                                             <div class="form-group">
                                                 <label>Hình Ảnh Chi Tiết</label>
                                                 <input type="file" multiple class="form-control-file"
-                                                    name="photo_path[]">
+                                                    name="photo_path_multi[]">
                                                 <div class="col-md-12 box-gallery"> 
                                                     @foreach ($product->productGallery as $productGalleryItem)
                                                         <div class="box-gallery-item">

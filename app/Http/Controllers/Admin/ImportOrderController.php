@@ -67,7 +67,7 @@ class ImportOrderController extends Controller
 
                 $this->ImportOrderdetail->create($dataCreateImportOrderDetail);
 
-                $product = WarehouseModel::find($request->id_product[$i]);
+                $product = WarehouseModel::where('id_parent', $request->id_product[$i])->first(); 
                 $product->quantity = $product->quantity + $request->quantity[$i];
                 $product->save();
             }

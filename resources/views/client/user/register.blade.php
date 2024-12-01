@@ -66,7 +66,16 @@
                             </div>
                             <label class="emailMember-error error" for="emailMember" style=""></label>
                         </div>
-
+                        <div class="return">
+                            @if ($message = Session::get('fail'))
+                                <div>
+                                    <div style="color: #dd0505;
+                                            font-size: 1.2em;font-weight: bold;">
+                                        {{ $message }}
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                         @error('email')
                             <div style="color: #dd0505;
                                 font-size: 1em;font-weight: bold;">
@@ -80,7 +89,8 @@
                                     placeholder="Nhập mật khẩu" autocomplete="off" />
                             </div>
                         </div>
-                        <div class="ex-password" style="font-size: 12px;margin-bottom:10px;color:#9b9b9b">Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa, chữ thường, và 1 ký tự đặc biệt</div>
+                        <div class="ex-password" style="font-size: 12px;margin-bottom:10px;color:#9b9b9b">Mật khẩu phải
+                            chứa ít nhất 1 chữ cái viết hoa, chữ thường, số và 1 ký tự đặc biệt</div>
                         @error('password')
                             <div style="color: #dd0505;
                                 font-size: 1em;font-weight: bold;">
@@ -94,7 +104,7 @@
                                     placeholder="Xác nhận mật khẩu" autocomplete="off" />
                             </div>
                         </div>
-                    
+
                         @error('confirm-password')
                             <div style="color: #dd0505;
                                 font-size: 1em;font-weight: bold;">
@@ -107,41 +117,30 @@
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>
-                                <button class="login100-form-btn" onclick="validatePassword()" type="submit">Đăng ký</button>
+                                <button class="login100-form-btn" onclick="validatePassword()" type="submit">Đăng
+                                    ký</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="return">
-            @if ($message = Session::get('fail'))
-                <div>
-                    <div style="color: #dd0505;
-                            font-size: 1.2em;font-weight: bold;">
-                        {{ $message }}
-                    </div>
-                </div>
-            @endif
-        </div>
-    </div>
-    </div>
-    </div>
-    
+        </div> 
+    </div>  
 </body>
 <script>
     function validatePassword() {
-       const password = document.getElementById('password').value;
-       const confirmPassword = document.getElementById('confirm-password').value;
-       const message = document.getElementById('message');
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const message = document.getElementById('message');
 
-       if (password === confirmPassword) {
-           message.textContent = "Mật khẩu trùng khớp!";
-           message.className = "success";
-       } else {
-           message.textContent = "Mật khẩu không trùng khớp, vui lòng thử lại.";
-           message.className = "error";
-       }
-   }
+        if (password === confirmPassword) {
+            message.textContent = "Mật khẩu trùng khớp!";
+            message.className = "success";
+        } else {
+            message.textContent = "Mật khẩu không trùng khớp, vui lòng thử lại.";
+            message.className = "error";
+        }
+    }
 </script>
+
 </html>
