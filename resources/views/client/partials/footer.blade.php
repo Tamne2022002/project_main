@@ -80,3 +80,5 @@ use App\Http\Controllers\Client\CHomeController;
         </path>
     </svg>
 </div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v21.0"></script>
+

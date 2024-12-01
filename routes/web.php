@@ -86,6 +86,8 @@ Route::prefix('/')->group(function () {
     Route::controller(COrderController::class)->group(function () {
         Route::get('order', 'index')->name('user.order');
         Route::get('order/{id}', 'detail')->name('user.order.detail');
+        Route::post('/api/cancel-order', 'cancelOrder')->name('order.cancel');
+
     });
  
     /*Password Change*/

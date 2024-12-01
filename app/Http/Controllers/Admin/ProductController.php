@@ -67,7 +67,7 @@ class ProductController extends Controller
                 $product = ProductModel::find($warehouseItem->id);
                 $warehouseItem->product_name = $product ? $product->name : 'Không tìm thấy sản phẩm';
                 $warehouseItem->photo_path = $product ? $product->photo_path : 'Ảnh không có sẵn';
-                $warehousedata = WarehouseModel::find($warehouseItem->id);
+                $warehousedata = WarehouseModel::where('id_parent',$warehouseItem->id)->first();
 
                 if ($warehousedata) {
                     $warehouseItem->quantity = $warehousedata->quantity;

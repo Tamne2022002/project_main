@@ -166,8 +166,8 @@ a{color:#000;text-decoration:unset !important;}
 .slideshow-has-category{
     margin-top: 11rem;
     }
-.slideshow{position:relative;width: 930px;height: 417px;}
-.slider-style{object-fit:fill;}
+.slideshow{position:relative;width: 930px;height: 417px; height: 390px; overflow: hidden;}
+.slider-style{object-fit:cover; width: 900px; height: 390px;border-radius: 20px; overflow: hidden;}
 
 /* EXTERNAL PAGE */
 

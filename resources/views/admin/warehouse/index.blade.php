@@ -26,7 +26,7 @@ $func = new App\Helpers\Func();
             <div class="container-fluid pt-3">
                 <div class="w-100 card card-primary card-outline text-sm px-3 py-3">
                     <div class="row">
-                        <div class="col-md-4 filter-product-warehouse-admin">
+                        {{-- <div class="col-md-4 filter-product-warehouse-admin">
                             <label for="">Lọc theo danh mục</label>
                             <select multiple="multiple" name="product[]" data-url="{{ route('get-category-id-warehouse') }}"
                                 class="sumoselectfilterproductwarehouse">
@@ -34,7 +34,7 @@ $func = new App\Helpers\Func();
                                     <option value="{{ $value->id }}">{{ $value->name }}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="col-md-4">
                             <label for="">Tìm sản phẩm</label>
                             <form action="" class="form-inline" method="GET">

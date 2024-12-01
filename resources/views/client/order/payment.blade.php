@@ -214,7 +214,7 @@
                     Swal.fire('Thông báo', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
                     return;
                 }
-                const phoneRegex = /^[0-9]{10}$/;
+                const phoneRegex = /^(?!00)(086|096|097|098|032|033|034|035|036|037|038|039|070|079|077|076|078|083|084|085|081|082|091|094|088|089|099|090)\d{7}$/;
 
                 // Kiểm tra thông tin
                 if (!fullname || !phone || !address) {

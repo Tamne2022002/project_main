@@ -180,6 +180,7 @@
                                                     3 => 'badge-warning',
                                                     4 => 'badge-success',
                                                     5 => 'badge-danger',
+                                                    6 => 'badge-secondary',
                                                 ];
                                             @endphp
                                             <tr>

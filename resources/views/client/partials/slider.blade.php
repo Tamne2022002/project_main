@@ -13,9 +13,7 @@ use App\Http\Controllers\Client\CHomeController;
                                 <a href="{{ $v->description }}" class="slideshow-image" target="_blank" title="{{ $v->name }}">
                                     <img class="w-100 slider-style" src= "{{$v->photo_path}}"
                                         alt="{{ $v->desc }}">
-                                </a>
-                                {{-- //<img class="w-100 slider-style" src= "../index/imgs/slide0.png" --}}
-                                {{-- alt=""> --}}
+                                </a> 
                             </div>
                         @endforeach
                        

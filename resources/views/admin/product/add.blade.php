@@ -129,24 +129,13 @@
                                                     <input type="text" class="text-capitalize form-control"
                                                         name="author" placeholder="Nhập tác giả:"
                                                         value="{{ old('author') }}">
-                                                </div>
-                                                <div class="form-group col-md-6 hidden">
-                                                    <label>Giá mới</label>
-                                                    <input type="number" class="form-control format-price sale_price"
-                                                        name="sale_price" placeholder="Nhập giá mới"
-                                                        value="{{ old('sale_price') }}">
-                                                </div>
+                                                </div> 
                                                 <div class="form-group col-md-6">
                                                     <label>Năm xuất bản:</label>
                                                     <input type="text" class="form-control" name="publishing_year"
                                                         placeholder="Nhập năm xuất bản"
                                                         value="{{ old('publishing_year') }}">
-                                                </div>
-                                                <div class="form-group col-md-6 hidden">
-                                                    <label>Chiết khấu(%):</label>
-                                                    <input type="number" class="form-control discount" name="discount"
-                                                        placeholder="" value="{{ old('discount') }}" readonly>
-                                                </div>
+                                                </div> 
                                                 <div class="form-group col-md-6">
                                                     <label>Hiển thị:</label>
                                                     <div class="form-check">

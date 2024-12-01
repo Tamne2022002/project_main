@@ -49,13 +49,12 @@ class OrderController extends Controller
                 'status' => $request->status,
             ];
             $this->order->find($id)->update($dataCreate);
-
             // Update warehouse
-            if ($request->status == 6) {
+            if ($request->status == 7) {
                 foreach ($OrderDetail as $k => $v) {
                     $warehouse = WarehouseModel::where('id_parent', $v->id_product)->first();
                     $inventory = $warehouse->quantity + $v->quantity;
-                    $warehouse->update(['quantity' => $inventory]);
+                    $warehouse->update(['quantity' => $inventory]); 
                 }
             }
 
