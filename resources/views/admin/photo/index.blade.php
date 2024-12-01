@@ -18,11 +18,14 @@ $func = new App\Helpers\Func();
 <div class="content-wrapper bg-white">
     <div class="content">
         <div class="container-fluid pt-3">
+            @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'add_photo'))
+
             <div class="w-100 card card-primary card-outline text-sm">
                 <div class="col-md-6">
                     <a href="{{ route('photo.create', ['type' => $type]) }}" class="btn btn-success m-2">Thêm</a>
                 </div>
             </div>
+            @endif
             <div class="w-100 card card-primary card-outline text-sm px-3 py-3">
                 <form action="" class="form-inline" method="GET">
                     @csrf
@@ -49,19 +52,23 @@ $func = new App\Helpers\Func();
                 <tbody>
                     @if (!$sliders->isEmpty())
                         @foreach ($sliders as $slider)
-                            <tr>
-
+                            <tr> 
                                 <td class="text-capitalize">{{ $slider->name }}</td>
 
                                 <td>
-                                    <img class="slider-image-thumb" src="{{ $slider->photo_path }}" alt="">
+                                    <img class="slider-image-thumb" src="{{ (!empty($slider->photo_name) && !empty($slider->photo_path)) ? $slider->photo_path : asset('assets/noimage.jpg') }}" alt="">
                                 </td>
                                 <td>
+                                    @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'edit_photo'))
+
                                     <a href="{{ route('photo.edit', ['id' => $slider->id, 'type' => $type]) }}"
                                         class="btn btn-default">Sửa</a>
+                                    @endif
+                                    @if ($func->CheckPermissionAdmin(session()->get('user')['id'], 'delete_photo'))
                                     <a href=""
                                         data-url="{{ route('photo.delete', ['id' => $slider->id, 'type' => $type]) }}"
                                         class="btn btn-danger action_delete">Xóa</a>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

@@ -24,23 +24,53 @@ class CCartController extends Controller
     //thêm giỏ hàng từ index
     public function add_index($id = null, $quantity)
     {
-        $product = ProductModel::where('id', $id)->first();
+        // $product = ProductModel::where('id', $id)->first();
+        // $qty = WarehouseModel::where('id_parent', $id)->value('quantity');
+        // $cart = session()->get('cart', []);
+
+        // if (isset($cart[$id])) {
+        //     $cart[$id]['quantity'] += $quantity;
+        // } else {
+        //     $cart[$id]['id_product'] = $id;
+        //     $cart[$id]['name'] = $product->name;
+        //     $cart[$id]['regular_price'] = $product->regular_price;
+        //     $cart[$id]['sale_price'] = $product->sale_price;
+        //     $cart[$id]['photo_path'] = $product->photo_path;
+        //     $cart[$id]['quantity'] = $quantity;
+        //     $cart[$id]['product_qty'] = $qty;
+        // }
+        
+        // session()->put('cart', $cart);
+
+        if (!$id || !$quantity || $quantity < 1) {
+            return response()->json(['message' => 'Dữ liệu không hợp lệ!'], 400);
+        }
+    
+        $product = ProductModel::find($id);
+        if (!$product) {
+            return response()->json(['message' => 'Sản phẩm không tồn tại!'], 404);
+        }
+    
         $qty = WarehouseModel::where('id_parent', $id)->value('quantity');
         $cart = session()->get('cart', []);
-
+    
         if (isset($cart[$id])) {
             $cart[$id]['quantity'] += $quantity;
         } else {
-            $cart[$id]['id_product'] = $id;
-            $cart[$id]['name'] = $product->name;
-            $cart[$id]['regular_price'] = $product->regular_price;
-            $cart[$id]['sale_price'] = $product->sale_price;
-            $cart[$id]['photo_path'] = $product->photo_path;
-            $cart[$id]['quantity'] = $quantity;
-            $cart[$id]['product_qty'] = $qty;
+            $cart[$id] = [
+                'id_product' => $id,
+                'name' => $product->name,
+                'regular_price' => $product->regular_price,
+                'sale_price' => $product->sale_price,
+                'photo_path' => $product->photo_path,
+                'quantity' => $quantity,
+                'product_qty' => $qty,
+            ];
         }
-
+    
         session()->put('cart', $cart);
+    
+        return response()->json(['message' => 'Thêm giỏ hàng thành công!', 'cart' => $cart], 200);
     }
 
     public function changeQuantity($id, $method)

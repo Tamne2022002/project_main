@@ -25,10 +25,11 @@
                                 </h3>
                                 <h3 class="user-list-inf-item">
                                     <a href="{{ route('user.order') }}">
-                                        <span class="user-list-item-name"  style="font-size: 16px;color:#5070C0;font-weight: 700">
+                                        <span class="user-list-item-name"
+                                            style="font-size: 16px;color:#5070C0;font-weight: 700">
                                             Lịch sử mua hàng
                                         </span>
-                                    </a>
+                                    </a> 
                                 </h3>
                                 <h3 class="user-list-inf-item">
                                     <a href="{{ route('user.changepassword') }}"><span class="user-list-item-name">Đổi mật
@@ -40,37 +41,50 @@
                             </div>
                         </div>
                     </div>
-                    @php 
-                        $province = DB::table('table_provinces')->where('id',$hdb[0]->province)->get();
-                        $districts = DB::table('table_districts')->where('id',$hdb[0]->distrist)->get();
-                        $ward = DB::table('table_wards')->where('id',$hdb[0]->ward)->get(); 
+                    @php
+                        $province = DB::table('table_provinces')
+                            ->where('id', $hdb[0]->province)
+                            ->get();
+                        $districts = DB::table('table_districts')
+                            ->where('id', $hdb[0]->distrist)
+                            ->get();
+                        $ward = DB::table('table_wards')
+                            ->where('id', $hdb[0]->ward)
+                            ->get();
+                        $statusOrder = DB::table('table_order_status')
+                            ->where('id', $hdb[0]->status)
+                            ->get();
 
-                    @endphp
+                    @endphp 
                     <div class="col-md-9">
                         <div class="box-form">
                             <div class="title__form">Thông tin</div>
-                            <div class="content__form"> 
+                            <div class="content__form">
                                 <div class="flex-infor-bill mb-4">
                                     <div class="infor-bill">
                                         <div class="infor-bill-item"></div>
-                                        <div class="title-name2">Địa chỉ nhận hàng: {{ $user->address }}, {{ $ward[0]->Name ?? '' }} {{ $districts[0]->Name ?? '' }}  {{ $province[0]->Name ?? ''}}</div>
-                                        <div class="infor-bill-item">Tên: {{ $user->name }} </div> 
+                                        <div class="title-name2">Địa chỉ nhận hàng: {{ $user->address }},
+                                            {{ $ward[0]->Name ?? '' }} {{ $districts[0]->Name ?? '' }}
+                                            {{ $province[0]->Name ?? '' }}</div>
+                                        <div class="infor-bill-item">Tên: {{ $user->name }} </div>
                                         <div class="infor-bill-item">Số điện thoại: {{ $user->phone }}</div>
-                                    </div> 
+                                    </div>
                                 </div>
-                                <table class="table table-bordered table-striped">  
+                                <table class="table table-bordered table-striped">
                                     <tbody>
                                         <tr>
                                             <th>Mã Sản Phẩm</th>
                                             <th>Tên Sản Phẩm</th>
                                             <th>Số Lượng</th>
+                                            <th>Trạng thái</th>
                                             <th>Đơn giá</th>
-                                        </tr> 
+                                        </tr>
                                         @foreach ($cthdb as $item)
                                             <tr>
                                                 <td>{{ $item->code }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->quantity }}</td>
+                                                <td>{{ $statusOrder[0]->name }}</td>
                                                 @if ($item->sale_price > 0)
                                                     <td>@formatmoney($item->sale_price)</td>
                                                 @else
@@ -81,10 +95,9 @@
                                     </tbody>
                                 </table>
                                 <div class="d-flex justify-content-between py-3">
-                                    
-                                <div class="title-name2"><strong>Tạm tính:</strong> @formatmoney($hdb[0]->total_price - 30000)</div>
-                                <div class="title-name2"><strong>Phí ship:</strong> @formatmoney(30000)</div>
-                                <div class="title-name2"><strong>Tổng tiền:</strong> @formatmoney($hdb[0]->total_price)</div>
+                                    <div class="title-name2"><strong>Tạm tính:</strong> @formatmoney($hdb[0]->total_price - 30000)</div>
+                                    <div class="title-name2"><strong>Phí ship:</strong> @formatmoney(30000)</div>
+                                    <div class="title-name2"><strong>Tổng tiền:</strong> @formatmoney($hdb[0]->total_price)</div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
@@ -104,6 +117,7 @@
         </div>
     </div>
     <script>
+
         document.addEventListener('DOMContentLoaded', function() {
             const cancelOrderButton = document.getElementById('cancelOrderButton');
 

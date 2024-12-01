@@ -45,7 +45,7 @@ class RoleController extends Controller
         $permissionsParent = $this->permission->where('id_parent', 0)->get();
         return view('admin.role.add', compact('permissionsParent'));
     }
-    public function store(Request $request)
+    public function store(RoleAddRequest $request)
     { 
 
         $role = $this->role->create([

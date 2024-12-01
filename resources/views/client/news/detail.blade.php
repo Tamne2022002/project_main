@@ -3,7 +3,7 @@
     <title> {{$pageName }}</title>
 @endsection
 @section('content')
-    <div class="wrap-content">
+    <div class="wrap-content" style="margin-top:8em;">
         <div class="flex-news-internal row">
             <div class="news-internal-left col-lg-9">
                 <div class="title-main">

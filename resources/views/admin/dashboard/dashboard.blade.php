@@ -17,7 +17,7 @@
     <script src="{{ asset('/adminlte/dist/js/adminlte.min.js') }}"></script>
 
     <script src="{{ asset('/adminlte/dist/js/demo.js') }}"></script>
-    <script src="{{ asset('/adminlte/dist/js/pages/dashboard2.js') }}"></script>
+    {{-- <script src="{{ asset('/adminlte/dist/js/pages/dashboard2.js') }}"></script> --}}
     <script src="{{ asset('/adminlte/plugins/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('/admins/js/app.js') }}"></script>
     <script type="text/javascript">
@@ -180,6 +180,7 @@
                                                     3 => 'badge-warning',
                                                     4 => 'badge-success',
                                                     5 => 'badge-danger',
+                                                    6 => 'badge-secondary',
                                                 ];
                                             @endphp
                                             <tr>

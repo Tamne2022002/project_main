@@ -191,15 +191,15 @@ function SumoSelectFilterProduct() {
                                     <td>
                                         <img class="adm-product-img"
                                             src="${
-                                                product.product_photo_path
-                                                    ? product.product_photo_path
+                                                product.photo_path
+                                                    ? product.photo_path
                                                     : "/assets/noimage.jpg"
                                             }"
                                             alt="">
                                     </td>
                                     <td class="text-capitalize">${
-                                        product.category
-                                            ? product.category.name
+                                        product.id_list
+                                            ? product.dm.name
                                             : "Không tìm thấy danh mục"
                                     }</td>
                                     <td>
@@ -411,6 +411,25 @@ if ($(".regular_price").length && $(".sale_price").length) {
     });
 }
 
+// document.addEventListener('DOMContentLoaded', function () {
+//     const form = document.querySelector('form');
+//     const checkboxes = document.querySelectorAll('input[name="permission_id[]"]');
+
+//     form.addEventListener('submit', function (e) {
+//         let isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+
+//         if (!isChecked) {
+//             e.preventDefault();
+//             showNotify(
+//                 "Vui lòng nhập giá mới nhỏ hơn giá bán!",
+//                 "Thông báo",
+//                 "error"
+//             );
+
+//         }
+//     });
+// });
+
 
 function formatMoney(money) {
     return new Intl.NumberFormat("vi-VN", {
@@ -495,7 +514,7 @@ function chartJS() {
                 return showNotify("Vui lòng chọn năm!", "Thống báo", "error");
 
             $.ajax({
-                url: `/admin/dashboard/${month}&${year}`,
+                url: `/admin/${month}&${year}`,
                 type: "GET",
                 success: function (data) {
                     $("#statistic-number").text(formatMoney(data.total));

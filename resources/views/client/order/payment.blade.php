@@ -156,7 +156,7 @@
                                 <div id="qr-container" class="text-center mt-3" style="display: none;">
                                     <p>Quét mã QR để thanh toán:</p>
                                     <img id="qr-code-image"
-                                        src="https://img.vietqr.io/image/MB-4660590747532-compact2.png?amount=500000&addInfo=TLBOOKSTORE"
+                                        src=""
                                         class="img-fluid" alt="Mã QR thanh toán" style="max-width: 200px;">
                                 </div>
 
@@ -182,6 +182,22 @@
                 "https://script.google.com/macros/s/AKfycbxcrTkN4n8y84VESNeNE9mqeqdvPUKnnVuiFq4M3_YYMul-5EYRyJ-MeQuvwOofOeOv/exec";
             const code = generateRandomNumbers();
             // Xử lý hiển thị QR Code khi chọn phương thức thanh toán
+            paymentRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.id === 'vietqr') {
+                        const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''),
+                            10);
+
+                        const QR =
+                            `https://img.vietqr.io/image/970415-107871769484-compact2.png?amount=${total}&addInfo=TPStore_${code}&accountName=NGUYEN%20MINH%20TAM`;
+
+                        qrCodeImage.setAttribute('src', QR);
+                        qrContainer.style.display = 'block';
+                    } else {
+                        qrContainer.style.display = 'none';
+                    }
+                });
+            });
             paymentForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
                 const selectedPaymentMethod = document.querySelector(
@@ -189,22 +205,40 @@
                 const fullname = document.getElementById('fullname_vnpay').value;
                 const phone = document.getElementById('phone_vnpay').value;
                 const address = document.getElementById('address_vnpay').value;
+                const province = document.getElementById('cart-province').value;
+                const district = document.getElementById('cart-distrist').value;
+                const ward = document.getElementById('cart-ward').value;
                 const total = parseInt(totalPriceElement.textContent.replace(/[^\d]/g, ''), 10);
 
                 if (!fullname || !phone || !address) {
-                    Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
+                    Swal.fire('Thông báo', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
                     return;
                 }
-                const phoneRegex = /^[0-9]{10}$/;
+                const phoneRegex = /^(?!00)(086|096|097|098|032|033|034|035|036|037|038|039|070|079|077|076|078|083|084|085|081|082|091|094|088|089|099|090)\d{7}$/;
 
                 // Kiểm tra thông tin
                 if (!fullname || !phone || !address) {
-                    Swal.fire('Lỗi', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
+                    Swal.fire('Thông báo', 'Vui lòng nhập đầy đủ thông tin giao hàng!', 'error');
                     return;
                 }
 
                 if (!phoneRegex.test(phone)) {
-                    Swal.fire('Lỗi', 'Vui lòng nhập số điện thoại hợp lệ 10 số !', 'error');
+                    Swal.fire('Thông báo', 'Vui lòng nhập số điện thoại hợp lệ 10 số !', 'error');
+                    return;
+                }
+ 
+                if (province === "0") {
+                    Swal.fire('Thông báo', 'Vui lòng chọn đầy đủ Tỉnh', 'error');
+                    return;
+                }
+                
+                if (district === "0") {
+                    Swal.fire('Thông báo', 'Vui lòng chọn đầy đủ Huyện/Quận !', 'error');
+                    return;
+                }
+                
+                if (ward === "0") {
+                    Swal.fire('Thông báo', 'Vui lòng chọn đầy đủ Xã/Phường!', 'error');
                     return;
                 }
 
@@ -235,10 +269,10 @@
                                     'warning');
                             }
                         } else {
-                            Swal.fire('Lỗi', 'Không tìm thấy dữ liệu thanh toán!', 'error');
+                            Swal.fire('Thông báo', 'Không tìm thấy dữ liệu thanh toán!', 'error');
                         }
                     } catch (error) {
-                        Swal.fire('Lỗi', 'Không thể kiểm tra thanh toán, vui lòng thử lại!', 'error');
+                        Swal.fire('Thông báo', 'Không thể kiểm tra thanh toán, vui lòng thử lại!', 'error');
                     }
                 }
             });

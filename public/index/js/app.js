@@ -203,7 +203,7 @@ function SlickPage() {
             dots: false,
             infinite: true,
             autoplaySpeed: 1500,
-            slidesToShow: 8,
+            slidesToShow: 7,
             slidesToScroll: 1,
             adaptiveHeight: false,
             autoplay: true,
@@ -481,45 +481,22 @@ function AllRun() {
     //     }
     // }); 
 
-   $("body").on("click", ".add-to-cart", function (event) {
-    event.preventDefault();
-
-    const act = $(this).data("act") ? $(this).data("act") : 0,
-        direct = $(this).data("direct") ? $(this).data("direct") : 0;
-    let route = $(this).data("route");
- 
-    $.ajax({
-        url: "/check-login",
-        type: "GET",
-        success: function (response) {
-            if (response.logged_in) { 
-                let quantity = 0;
-
-                if ($(".qty-pro").length) { 
-                    quantity = $(".qty-pro").val();
-                } 
-
-                const warehouse_qty_obj = document.getElementById("qty");
-                const warehouse_qty = parseInt(warehouse_qty_obj.value, 10);
-
-                const in_cart_quantity_obj = document.getElementById("cqty");
-                const in_cart_quantity = parseInt(in_cart_quantity_obj.value, 10);
-
-                if (parseInt(quantity, 10) + parseInt(in_cart_quantity, 10) > parseInt(warehouse_qty, 10)) {
-                    showNotify(
-                        `Bạn đã thêm quá số lượng tồn kho`,
-                        "Thông báo",
-                        "error"
-                    );
-                } else { 
+    $("body").on("click", ".add-to-cart", function (event) {
+        event.preventDefault();
+    
+        const act = $(this).data("act") || 0;
+        const direct = $(this).data("direct") || 0;
+        const route = $(this).data("route");
+        const quantity = $("#qty_product").val() || 1;
+    
+        $.ajax({
+            url: "/check-login",
+            type: "GET",
+            success: function (response) {
+                if (response.logged_in) {
                     $.ajax({
-                        url: route,
+                        url: `${route}/${quantity}`,
                         type: "GET",
-                        data: {
-                            in_cart_quantity: in_cart_quantity,
-                            warehouse_qty: warehouse_qty,
-                            quantity: quantity,
-                        },
                         success: function (response) {
                             if (act === "buynow" && direct) {
                                 window.location.href = direct;
@@ -532,19 +509,19 @@ function AllRun() {
                             console.error(xhr.responseText);
                         },
                     });
+                } else {
+                    showNotify("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!", "Thông báo", "error");
+                    setTimeout(() => {
+                        window.location.href = "/sign-in";
+                    }, 3000);
                 }
-            } else { 
-                showNotify("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!", "Thông báo", "error");
-                setTimeout(function () {
-                    window.location.href = "/sign-in";
-                }, 3000);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("Lỗi khi kiểm tra trạng thái đăng nhập:", xhr.responseText);
-        },
+            },
+            error: function (xhr, status, error) {
+                console.error("Lỗi khi kiểm tra trạng thái đăng nhập:", xhr.responseText);
+            },
+        });
     });
-});
+    
 
     // Quantity detail page 1
     $(".quantity-minus-pro-detail,.quantity-plus-pro-detail,input.qty-pro").on(

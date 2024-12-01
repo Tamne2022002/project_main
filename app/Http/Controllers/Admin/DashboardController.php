@@ -36,7 +36,7 @@ class DashboardController extends Controller
         $monthStart = Carbon::create($now->year, $now->month, 1, 0, 0, 0);
         $monthEnd = Carbon::create($now->year, $now->month, $daysInMonth, 23, 59, 59);
 
-        $hdb = OrderModel::whereIn('status', [2, 5])->whereBetween('created_at', [$monthStart, $monthEnd])->get();
+        $hdb = OrderModel::whereIn('status', [2,3,4, 5])->whereBetween('created_at', [$monthStart, $monthEnd])->get();
     
         //tính tổng doanh thu
         foreach ($hdb as $value) {
@@ -56,7 +56,7 @@ class DashboardController extends Controller
 
     }
     public function filter($month, $year)
-    {
+    { 
         $user = Auth::user();
         if ($user == null) {
             return redirect()->route('admin.login');
@@ -73,7 +73,7 @@ class DashboardController extends Controller
             for ($i = 0; $i < $daysInMonth; $i++) { //get profit base on date
                 $todayStart = Carbon::create($year, $month, $i + 1, 0, 0, 0); //get first day
                 $todayEnd = Carbon::create($year, $month, $i + 1, 23, 59, 59); //get last day
-                $temp = DB::table('orders')->select('total_price')->where('created_at', '>=', $todayStart)->where('created_at', '<=', $todayEnd)->whereIn('status', [3, 5])->sum('total_price'); //get total price
+                $temp = DB::table('table_order')->select('total_price')->where('created_at', '>=', $todayStart)->where('created_at', '<=', $todayEnd)->whereIn('status', [3, 5])->sum('total_price'); //get total price
                 $profitBaseOnDate[$i] = $temp ? $temp : 0; //add to array
             }
 

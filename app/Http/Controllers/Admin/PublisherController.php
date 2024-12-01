@@ -51,7 +51,7 @@ class PublisherController extends Controller
     { 
         try {
             $dataCreate['name'] = $request->name;
-            $dataCreate['desc'] = $request->desc;
+            $dataCreate['desc'] = $request->desc ?? '';
 
             $dataPhotoPublisher = $this->storagetrait($request, 'photo_path', 'publisher');
             
@@ -78,7 +78,7 @@ class PublisherController extends Controller
         try {
             $dataUpdate = [
                 'name' => $request->name,
-                'description' => $request->description,
+                'desc' => $request->desc ?? '',
             ];
             $dataPhotoPublisher = $this->storagetrait($request, 'photo_path', 'publisher');
             if (!empty($dataPhotoPublisher)) {
