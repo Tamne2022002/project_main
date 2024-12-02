@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NewsModel;
+use App\Models\PhotoModel;
 use Illuminate\Support\Facades\Auth;
 
 class CNewsController extends Controller
@@ -20,7 +21,8 @@ class CNewsController extends Controller
         $newsDetail = NewsModel::find($id);
         $pageName = $newsDetail->name;
         $newsInternal = NewsModel::select('id', 'name', 'desc', 'photo_path')->get();
+        $banner =  PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'banner')->get();
         
-        return view('client.news.detail', compact('newsDetail', 'newsInternal', 'pageName'));
+        return view('client.news.detail', compact('newsDetail', 'newsInternal', 'pageName','banner'));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\ProductModel;
+use App\Models\PhotoModel;
 use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
 use DB;
@@ -18,29 +19,13 @@ class CCartController extends Controller
         } else {
             $user = '';
         }
-        return view('client.order.cart', compact('user'));
+        $banner =  PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'banner')->get();
+        return view('client.order.cart', compact('user','banner'));
     }
 
     //thêm giỏ hàng từ index
     public function add_index($id = null, $quantity)
     {
-        // $product = ProductModel::where('id', $id)->first();
-        // $qty = WarehouseModel::where('id_parent', $id)->value('quantity');
-        // $cart = session()->get('cart', []);
-
-        // if (isset($cart[$id])) {
-        //     $cart[$id]['quantity'] += $quantity;
-        // } else {
-        //     $cart[$id]['id_product'] = $id;
-        //     $cart[$id]['name'] = $product->name;
-        //     $cart[$id]['regular_price'] = $product->regular_price;
-        //     $cart[$id]['sale_price'] = $product->sale_price;
-        //     $cart[$id]['photo_path'] = $product->photo_path;
-        //     $cart[$id]['quantity'] = $quantity;
-        //     $cart[$id]['product_qty'] = $qty;
-        // }
-        
-        // session()->put('cart', $cart);
 
         if (!$id || !$quantity || $quantity < 1) {
             return response()->json(['message' => 'Dữ liệu không hợp lệ!'], 400);

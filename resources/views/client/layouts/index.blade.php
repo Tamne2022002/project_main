@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <div class="wrap-container">
+    <div class="wrap-container" style="margin-top: 16em">
         <div class="{{ Request::route()->getName() == 'index' ? 'external-page' : 'internal-page' }}">
             @include('client.partials.header')
             {{-- @include('client.partials.menu') --}}

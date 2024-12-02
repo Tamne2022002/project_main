@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-  
 use App\Http\Requests\PasswordChangeRequest;
 use App\Models\MemberModel; 
+use App\Models\PhotoModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,7 +16,8 @@ class CChangePasswordController extends Controller
     {
         if (Auth::guard('member')->user()) {
             $user = Auth::guard('member')->user(); 
-            return view('client.info.changepassword', compact('user'));
+            $banner =  PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'banner')->get();
+            return view('client.info.changepassword', compact('user', 'banner'));
         }
         return redirect()->route('login');
     }

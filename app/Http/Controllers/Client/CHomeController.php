@@ -23,6 +23,7 @@ class CHomeController extends Controller
     public function index()
     {  
         $sliders = PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'slider')->get();
+        $banner =  PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'banner')->get();
         $news = NewsModel::select('id', 'name', 'desc', 'photo_path')->where('status', 1)
         ->where('featured', 1)
         ->whereNull('deleted_at')->get();
@@ -30,6 +31,12 @@ class CHomeController extends Controller
         $publisher = PublisherModel::select('id', 'name', 'photo_path')->get();
         $category_child = ProductListModel::with('children')
         ->where('status', 1)
+        ->whereNull('deleted_at')
+        ->where('id_parent', 0)
+        ->get();
+        $category_featured = ProductListModel::with('children')
+        ->where('status', 1)
+        ->where('featured', 1)
         ->whereNull('deleted_at')
         ->where('id_parent', 0)
         ->get();
@@ -43,18 +50,19 @@ class CHomeController extends Controller
 
          if (Auth::guard('member')->user()) {
              $user = Auth::guard('member')->user();
-             return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_child', 'user'));
+             return view('client.index', compact('sliders', 'banner','news', 'productFeatured',  'publisher', 'category_child','category_featured', 'user'));
          }
-        return view('client.index', compact('sliders', 'news', 'productFeatured',  'publisher', 'category_child')); 
+        return view('client.index', compact('sliders','banner' ,'news', 'productFeatured',  'publisher', 'category_child','category_featured')); 
 
 
     }
     public function PublisherProduct($id)
     {
         $publisher = PublisherModel::where('id', $id)->firstOrFail();
+        $banner =  PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'banner')->get();
         $pagename = $publisher->name;
         $publisherproduct = ProductModel::where('id_publisher', $id)->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
-        return view('client.product.publisher_product', compact('publisherproduct', 'pagename',));
+        return view('client.product.publisher_product', compact('publisherproduct', 'pagename','banner'));
     }
    
 
@@ -72,7 +80,8 @@ class CHomeController extends Controller
         ->whereNull('deleted_at')
         ->latest()
         ->paginate(20);
-        return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename','category_child'));
+        $banner =  PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'banner')->get();
+        return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename','category_child','banner'));
     }
 
     public function getCategoryData(Request $request)

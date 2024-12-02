@@ -56,9 +56,24 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            <div class="product-button text-center">
+                                                <div class="product-button-cart btn rounded btn-success mb-1 w-100 ">
+                                                    <a href="{{ route('add_index.cart', ['id' => $v->id]) }}"
+                                                        class="product-button-cart-action button-addnow text-light add-to-cart"
+                                                        data-route="{{ route('add_index.cart', ['id' => $v->id]) }}"><i
+                                                            class="fa-solid fa-cart-circle-plus me-1"></i>Thêm vào giỏ hàng</a>
+                                                </div>
+                                                <div class="product-button-cart-buy btn rounded btn-primary  w-100 ">
+                                                    <a href="#" class="product-button-cart-action add-to-cart text-light"
+                                                        data-route="{{ route('add_index.cart', ['id' => $v->id]) }}"
+                                                        data-act="buynow" data-direct="{{ route('user.cart') }}"><i
+                                                            class="fa-solid fa-basket-shopping-simple me-1"></i>Mua ngay</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                
                             @endforeach
                         </div>
                     </div>
@@ -67,9 +82,9 @@
         </div>
     @endif
 @endisset
-@isset($category_child)
-    @if (!$category_child->isEmpty())
-        @foreach ($category_child as $v)
+@isset($category_featured)
+    @if (!$category_featured->isEmpty())
+        @foreach ($category_featured as $v)
             <div class="wrap-product-list-cat product-from-ajax">
                 <div class="wrap-content">
                     <div class="category-group d-flex justify-content-between flex-wrap relative">
@@ -78,7 +93,6 @@
                                 <span>{{ $v->name }}</span>
                             </div>
                         </div>
-                        
                         <div class="flex-categorysecond">
                             @foreach ($v->children()->where('featured', 1)->where('status', 1)->whereNull('deleted_at')->get() as $category_second)
                                 <div class="categorysecond" data-idf="{{ $v->id }}"
@@ -89,9 +103,11 @@
                             @endforeach 
                         </div>
                     </div>
+                 
                     <div class="paging-product-category-style paging-product-category-{{ $v->id }}"
                         data-route="{{ route('add_index.cart', ['id'=> $v->id , 'quantity' => 1]) }}">
                     </div>
+                    
                 </div>
             </div>
         @endforeach

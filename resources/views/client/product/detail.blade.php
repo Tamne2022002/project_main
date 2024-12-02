@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="wrap-content">
-        <div class="grid-product-detail row" style="margin-top: 8em">
+        <div class="grid-product-detail row" >
             <div class="left-product-detail col-md-6 col-lg-5 mb-4">
                 <div class="group-product-image">
                     <div class="slick-product-image-core">
@@ -99,10 +99,10 @@
                             <div class="cart-pro-detail d-flex flex-wrap align-items-center justify-content-between">
                                 <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center add-to-cart"
                                    href="#" data-route="{{ route('add_index.cart', ['id' => $productDetail->id]) }}"
-                                   data-quantity="1"><i class="bi bi-basket2"></i><span>Thêm vào giỏ hàng</span></a>
+                                   data-quantity="{{$qty}}"><i class="bi bi-basket2"></i><span>Thêm vào giỏ hàng</span></a>
                                 <a class="transition buynow addcart text-decoration-none d-flex align-items-center justify-content-center add-to-cart"
                                    href="#" data-route="{{ route('add_index.cart', ['id' => $productDetail->id]) }}"
-                                   data-act="buynow" data-direct="{{ route('user.cart') }}" data-quantity="1"><i class="bi bi-cart2"></i><span>Mua ngay</span></a>
+                                   data-act="buynow" data-direct="{{ route('user.cart') }}" data-quantity="{{$qty}}"><i class="bi bi-cart2"></i><span>Mua ngay</span></a>
                             </div>
                         </div>
                         

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\CartModel;
 use App\Models\CartDetailModel;
 use App\Models\MemberModel;
+use App\Models\PhotoModel;
 
 class CInfoController extends Controller
 {
@@ -18,9 +19,10 @@ class CInfoController extends Controller
         if(Auth::guard('member')->user()) 
         {
             $user = Auth::guard('member')->user(); 
-            return view('client.info.index', compact('user'));
+            $banner =  PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'banner')->get();
+            return view('client.info.index', compact('user','banner'));
         }
-
+        
         return redirect()->route('user.login');
     }
 

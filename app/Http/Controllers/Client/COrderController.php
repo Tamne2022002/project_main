@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OrderModel;
 use App\Models\OrderDetailModel;  
+use App\Models\PhotoModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,8 @@ class COrderController extends Controller
             // $allrate = Rate::all();
             $user = Auth::guard('member')->user();
             $hdb = OrderModel::where('id_member', $user->id)->orderBy('created_at', 'desc')->get();
-            return view('client.order.order', compact('user', 'hdb'));
+            $banner =  PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'banner')->get();
+            return view('client.order.order', compact('user', 'hdb','banner'));
         }
         return redirect()->route('login');
     }
@@ -28,7 +30,8 @@ class COrderController extends Controller
             $user = Auth::guard('member')->user();
             $hdb = OrderModel::where('id', $id)->get();
             $cthdb = OrderDetailModel::join('table_product', 'table_product.id', '=', 'table_order_detail.id_product')->where('id_order', $id)->get();
-            return view('client.order.order_detail', compact('user', 'hdb', 'cthdb'));
+            $banner =  PhotoModel::select('name', 'desc', 'photo_path')->where('type', 'banner')->get();
+            return view('client.order.order_detail', compact('user', 'hdb', 'cthdb','banner'));
         }
         return redirect()->route('login');
     }
