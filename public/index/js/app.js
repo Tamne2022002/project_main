@@ -150,7 +150,7 @@ function SlickPage() {
         $(".slick-slideshow").slick({
             dots: false,
             infinite: true,
-            autoplaySpeed: 1500,
+            autoplaySpeed: 2000,
             slidesToShow: 1,
             slidesToScroll: 1,
             adaptiveHeight: false,
@@ -838,59 +838,3 @@ $(document).ready(function () {
         }
     });
 });
-//show notification delete
-// function actionDeleteOrder() {
-//     let noti = {
-//             title: "Bạn muốn hủy đơn hàng này?",
-//             text: "Bạn sẽ không thể hoàn tác hành động này!",
-//             icon: "warning",
-//             showCancelButton: true,
-//             confirmButtonColor: "#3085d6",
-//             cancelButtonColor: "#d33",
-//             confirmButtonText: "Có!",
-//         };
-//     let urlRequest = $(this).data("url");
-//     console.log(urlRequest);
-//     let that = $(this);
-//     Swal.fire(noti).then((result) => {
-//         if (result.isConfirmed) {
-//             $.ajax({
-//                 type: "POST", 
-//                 url: urlRequest, 
-//                 headers: {
-//                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), 
-//                 },
-//                 success: function (data) {
-//                     if (data.code === 200) {
-//                         // Cập nhật giao diện
-//                         that.closest(".order-item").find(".order-status").text(data.data.status_name);
-//                         Swal.fire({
-//                             title: "Thành công!",
-//                             text: data.message,
-//                             icon: "success",
-//                         });
-//                     } else {
-//                         Swal.fire({
-//                             title: "Thất bại!",
-//                             text: data.message,
-//                             icon: "error",
-//                         });
-//                     }
-//                 },
-//                 error: function (xhr) {
-//                     Swal.fire({
-//                         title: "Lỗi!",
-//                         text: "Không thể cập nhật trạng thái đơn hàng.",
-//                         icon: "error",
-//                     });
-//                     console.error(xhr.responseText);
-//                 },
-//             });
-//         }
-//     });
-// }
-// $(function () {
-//     if (isExist("cancel-order-button")) {
-//         $(document).on("click", ".cancel-order-button", actionDeleteOrder);
-//     }
-// });

@@ -13,30 +13,31 @@ class CProductController extends Controller
 {
     public function index()
     {   
-        $category_first = ProductListModel::with('children')->where('featured', 1)->where('status', 1)->whereNull('deleted_at')->where('id_parent', 0)->get();
-        $productInternal = ProductModel::select('id', 'name', 'photo_path', 'regular_price', 'sale_price', 'discount')->where('status', 1)->whereNull('deleted_at')->latest()->paginate(20);
-        $pageName = 'Sản phẩm';
+        $category_first = ProductListModel::with('children')
+        ->where('featured', 1)
+        ->where('status', 1)
+        ->whereNull('deleted_at')
+        ->where('id_parent', 0)
+        ->get();
 
-        return view('client.product.index', compact('productInternal', 'pageName','category_first'));
+        $pageName = "";
+
+        return view('client.product.index', compact( 'pageName','category_first'));
     }
 
     public function detail($id)
     {
-
         $productDetail = ProductModel::find($id);
         $pageName = $productDetail->name;
         $qty = WarehouseModel::where('id_parent', $id)->value('quantity');
         $cart = session()->get('cart', []);
         $cqtyincart = isset($cart[$id]['quantity']) ? $cart[$id]['quantity'] : 0;
 
-        //dd($qty);
-
         return view('client.product.detail', compact('productDetail', 'pageName', 'qty', 'cqtyincart'));
     }
 
     public function add(Request $request, $id )
     {
-        //dd($request->all());
 
         if (!Auth::guard('member')->check()) {
             return redirect()->route('user.login');
@@ -72,8 +73,8 @@ class CProductController extends Controller
 
         if (!empty($query)) {
             $products = ProductModel::where('name', 'like', "%$query%")
-                ->orWhere('author', 'like', "%$query%")
-                ->limit(10)
+                ->orWhere('desc', 'like', "%$query%")
+                ->limit(100)
                 ->get(); 
             return response()->json($products);
         } 
