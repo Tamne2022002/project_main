@@ -72,9 +72,12 @@ use App\Models\WarehouseModel;
                                             </div>
                                             <!--Tên-->
                                             <div class="info-procart col-2 col-md-2 mg-col-10">
-                                                <h3 class="name-procart"><a class="text-decoration-none"
-                                                        href="{{ route('product.detail', ['id' => $v['id_product']]) }}"
-                                                        title=""> {{ $v['name'] }} </a></h3>
+                                                <h3 class="name-procart">
+                                                    <a class="text-decoration-none"
+                                                        href="{{ route('product.detail', ['id' => $v['id_product']]) }}">
+                                                         {{ $v['name'] }} 
+                                                    </a>
+                                                </h3>
                                             </div>
 
                                             <!--Số lượng-->

@@ -24,3 +24,4 @@
 <script src="{{ asset('vendors/aos/aos.js') }}"></script>
 <script src="{{ asset('vendors/simplenotify/simple-notify.js') }}"></script>
 <script src="{{ asset('index/js/app.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

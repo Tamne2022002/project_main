@@ -75,7 +75,6 @@ class CHomeController extends Controller
         return view('client.product.categoryid_product', compact('categoryidproduct', 'pagename','category_child'));
     }
 
-
     public function getCategoryData(Request $request)
     {
         $categoryId = $request->input('categoryId');
@@ -93,7 +92,6 @@ class CHomeController extends Controller
         } else {
             $user = Auth::guard('member')->user();
         }
-        
         return $user;
     }
 }

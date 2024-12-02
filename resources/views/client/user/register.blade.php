@@ -111,9 +111,18 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        {{-- <div class="text-center text-lg-start mt-3 btn-login-member">
-                                <input type="submit" class="btn-lg btn btn-sm bg-danger btn-block w-100 " value="Đăng ký">
-                            </div> --}}
+
+                        <div class="return">
+                            @if ($message = Session::get('fail'))
+                                <div>
+                                    <div style="color: #dd0505;
+                                            font-size: 1.2em;font-weight: bold;">
+                                        {{ $message }}
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+                        
                         <div class="container-login100-form-btn">
                             <div class="wrap-login100-form-btn">
                                 <div class="login100-form-bgbtn"></div>
@@ -124,8 +133,12 @@
                     </form>
                 </div>
             </div>
-        </div> 
-    </div>  
+        </div>
+       
+    </div>
+    </div>
+    </div>
+    
 </body>
 <script>
     function validatePassword() {

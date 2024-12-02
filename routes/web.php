@@ -41,7 +41,7 @@ Route::prefix('/')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/get-category-data/{categoryId}', [CHomeController::class, 'getCategoryData'])->name('get-category-data');
         Route::get('/publisher/{id}', [CHomeController::class, 'publisherproduct'])->name('publisher.publisherproduct');
-        Route::get('/categoryid/{id}', [CHomeController::class, 'categoryidproduct'])->name('categoryid.categoryidproduct');
+        Route::get('/categoryproduct/{id}', [CHomeController::class, 'categoryidproduct'])->name('categoryid.categoryidproduct');
     });
     /* Search */
     Route::controller(CProductController::class)->group(function () {
@@ -68,7 +68,6 @@ Route::prefix('/')->group(function () {
         Route::get('/add-to-cart/{id?}/{quantity?}', [CCartController::class, 'add_index'])->name('add_index.cart');
         Route::get('/cart/update_quantity/{id?}&{method?}', 'changeQuantity')->name('update_quantity.cart');
         Route::get('/cart/delete/{id}', 'delete')->name('delete.cart');
-        //Route::patch('/cart/update/{id}', 'update_qty')->name('update.cart');
         Route::get('/get-districts', [CCartController::class, 'getDistricts']);
         Route::get('/get-wards', [CCartController::class, 'getWards']);
 
@@ -86,10 +85,10 @@ Route::prefix('/')->group(function () {
     Route::controller(COrderController::class)->group(function () {
         Route::get('order', 'index')->name('user.order');
         Route::get('order/{id}', 'detail')->name('user.order.detail');
+        // Route::get('order/cancel/{id}', 'cancel')->name('user.order.cancel');
         Route::post('/api/cancel-order', 'cancelOrder')->name('order.cancel');
-
     });
- 
+
     /*Password Change*/
     Route::controller(CChangePasswordController::class)->group(function () {
         Route::get('change-password', 'index')->name('user.changepassword');

@@ -7,7 +7,6 @@
 @section('content')
     <!-- Thông tin đơn hàng -->
     <div class="wrap-content" style="margin-top: 8em">
-
         <div class="title-main">
             <span>
                 <title>Chi tiết lịch sử đơn hàng</title>
@@ -102,18 +101,23 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <div class="d-flex justify-content-end">
-                                    <a href="#" class="btn btn-danger mt-2" onclick="history.back()">Thoát</a>
-                                    <button class="btn btn-danger mt-2" id="cancelOrderButton">Hủy đơn hàng</button>
+                                @if($hdb[0]->status == 1 || $hdb[0]->status == 2 || $hdb[0]->status == 3)
+                                    {{-- <button class="btn btn-danger mt-2 cancel-order-button"
+                                        data-url = "{{route('user.order.cancel',['id'=> $hdb[0]->id])}}">Hủy đơn hàng</button> --}}
+                                        <button class="btn btn-danger mt-2" id="cancelOrderButton">Hủy đơn hàng</button> 
+                                @endif
+                                <div class="back-buton" style="padding: 0 5px">
+                                    <a href="#" class="btn btn-secondary mt-2" onclick="history.back()">Thoát</a>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
     </div>
     <script>
+
         document.addEventListener('DOMContentLoaded', function() {
             const cancelOrderButton = document.getElementById('cancelOrderButton');
 
@@ -148,7 +152,7 @@
                                             'Đơn hàng đã được hủy thành công.',
                                             'success'
                                         ).then(() => {
-                                            window.history.back(); // Tải lại trang
+                                            window.location.href = data.redirect_url; 
                                         });
                                     } else {
                                         Swal.fire(
@@ -174,3 +178,4 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endsection
+

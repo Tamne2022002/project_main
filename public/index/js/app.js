@@ -150,7 +150,7 @@ function SlickPage() {
         $(".slick-slideshow").slick({
             dots: false,
             infinite: true,
-            autoplaySpeed: 1500,
+            autoplaySpeed: 2000,
             slidesToShow: 1,
             slidesToScroll: 1,
             adaptiveHeight: false,
@@ -578,48 +578,6 @@ function AllRun() {
             }
         });
 
-    // Quantity detail page 2
-    /*$(".quantity-minus-pro-detail,.quantity-plus-pro-detail,input.qty-pro").on(
-        "click change",
-        function (event) {
-            const _target = event.target;
-
-            switch (_target.classList[0]) {
-                case "quantity-minus-pro-detail":
-                    if (_target.nextElementSibling.value < 1) {
-                        _target.nextElementSibling.value =
-                            parseInt(_target.nextElementSibling.value) - 1;
-                    } else {
-                        _target.nextElementSibling.value = 1;
-                        showNotify(
-                            "Số lượng không được nhỏ hơn 1",
-                            "Thông báo",
-                            "error"
-                        );
-                        return false;
-                    }
-                    break;
-                case "quantity-plus-pro-detail":
-                    _target.previousElementSibling.value =
-                        parseInt(_target.previousElementSibling.value) + 1;
-                    break;
-                case "qty-pro":
-                    if (_target.value < 1) {
-                        _target.value = 1;
-                        showNotify(
-                            "Số lượng không được nhỏ hơn 1",
-                            "Thông báo",
-                            "error"
-                        );
-                        return false;
-                    }
-                    break;
-                default:
-                    showNotify("Không hợp lệ", "Thông báo", "error");
-                     break;
-            }
-        }
-    );*/
 
     // Quantity with AJAX || cart page
     $("body").on(

@@ -7,7 +7,7 @@
         <div class="product-content">
             <div class="title-main">
                 <span>
-                    Sản phẩm
+                    <?= $pageName ?> 
                 </span>
             </div>
             <div class="content-main d-flex"> 
