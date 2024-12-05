@@ -6,7 +6,7 @@
 
 @section('content')
     <!-- Thông tin đơn hàng -->
-    <div class="wrap-content" style="margin-top: 8em">
+    <div class="wrap-content">
         <div class="title-main">
             <span>
                 <title>Chi tiết lịch sử đơn hàng</title>

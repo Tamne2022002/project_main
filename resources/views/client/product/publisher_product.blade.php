@@ -12,7 +12,7 @@
         <div class="content-main">
             @isset($publisherproduct)
                 @if (!$publisherproduct->isEmpty())
-                    <div class="grid-product-internal" style="margin-top: 14em">
+                    <div class="grid-product-internal" >
                         @foreach ($publisherproduct as $v)
                             <div class="product-item" data-aos="fade-up" data-aos-duration="1000">
                                 <div class="product" data-aos="zoom-in-up">

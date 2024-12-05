@@ -11,7 +11,7 @@
 
 @section('content')
     <div class="wrap-content">
-        <div class="container" style="margin-top: 11em">
+        <div class="container">
             <div class="row cart_form">
                 <!-- Giỏ hàng -->
                 <div class="col-lg-7">

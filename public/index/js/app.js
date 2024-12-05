@@ -746,7 +746,7 @@ $(document).ready(function () {
     }
     const searchHandler = debounce(function () {
         const query = $("#search-input").val();
-            urlProdct= "http://127.0.0.1:8000/product/";
+            urlProduct= "http://127.0.0.1:8000/product/";
         if (query.length > 1) { 
             $.ajax({
                 url: "/search-product",
@@ -762,7 +762,7 @@ $(document).ready(function () {
                         data.forEach(product => {
                             html += `
                                     <div id="search-result">
-                                        <a href="${urlProdct}${product.id}">
+                                        <a href="${urlProduct}${product.id}">
                                             <div class="product-info-result">
                                                 <span>${product.name}</span>
                                             </div>

@@ -2,14 +2,16 @@
 use App\Http\Controllers\Client\CHomeController;
 ?>
 <div class="header">
+    <div class="header-top">
+        <img src="{{$banner[0]->photo_path}}" alt="banner" width="100%">
+    </div>
     <div class="header-bottom">
         <div class="wrap-content">
             <div class="flex-header-bottom">
                 <div class="header-bottom-logo peShiner">
                     <a href="{{route('index')}}">
                         <div class="main-logo" style="margin-top: 10px">
-                            {{-- <img src="{{ CHomeController::settings()->logo_path }}" alt> --}}
-                            <img src="../index/imgs/logo.png" alt="tpstore-logo" width="200px" height="200px">
+                            <img src="{{ CHomeController::settings()->logo_path }}" alt="TP-Store" width="200px" height="200px">
                         </div>
                     </a>
                 </div>
@@ -27,7 +29,7 @@ use App\Http\Controllers\Client\CHomeController;
                         </form>
                         
                         <div id="search-result" class="search-result-list">
-                            <div id="loading" class="search-loading">Đang tìm kiếm...</div>
+                            <div id="loading" class="search-loading loading-spinner">Đang tìm kiếm...</div>
                         </div> 
                     </div>
                 </div>

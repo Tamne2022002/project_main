@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="wrap-content">
-        <div class="order-content" style="margin-top: 8em ">
+        <div class="order-content" >
       
             @if (count($hdb) < 1)   
                 <div class="form-add-top row">

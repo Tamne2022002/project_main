@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="wrap-content"> 
-        <div class="content-main" style="margin-top: 8em">
+        <div class="content-main">
             <div class="form-add-top row">
                
                 <div class="user-list-inf col-md-3">

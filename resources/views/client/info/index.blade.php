@@ -7,7 +7,7 @@
     <!-- Thông tin user -->
     <div class="wrap-content">
  
-        <div class="content-main" style="margin-top: 8em">
+        <div class="content-main">
       
             <div class="form-add-top row">
                 <div class="return">
